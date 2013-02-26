@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6BA09D43-FFE4-44B0-B29A-12084AACB5CB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xemio.PrincessDefense</RootNamespace>
+    <AssemblyName>PrincessDefense</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="XGL">
+      <HintPath>..\GameLibrary\Xemio.GameLibrary\bin\Release\XGL.dll</HintPath>
+    </Reference>
+    <Reference Include="XGL.GDIPlus">
+      <HintPath>..\GameLibrary\Xemio.GameLibrary.Rendering.GDIPlus\bin\Release\XGL.GDIPlus.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Program.cs" />
+    <Compile Include="Art.cs" />
+    <Compile Include="Entities\Components\AnimationComponent.cs" />
+    <Compile Include="Entities\Components\CollidableComponent.cs" />
+    <Compile Include="Entities\Components\DamageComponent.cs" />
+    <Compile Include="Entities\Components\ExperienceComponent.cs" />
+    <Compile Include="Entities\Components\HealthComponent.cs" />
+    <Compile Include="Entities\Components\InputComponent.cs" />
+    <Compile Include="Entities\Components\KnockbackComponent.cs" />
+    <Compile Include="Entities\Components\Knockback.cs" />
+    <Compile Include="Entities\Components\PhysicsComponent.cs" />
+    <Compile Include="Entities\Components\Behavior\PrincessBehavior.cs" />
+    <Compile Include="Entities\Components\Behavior\TargetingBehavior.cs" />
+    <Compile Include="Entities\Characters\Character.cs" />
+    <Compile Include="Entities\Components\SpeedComponent.cs" />
+    <Compile Include="Entities\Environment\WaveManager.cs" />
+    <Compile Include="Entities\Environment\WorldCollision.cs" />
+    <Compile Include="Entities\Environment\WorldGenerator.cs" />
+    <Compile Include="Entities\Events\CollisionEvent.cs" />
+    <Compile Include="Entities\Rendering\CharacterRenderer.cs" />
+    <Compile Include="Entities\Characters\Player.cs" />
+    <Compile Include="Entities\Environment\World.cs" />
+    <Compile Include="Entities\Characters\Princess.cs" />
+    <Compile Include="Entities\Projectile.cs" />
+    <Compile Include="Entities\Rendering\ProjectileRenderer.cs" />
+    <Compile Include="Entities\Characters\Skeleton.cs" />
+    <Compile Include="Entities\Rendering\TreeRenderer.cs" />
+    <Compile Include="Entities\Team.cs" />
+    <Compile Include="Entities\Direction.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Tree.cs" />
+    <Compile Include="Entities\Upgrades\IUpgrade.cs" />
+    <Compile Include="Entities\Upgrades\MultipleArrowUpgrade.cs" />
+    <Compile Include="Entities\Upgrades\SpeedUpgrade.cs" />
+    <Compile Include="Entities\Upgrades\StrengthUpgrade.cs" />
+    <Compile Include="Entities\Upgrades\UpgradeManager.cs" />
+    <Compile Include="Extensions\SpriteFontExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenes\Announcer.cs" />
+    <Compile Include="Scenes\FpsCounter.cs" />
+    <Compile Include="Scenes\Menues\GameMenu.cs" />
+    <Compile Include="Scenes\HealthBar.cs" />
+    <Compile Include="Scenes\MiniMap.cs" />
+    <Compile Include="Scenes\PrincessGame.cs" />
+    <Compile Include="Entities\Environment\Camera.cs" />
+    <Compile Include="Scenes\SpellButtons.cs" />
+    <Compile Include="Scenes\Menues\UpgradeMenu.cs" />
+    <EmbeddedResource Include="App\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Resources\fonts\kenPixel.sf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\particles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Libraries\XGL.dll" />
+    <Content Include="Libraries\XGL.GDIPlus.dll" />
+    <Content Include="Resources\characters\heroShooting.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\characters\heroWalking.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\characters\princess.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\characters\skeleton.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\items\potion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\items\invincibilityPotion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\map.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\map\main.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\misc\menu.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\misc\title.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\projectiles\arrowDown.png">
+<<<<<<< HEAD
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\projectiles\arrowLeft.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\projectiles\arrowRight.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\projectiles\arrowUp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+=======
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\projectiles\arrowLeft.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\projectiles\arrowRight.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\projectiles\arrowUp.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+>>>>>>> 410cdf2ab21cf1c411d1d6d3e292c35359b49c28
+    </Content>
+    <Content Include="Resources\terrain\grass.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\tree.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ui\buttons.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ui\scroll.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ui\scrollBottom.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ui\scrollTop.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ui\skillPoint.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\upgrades\speed.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\upgrades\strength.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\upgrades\multiArrows.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\upgrades\fireLion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\upgrades\bowSpeed.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\upgrades\regeneration.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\upgrades\health.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
