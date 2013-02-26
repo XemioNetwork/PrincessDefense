@@ -6,6 +6,8 @@ using System.IO;
 using Xemio.GameLibrary.Entities;
 using PrincessDefense.Entities.Components;
 using Xemio.GameLibrary.Math;
+using Xemio.GameLibrary.Rendering.Geometry;
+using Xemio.GameLibrary.Rendering;
 
 namespace PrincessDefense.Entities.Rendering
 {
@@ -19,6 +21,10 @@ namespace PrincessDefense.Entities.Rendering
         public TreeRenderer(Tree tree) : base(tree)
         {
         }
+        #endregion
+
+        #region Fields
+        private IBrush _shadowBrush;
         #endregion
 
         #region Properties
@@ -39,16 +45,21 @@ namespace PrincessDefense.Entities.Rendering
         {
             AnimationComponent animation = this.Entity.GetComponent<AnimationComponent>();
 
-            if (animation != null && animation.CurrentFrame != null)
+            if (this._shadowBrush == null)
             {
-                int width = animation.CurrentFrame.Width;
-                int height = animation.CurrentFrame.Height;
+                this._shadowBrush = this.Geometry.Factory.CreateSolid(new Color(0, 0, 0, 0.2f));
+            }
+
+            if (animation != null && animation.Frame != null)
+            {
+                int width = animation.Frame.Width;
+                int height = animation.Frame.Height;
 
                 Vector2 position = this.Tree.Position;
-
                 position -= new Vector2(width * 0.5f, height * 0.5f);
 
-                this.RenderManager.Render(animation.CurrentFrame, position);
+                this.Geometry.FillEllipse(this._shadowBrush, new Rectangle(18, 88, 54, 30) + position);
+                this.RenderManager.Render(animation.Frame, position);
             }
         }
         #endregion

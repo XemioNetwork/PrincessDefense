@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Rendering.Sprites;
-using PrincessDefense.Entities;
-using PrincessDefense.Entities.Components;
 using Xemio.GameLibrary.Math;
-using PrincessDefense.Resources;
 using Xemio.GameLibrary.Events;
 using Xemio.GameLibrary;
 using PrincessDefense.Entities.Events;
+using PrincessDefense.Entities.Upgrades;
+using PrincessDefense.Entities;
+using PrincessDefense.Entities.Components;
 
 namespace PrincessDefense.Entities.Characters
 {
@@ -23,25 +23,29 @@ namespace PrincessDefense.Entities.Characters
         public Player()
         {
             AnimationComponent animation = this.GetComponent<AnimationComponent>();
-
             HealthComponent health = this.GetComponent<HealthComponent>();
+            DamageComponent damage = this.GetComponent<DamageComponent>();
+
             health.MaxHealth = 20;
+            damage.Damage = 1;
 
-            this.LoadAnimations("Player", @"Resources\characters\heroWalking.png");
+            animation.Add(Art.HeroWalking);
+            animation.Add(Art.HeroShooting);
+
+            KnockbackComponent knockback = new KnockbackComponent(this);
+            knockback.Entries.Add(new Knockback<Skeleton>(3));
+
             this.Components.Add(new InputComponent(this));
+            this.Components.Add(new SpeedComponent(this));
+            this.Components.Add(knockback);
+            this.Components.Add(new ExperienceComponent(this));
 
-            SpriteSheet shootUp = SpriteRegistry.Load("Player.ShootUp", @"Resources\characters\heroShooting.png", 64, 64, 0, 11);
-            SpriteSheet shootLeft = SpriteRegistry.Load("Player.ShootLeft", @"Resources\characters\heroShooting.png", 64, 64, 13, 11);
-            SpriteSheet shootDown = SpriteRegistry.Load("Player.ShootDown", @"Resources\characters\heroShooting.png", 64, 64, 26, 11);
-            SpriteSheet shootRight = SpriteRegistry.Load("Player.ShootRight", @"Resources\characters\heroShooting.png", 64, 64, 39, 11);
+            this.Upgrades = new List<IUpgrade>();
+            this.Upgrades.Add(new StrengthUpgrade(this));
+            this.Upgrades.Add(new SpeedUpgrade(this));
+            this.Upgrades.Add(new MultipleArrowUpgrade(this));
 
-            animation.Animations.Add(new SpriteAnimation("ShootUp", shootUp, 40, false));
-            animation.Animations.Add(new SpriteAnimation("ShootLeft", shootLeft, 40, false));
-            animation.Animations.Add(new SpriteAnimation("ShootDown", shootDown, 40, false));
-            animation.Animations.Add(new SpriteAnimation("ShootRight", shootRight, 40, false));
-
-            EventManager eventManager = XGL.GetComponent<EventManager>();
-            eventManager.Subscribe<CollisionEvent>(this.OnCollide);
+            this.ArrowsPerShot = 3;
         }
         #endregion
 
@@ -58,41 +62,24 @@ namespace PrincessDefense.Entities.Characters
         {
             get { return Team.Princess; }
         }
+        /// <summary>
+        /// Gets the speed.
+        /// </summary>
+        public override float Speed
+        {
+            get { return this.GetComponent<SpeedComponent>().Speed; }
+        }
+        /// <summary>
+        /// Gets or sets the arrows per shot.
+        /// </summary>
+        public int ArrowsPerShot { get; set; }
+        /// <summary>
+        /// Gets the upgrades.
+        /// </summary>
+        public List<IUpgrade> Upgrades { get; private set; }
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Handles an incoming collision event.
-        /// </summary>
-        /// <param name="collisionEvent">The collision event.</param>
-        protected void OnCollide(CollisionEvent collisionEvent)
-        {
-            if (collisionEvent.Entity is Skeleton && collisionEvent.CollidingEntity is Player ||
-                collisionEvent.Entity is Player && collisionEvent.CollidingEntity is Skeleton)
-            {
-                Skeleton skeleton = collisionEvent.Entity as Skeleton;
-                if (skeleton == null)
-                {
-                    skeleton = collisionEvent.CollidingEntity as Skeleton;
-                }
-
-                PhysicsComponent physics = this.GetComponent<PhysicsComponent>();
-                HealthComponent health = this.GetComponent<HealthComponent>();
-
-                health.Health -= 2;
-
-                Vector2 distance = this.Position - skeleton.Position;
-                distance.Normalize();
-
-                physics.Velocity = distance * 2;
-                physics.Acceleration = distance * 4;
-
-                if (health.Health <= 0)
-                {
-                    this.Destroy();
-                }
-            }
-        }
         /// <summary>
         /// Shoots an arrow.
         /// </summary>
@@ -128,10 +115,17 @@ namespace PrincessDefense.Entities.Characters
                     this._shootingDelay = 100;
                     this._shootingTime = 0;
 
-                    Projectile projectile = new Projectile(this.Facing);
+                    float maxAngle = MathHelper.ToRadians(45);
+                    float segmentSize = maxAngle / (float)this.ArrowsPerShot;
+
+                    Projectile projectile = new Projectile(this, this.Facing);
                     projectile.Position = this.Position + new Vector2(0, 25);
 
+                    /*projectile.Vector += MathHelper.ToVector(segmentSize * i);
+                    projectile.Vector.Normalize();*/
+
                     this.Environment.Add(projectile);
+
                     this.Locked = false;
                 }
             }

@@ -8,8 +8,9 @@ using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Rendering.GDIPlus;
 using Xemio.GameLibrary.Rendering.Fonts;
 using Xemio.GameLibrary.Input;
-using PrincessDefense.Scenes;
 using Xemio.GameLibrary;
+using PrincessDefense.Scenes;
+using PrincessDefense.Scenes.Menues;
 
 namespace PrincessDefense.App
 {
@@ -27,6 +28,7 @@ namespace PrincessDefense.App
             sceneManager.Add(new GameMenu());
             sceneManager.Add(new FpsCounter());
 
+            Art.LoadContent();
             Application.Run(mainForm);
         }
     }

@@ -6,6 +6,7 @@ using System.IO;
 using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Math;
 using Xemio.GameLibrary.Rendering;
+using Xemio.GameLibrary.Rendering.Geometry;
 using PrincessDefense.Entities.Characters;
 using PrincessDefense.Entities.Components;
 
@@ -21,6 +22,10 @@ namespace PrincessDefense.Entities.Rendering
         public CharacterRenderer(Entity entity) : base(entity)
         {
         }
+        #endregion
+
+        #region Fields
+        private IBrush _shadowBrush;
         #endregion
 
         #region Properties
@@ -40,17 +45,37 @@ namespace PrincessDefense.Entities.Rendering
         public override void Render()
         {
             AnimationComponent animation = this.Entity.GetComponent<AnimationComponent>();
+            HealthComponent health = this.Entity.GetComponent<HealthComponent>();
             
-            if (animation != null && animation.CurrentFrame != null)
+            if (this._shadowBrush == null)
             {
-                int width = animation.CurrentFrame.Width;
-                int height = animation.CurrentFrame.Height;
+                this._shadowBrush = this.Geometry.Factory.CreateSolid(new Color(0, 0, 0, 0.2f));
+            }
+
+            if (animation != null && animation.Frame != null)
+            {
+                int width = animation.Frame.Width;
+                int height = animation.Frame.Height;
 
                 Vector2 position = this.Character.Position;
+                float hurtPercentage = health.HurtPercentage;
 
                 position -= new Vector2(width * 0.5f, height * 0.5f);
 
-                this.RenderManager.Render(animation.CurrentFrame, position);
+                this.Geometry.FillEllipse(this._shadowBrush, new Rectangle(18, 48, 28, 18) + position);
+                this.Geometry.FillEllipse(this._shadowBrush, new Rectangle(22, 54, 20, 10) + position);
+
+                this.RenderManager.Render(animation.Frame, position);
+
+                if (health.IsHurt)
+                {
+                    this.RenderManager.Tint(new Color(1.0f, 0, 0.1f, 0.8f - hurtPercentage * 0.8f));
+                    this.RenderManager.Render(
+                        animation.Frame,
+                        position);
+
+                    this.RenderManager.Tint(Color.White);
+                }
             }
 
             base.Render();

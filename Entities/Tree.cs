@@ -8,7 +8,6 @@ using Xemio.GameLibrary.Rendering.Sprites;
 using Xemio.GameLibrary.Events;
 using Xemio.GameLibrary;
 using Xemio.GameLibrary.Math;
-using PrincessDefense.Resources;
 using PrincessDefense.Entities.Events;
 using PrincessDefense.Entities.Rendering;
 using PrincessDefense.Entities.Components;
@@ -24,9 +23,9 @@ namespace PrincessDefense.Entities
         public Tree()
         {
             AnimationComponent animation = new AnimationComponent(this);
-            SpriteSheet idle = SpriteRegistry.Load("Tree.Idle", @"Resources\terrain\tree.png", 95, 117, 0, 1);
+            SpriteSheet idle = new SpriteSheet(@"Resources\terrain\tree.png", 95, 117, 0, 1);
 
-            animation.Animations.Add(new SpriteAnimation("Idle", idle, 100));
+            animation.Add(new SpriteAnimation("Idle", idle, 100));
             animation.PlayAnimation("Idle");
 
             CollidableComponent collision = new CollidableComponent(this, 20, true);

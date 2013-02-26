@@ -7,9 +7,10 @@ using Xemio.GameLibrary.Game;
 using Xemio.GameLibrary.Rendering.Geometry;
 using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Math;
+using Xemio.GameLibrary.Rendering.Fonts;
 using PrincessDefense.Entities.Characters;
 using PrincessDefense.Entities.Components;
-using Xemio.GameLibrary.Rendering.Fonts;
+using PrincessDefense.Extensions;
 
 namespace PrincessDefense.Scenes
 {
@@ -29,6 +30,8 @@ namespace PrincessDefense.Scenes
         #region Fields
         private Player _player;
         private SpriteFont _font;
+
+        private IBrush _background;
         #endregion
 
         #region Methods
@@ -38,6 +41,7 @@ namespace PrincessDefense.Scenes
         public override void LoadContent()
         {
             this._font = this.GraphicsDevice.TextureFactory.CreateSpriteFont(@"Resources\fonts\kenPixel.sf");
+            this._background = this.GraphicsDevice.Geometry.Factory.CreateSolid(new Color(0.2f, 0.1f, 0.05f, 1.0f));
         }
         /// <summary>
         /// Renders this instance.
@@ -54,24 +58,30 @@ namespace PrincessDefense.Scenes
 
             Vector2 position = new Vector2(10, 300 - height - 10);
 
-            IBrush black = geometry.Factory.CreateSolid(new Color(0.2f, 0.1f, 0.05f, 1.0f));
-
             renderManager.Offset(Vector2.Zero);
-            geometry.FillRectangle(black, new Rectangle(position.X, position.Y, maxWidth, height));
+            geometry.FillRectangle(this._background, new Rectangle(position.X, position.Y, maxWidth, height));
 
             if (health.Percentage > 0)
             {
-                IBrush red = geometry.Factory.CreateGradient(new Color(1, 0.15f, 0, 0.6f), new Color(0.9f, 0.15f, 0, 0.6f), (int)width, (int)height * 2, MathHelper.ToRadians(-90));
+                IBrush gradient = geometry.Factory.CreateGradient(
+                    new Color(1, 0.15f, 0, 0.6f),
+                    new Color(0.9f, 0.15f, 0, 0.6f),
+                    (int)width, (int)height * 2, 
+                    MathHelper.ToRadians(-90));
 
-                geometry.FillRectangle(red, new Rectangle(position.X + 1, position.Y + 1, width - 2, height - 2));
-                geometry.DrawRectangle(new Color(1, 0.9f, 0.8f, 0.1f), new Rectangle(position.X + 1, position.Y + 1, width - 3, height - 3));
+                geometry.FillRectangle(
+                    gradient,
+                    new Rectangle(position.X + 1, position.Y + 1, width - 2, height - 2));
+
+                geometry.DrawRectangle(
+                    new Color(1, 0.9f, 0.8f, 0.1f),
+                    new Rectangle(position.X + 1, position.Y + 1, width - 3, height - 3));
             }
 
-            renderManager.Tint(new Color(0, 0, 0, 0.6f));
-            this._font.Render("Health:", position - new Vector2(0, height + 4));
+            ExperienceComponent experience = this._player.GetComponent<ExperienceComponent>();
 
-            renderManager.Tint(Color.White);
-            this._font.Render("Health:", position - new Vector2(0, height + 5));
+            this._font.RenderShadowed("Health:", position - new Vector2(1, height + 3), 0.7f);
+            this._font.RenderShadowed("Level " + experience.GetLevel(), position - new Vector2(-225, height + 3), 0.7f);
         }
         #endregion
     }

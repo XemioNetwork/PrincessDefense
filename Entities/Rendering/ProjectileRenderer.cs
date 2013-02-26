@@ -19,18 +19,7 @@ namespace PrincessDefense.Entities.Rendering
         /// <param name="projectile">The projectile.</param>
         public ProjectileRenderer(Projectile projectile) : base(projectile)
         {
-            this._textures = new Dictionary<string, ITexture>();
-
-            ITextureFactory factory = this.RenderManager.GraphicsDevice.TextureFactory;
-            this._textures.Add("Up", factory.CreateTexture(@"Resources\projectiles\arrowUp.png"));
-            this._textures.Add("Left", factory.CreateTexture(@"Resources\projectiles\arrowLeft.png"));
-            this._textures.Add("Right", factory.CreateTexture(@"Resources\projectiles\arrowRight.png"));
-            this._textures.Add("Down", factory.CreateTexture(@"Resources\projectiles\arrowDown.png"));
         }
-        #endregion
-
-        #region Fields
-        private Dictionary<string, ITexture> _textures;
         #endregion
 
         #region Properties
@@ -49,7 +38,22 @@ namespace PrincessDefense.Entities.Rendering
         /// </summary>
         public override void Render()
         {
-            ITexture texture = this._textures[this.Projectile.Direction.ToString()];
+            ITexture texture = null;
+            switch (this.Projectile.Facing)
+            {
+                case Direction.Up:
+                    texture = Art.Arrow[0];
+                    break;
+                case Direction.Down:
+                    texture = Art.Arrow[1];
+                    break;
+                case Direction.Left:
+                    texture = Art.Arrow[2];
+                    break;
+                case Direction.Right:
+                    texture = Art.Arrow[3];
+                    break;
+            }
 
             this.RenderManager.Tint(new Color(0, 0, 0, 0.5f));
             this.RenderManager.Render(texture, this.Projectile.Position);

@@ -26,6 +26,9 @@ namespace PrincessDefense.Entities.Environment
             this.Camera.Max = new Vector2(this.Background.Width, this.Background.Height);
 
             this.Collision = new WorldCollision(this);
+            this.Generator = new WorldGenerator(this);
+
+            this.WaveManager = new WaveManager(this);
         }
         #endregion
 
@@ -42,9 +45,25 @@ namespace PrincessDefense.Entities.Environment
         /// Gets the collision.
         /// </summary>
         public WorldCollision Collision { get; private set; }
+        /// <summary>
+        /// Gets the generator.
+        /// </summary>
+        public WorldGenerator Generator { get; private set; }
+        /// <summary>
+        /// Gets the wave manager.
+        /// </summary>
+        public WaveManager WaveManager { get; private set; }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Generates the world.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
+        public void GenerateWorld(string seed)
+        {
+            this.Generator.Generate(seed);
+        }
         /// <summary>
         /// Sorteds the entity collection.
         /// </summary>
@@ -60,6 +79,7 @@ namespace PrincessDefense.Entities.Environment
         {
             this.Camera.Tick(elapsed);
             this.Collision.Tick(elapsed);
+            this.WaveManager.Tick(elapsed);
 
             base.Tick(elapsed);
         }

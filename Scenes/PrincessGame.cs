@@ -17,6 +17,7 @@ using PrincessDefense.Entities;
 using PrincessDefense.Entities.Components;
 using PrincessDefense.Entities.Environment;
 using PrincessDefense.Entities.Characters;
+using PrincessDefense.Scenes.Menues;
 
 namespace PrincessDefense.Scenes
 {
@@ -35,6 +36,16 @@ namespace PrincessDefense.Scenes
         private World _world;
         #endregion
 
+        #region Properties
+        /// <summary>
+        /// Gets the upgrade menu.
+        /// </summary>
+        public UpgradeMenu UpgradeMenu
+        {
+            get { return (UpgradeMenu)this.SceneManager.GetScene(scene => scene is UpgradeMenu); }
+        }
+        #endregion
+
         #region Methods
         /// <summary>
         /// Loads the content.
@@ -46,9 +57,11 @@ namespace PrincessDefense.Scenes
             Player player = new Player();
             player.Position = new Vector2(180, 100);
 
+            this.SceneManager.Add(new UpgradeMenu(player));
             this.SceneManager.Add(new MiniMap(this._world));
             this.SceneManager.Add(new HealthBar(player));
-            this.SceneManager.Add(new Anouncer());
+            this.SceneManager.Add(new SpellButtons());
+            this.SceneManager.Add(new Announcer());
 
             Princess princess = new Princess();
             princess.Position = new Vector2(300, 300);
@@ -58,70 +71,22 @@ namespace PrincessDefense.Scenes
             this._world.Add(player);
             this._world.Add(princess);
 
-            PerlinNoise perlin = new PerlinNoise("Forest");
-            RandomProxy random = new RandomProxy("Forest");
-
-            float[,] baseNoise = perlin.GenerateBaseNoise(72, 72, 1.5f);
-            float[,] noise = perlin.GeneratePerlinNoise(baseNoise, 0.6f, 1, 3);
-
-            for (int x = 0; x < 10; x++)
-            {
-                for (int y = 0; y < 10; y++)
-                {
-                    if (noise[x * 6, y * 6] > 0.7f && random.NextBoolean(0.4f) ||
-                        (x <= 0 || x >= 9 || y <= 0 || y >= 9) && random.NextBoolean(0.1f))
-                    {
-                        Vector2 position = new Vector2(x * 64, y * 64);
-                        position += new Vector2(random.Next(-15, 15), random.Next(-15, 15));
-
-                        this._world.Add(new Tree { Position = position });
-                    }
-                }
-            }
+            this._world.GenerateWorld("Forest");
         }
-        private float _testElapsed = 14000;
-        private int _waveIndex = 1;
-        private int _spawnRate = 2;
-        private int _lastCount = 1;
         /// <summary>
         /// Ticks the specified elapsed.
         /// </summary>
         /// <param name="elapsed">The elapsed.</param>
         public override void Tick(float elapsed)
         {
-            Anouncer anouner = this.SceneManager.GetScene(a => a is Anouncer) as Anouncer;
-            int count = this._world.Count(e => e is Skeleton);
-
-            if (count == 0 && count != this._lastCount && this._waveIndex > 1)
+            if (this.Keyboard.IsKeyPressed(Keys.E))
             {
-                anouner.Announce("Wave completed.");
+                this.UpgradeMenu.ToggleVisibility();
             }
-
-            this._lastCount = count;
-
-            if (count == 0)
+            if (!this.UpgradeMenu.Visible)
             {
-                this._testElapsed += elapsed;
-                if (this._testElapsed >= 3000)
-                {
-                    for (int i = 0; i < this._spawnRate; i++)
-                    {
-                        this._world.Add(new Skeleton { Position = new Vector2(320 + i, -200) });
-                    }
-                    for (int i = 0; i < this._spawnRate; i++)
-                    {
-                        this._world.Add(new Skeleton { Position = new Vector2(-200, 320 + i) });
-                    }
-
-                    anouner.Announce("Wave " + this._waveIndex.ToString() + " incoming");
-
-                    this._waveIndex++;
-                    this._spawnRate++;
-                    this._testElapsed = 0;
-                }
+                this._world.Tick(elapsed);
             }
-
-            this._world.Tick(elapsed);
         }
         /// <summary>
         /// Handles a game render request.

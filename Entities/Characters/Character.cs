@@ -6,7 +6,6 @@ using System.IO;
 using Xemio.GameLibrary.Math;
 using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Rendering.Sprites;
-using PrincessDefense.Resources;
 using PrincessDefense.Entities.Rendering;
 using PrincessDefense.Entities.Components;
 
@@ -26,6 +25,8 @@ namespace PrincessDefense.Entities.Characters
             this.Components.Add(new AnimationComponent(this));
 
             this.Components.Add(new HealthComponent(this));
+            this.Components.Add(new DamageComponent(this));
+
             this.Components.Add(new PhysicsComponent(this));
         }
         #endregion
@@ -59,53 +60,15 @@ namespace PrincessDefense.Entities.Characters
         /// <param name="elapsed">The elapsed.</param>
         public override void Tick(float elapsed)
         {
+            AnimationComponent animation = this.GetComponent<AnimationComponent>();
+
             if (!this.IsWalking && !this.Locked)
             {
-                AnimationComponent animation = this.GetComponent<AnimationComponent>();
                 animation.PlayAnimation("Idle" + this.GetAnimationName(this.Facing));
             }
 
             this.IsWalking = false;
             base.Tick(elapsed);
-        }
-        /// <summary>
-        /// Loads the animations.
-        /// </summary>
-        /// <param name="registryID">The registry ID.</param>
-        /// <param name="fileName">The name.</param>
-        protected void LoadAnimations(string registryID, string fileName)
-        {
-            this.LoadAnimations(registryID, fileName, 50);
-        }
-        /// <summary>
-        /// Loads the animations.
-        /// </summary>
-        /// <param name="registryID">The registry ID.</param>
-        /// <param name="fileName">The name.</param>
-        /// <param name="frameTime">The framerate.</param>
-        protected void LoadAnimations(string registryID, string fileName, int frameTime)
-        {
-            AnimationComponent component = this.GetComponent<AnimationComponent>();
-
-            SpriteSheet idleUp = SpriteRegistry.Load(registryID + ".IdleUp", fileName, 64, 64, 0, 1);
-            SpriteSheet idleLeft = SpriteRegistry.Load(registryID + ".IdleLeft", fileName, 64, 64, 9, 1);
-            SpriteSheet idleDown = SpriteRegistry.Load(registryID + ".IdleDown", fileName, 64, 64, 18, 1);
-            SpriteSheet idleRight = SpriteRegistry.Load(registryID + ".IdleRight", fileName, 64, 64, 27, 1);
-
-            SpriteSheet walkUp = SpriteRegistry.Load(registryID + ".WalkUp", fileName, 64, 64, 0, 9);
-            SpriteSheet walkLeft = SpriteRegistry.Load(registryID + ".WalkLeft", fileName, 64, 64, 9, 9);
-            SpriteSheet walkDown = SpriteRegistry.Load(registryID + ".WalkDown", fileName, 64, 64, 18, 9);
-            SpriteSheet walkRight = SpriteRegistry.Load(registryID + ".WalkRight", fileName, 64, 64, 27, 9);
-
-            component.Animations.Add(new SpriteAnimation("IdleUp", idleUp, frameTime));
-            component.Animations.Add(new SpriteAnimation("IdleLeft", idleLeft, frameTime));
-            component.Animations.Add(new SpriteAnimation("IdleDown", idleDown, frameTime));
-            component.Animations.Add(new SpriteAnimation("IdleRight", idleRight, frameTime));
-
-            component.Animations.Add(new SpriteAnimation("WalkUp", walkUp, frameTime));
-            component.Animations.Add(new SpriteAnimation("WalkLeft", walkLeft, frameTime));
-            component.Animations.Add(new SpriteAnimation("WalkDown", walkDown, frameTime));
-            component.Animations.Add(new SpriteAnimation("WalkRight", walkRight, frameTime));
         }
         /// <summary>
         /// Accelerates the specified direction.
@@ -147,29 +110,48 @@ namespace PrincessDefense.Entities.Characters
 
             Direction result = Direction.Down;
 
-            if (degrees >= 315 || degrees < 45) result = Direction.Left;
-            if (degrees >= 45 && degrees < 135) result = Direction.Up;
-            if (degrees >= 135 && degrees < 225) result = Direction.Right;
-            if (degrees >= 225 && degrees < 315) result = Direction.Down;
+            if (degrees >= 337.5 || degrees < 22.5) result = Direction.Left;
+            if (degrees >= 22.5 && degrees < 67.5) result = Direction.LeftUp;
+            if (degrees >= 67.5 && degrees < 112.5) result = Direction.Up;
+            if (degrees >= 112.5 && degrees < 157.5) result = Direction.UpRight;
+            if (degrees >= 157.5 && degrees < 202.5) result = Direction.Right;
+            if (degrees >= 202.5 && degrees < 247.5) result = Direction.RightDown;
+            if (degrees >= 247.5 && degrees < 292.5) result = Direction.Down;
+            if (degrees >= 292.5 && degrees < 337.5) result = Direction.DownLeft;
 
             return result;
+        }
+        /// <summary>
+        /// Gets the direction.
+        /// </summary>
+        public Vector2 GetDirection()
+        {
+            return this.GetDirection(this.Facing);
         }
         /// <summary>
         /// Gets the direction vector for a specific walkdirection.
         /// </summary>
         /// <param name="direction">The direction.</param>
-        protected Vector2 GetDirection(Direction direction)
+        public Vector2 GetDirection(Direction direction)
         {
             switch (direction)
             {
-                case Direction.Down: return new Vector2(0, 1);
-                case Direction.DownLeft: return new Vector2(-1, 1);
-                case Direction.Left: return new Vector2(-1, 0);
-                case Direction.LeftUp: return new Vector2(-1, -1);
-                case Direction.Right: return new Vector2(1, 0);
-                case Direction.RightDown: return new Vector2(1, 1);
-                case Direction.Up: return new Vector2(0, -1);
-                case Direction.UpRight: return new Vector2(1, -1);
+                case Direction.Down:
+                    return new Vector2(0, 1);
+                case Direction.DownLeft: 
+                    return new Vector2(-1, 1);
+                case Direction.Left: 
+                    return new Vector2(-1, 0);
+                case Direction.LeftUp: 
+                    return new Vector2(-1, -1);
+                case Direction.Right: 
+                    return new Vector2(1, 0);
+                case Direction.RightDown: 
+                    return new Vector2(1, 1);
+                case Direction.Up: 
+                    return new Vector2(0, -1);
+                case Direction.UpRight:
+                    return new Vector2(1, -1);
 
                 default: return Vector2.Zero;
             }

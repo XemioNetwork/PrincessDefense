@@ -10,13 +10,13 @@ using Xemio.GameLibrary.Math;
 
 namespace PrincessDefense.Scenes
 {
-    public class Anouncer : Scene
+    public class Announcer : Scene
     {
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="Anouncer"/> class.
+        /// Initializes a new instance of the <see cref="Announcer"/> class.
         /// </summary>
-        public Anouncer()
+        public Announcer()
         {
             this.TimePerLetter = 50;
             this.DisplayTime = 3000;
@@ -59,7 +59,7 @@ namespace PrincessDefense.Scenes
         /// </summary>
         public float DisplayTime { get; set; }
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="Anouncer"/> is visible.
+        /// Gets or sets a value indicating whether this <see cref="Announcer"/> is visible.
         /// </summary>
         public bool Visible { get; set; }
         #endregion

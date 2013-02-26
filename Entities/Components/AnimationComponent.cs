@@ -18,7 +18,7 @@ namespace PrincessDefense.Entities.Components
         /// <param name="entity">The entity.</param>
         public AnimationComponent(Entity entity) : base(entity)
         {
-            this.Animations = new List<SpriteAnimation>();
+            this.Instances = new List<SpriteAnimationInstance>();
         }
         #endregion
 
@@ -26,37 +26,59 @@ namespace PrincessDefense.Entities.Components
         private bool _paused;
         private float _pauseTime;
 
-        private SpriteAnimation _currentAnimation;
+        private SpriteAnimationInstance _currentInstance;
         #endregion
 
         #region Properties
         /// <summary>
         /// Gets the animations.
         /// </summary>
-        public List<SpriteAnimation> Animations { get; private set; }
+        public List<SpriteAnimationInstance> Instances { get; private set; }
         /// <summary>
         /// Gets the current frame.
         /// </summary>
-        public ITexture CurrentFrame { get; private set; }
+        public ITexture Frame { get; private set; }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Adds the specified animation.
+        /// </summary>
+        /// <param name="animation">The animation.</param>
+        public void Add(SpriteAnimation animation)
+        {
+            this.Instances.Add(animation.CreateInstance());
+        }
+        /// <summary>
+        /// Adds the specified animations.
+        /// </summary>
+        /// <param name="animations">The animations.</param>
+        public void Add(IEnumerable<SpriteAnimation> animations)
+        {
+            foreach (SpriteAnimation animation in animations)
+            {
+                this.Add(animation);
+            }
+        }
         /// <summary>
         /// Plays the animation.
         /// </summary>
         /// <param name="name">The name.</param>
         public void PlayAnimation(string name)
         {
-            SpriteAnimation animation = this.Animations.FirstOrDefault(
-                anim => anim.Name == name);
+            SpriteAnimationInstance instance = this.Instances.FirstOrDefault(
+                i => i.Animation.Name == name);
 
-            if (animation != null)
+            if (instance != null)
             {
-                if (this._currentAnimation != null && this._currentAnimation.Name == animation.Name)
+                if (this._currentInstance != null &&
+                    this._currentInstance.Animation.Name == instance.Animation.Name)
+                {
                     return;
+                }
 
-                this._currentAnimation = animation;
-                this._currentAnimation.Reset();
+                this._currentInstance = instance;
+                this._currentInstance.Reset();
             }
         }
         /// <summary>
@@ -89,11 +111,11 @@ namespace PrincessDefense.Entities.Components
         /// <param name="elapsed">The elapsed.</param>
         public override void Tick(float elapsed)
         {
-            this.CurrentFrame = null;
-            if (this._currentAnimation != null && !this._paused)
+            this.Frame = null;
+            if (this._currentInstance != null && !this._paused)
             {
-                this._currentAnimation.Tick(elapsed);
-                this.CurrentFrame = this._currentAnimation.CurrentFrame;
+                this._currentInstance.Tick(elapsed);
+                this.Frame = this._currentInstance.Frame;
             }
 
             if (this._paused && this._pauseTime > 0)

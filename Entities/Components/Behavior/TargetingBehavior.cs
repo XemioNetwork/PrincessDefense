@@ -7,7 +7,7 @@ using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Math;
 using PrincessDefense.Entities.Characters;
 
-namespace PrincessDefense.Entities.Components
+namespace PrincessDefense.Entities.Components.Behavior
 {
     public class TargetingBehavior : EntityComponent
     {

@@ -11,6 +11,13 @@ namespace PrincessDefense.Entities
     {
         #region Properties
         /// <summary>
+        /// Gets the owner.
+        /// </summary>
+        public virtual BaseEntity Owner
+        {
+            get { return null; }
+        }
+        /// <summary>
         /// Gets the team.
         /// </summary>
         public virtual Team Team

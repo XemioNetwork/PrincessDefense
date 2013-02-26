@@ -6,8 +6,9 @@ using System.IO;
 using Xemio.GameLibrary.Events;
 using Xemio.GameLibrary;
 using Xemio.GameLibrary.Rendering.Sprites;
-using PrincessDefense.Entities.Components;
 using PrincessDefense.Entities.Events;
+using PrincessDefense.Entities.Components;
+using PrincessDefense.Entities.Components.Behavior;
 
 namespace PrincessDefense.Entities.Characters
 {
@@ -25,7 +26,8 @@ namespace PrincessDefense.Entities.Characters
             EventManager eventManager = XGL.GetComponent<EventManager>();
             eventManager.Subscribe<CollisionEvent>(this.OnCollide);
 
-            this.LoadAnimations("Princess", @"Resources\characters\princess.png");
+            AnimationComponent animation = this.GetComponent<AnimationComponent>();
+            animation.Add(Art.Princess);
         }
         #endregion
 
