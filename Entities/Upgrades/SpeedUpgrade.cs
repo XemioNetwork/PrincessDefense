@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Rendering;
-using PrincessDefense.Entities.Characters;
-using PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities.Components;
 
-namespace PrincessDefense.Entities.Upgrades
+namespace Xemio.PrincessDefense.Entities.Upgrades
 {
     public class SpeedUpgrade : IUpgrade
     {

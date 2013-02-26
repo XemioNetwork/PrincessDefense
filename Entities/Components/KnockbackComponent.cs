@@ -7,9 +7,9 @@ using Xemio.GameLibrary;
 using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Events;
 using Xemio.GameLibrary.Math;
-using PrincessDefense.Entities.Events;
+using Xemio.PrincessDefense.Entities.Events;
 
-namespace PrincessDefense.Entities.Components
+namespace Xemio.PrincessDefense.Entities.Components
 {
     public class KnockbackComponent : EntityComponent
     {

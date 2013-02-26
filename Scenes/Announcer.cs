@@ -8,7 +8,7 @@ using Xemio.GameLibrary.Rendering.Fonts;
 using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Math;
 
-namespace PrincessDefense.Scenes
+namespace Xemio.PrincessDefense.Scenes
 {
     public class Announcer : Scene
     {

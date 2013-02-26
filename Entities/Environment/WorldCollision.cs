@@ -7,10 +7,10 @@ using Xemio.GameLibrary;
 using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Math;
 using Xemio.GameLibrary.Events;
-using PrincessDefense.Entities.Events;
-using PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Events;
+using Xemio.PrincessDefense.Entities.Components;
 
-namespace PrincessDefense.Entities.Environment
+namespace Xemio.PrincessDefense.Entities.Environment
 {
     public class WorldCollision
     {

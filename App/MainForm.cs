@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace PrincessDefense.App
+namespace Xemio.PrincessDefense.App
 {
     public partial class MainForm : Form
     {

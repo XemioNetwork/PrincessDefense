@@ -5,11 +5,11 @@ using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Game;
 using Xemio.GameLibrary;
-using PrincessDefense.Scenes;
-using PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Scenes;
+using Xemio.PrincessDefense.Entities.Characters;
 using Xemio.GameLibrary.Math;
 
-namespace PrincessDefense.Entities.Environment
+namespace Xemio.PrincessDefense.Entities.Environment
 {
     public class WaveManager
     {

@@ -7,7 +7,7 @@ using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Rendering.Sprites;
 using Xemio.GameLibrary.Rendering;
 
-namespace PrincessDefense.Entities.Components
+namespace Xemio.PrincessDefense.Entities.Components
 {
     public class AnimationComponent : EntityComponent
     {

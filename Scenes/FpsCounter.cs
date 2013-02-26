@@ -10,7 +10,7 @@ using Xemio.GameLibrary.Math;
 using Xemio.GameLibrary;
 using Xemio.GameLibrary.Rendering;
 
-namespace PrincessDefense.Scenes
+namespace Xemio.PrincessDefense.Scenes
 {
     public class FpsCounter : Scene
     {

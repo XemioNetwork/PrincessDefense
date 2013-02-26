@@ -7,12 +7,12 @@ using Xemio.GameLibrary.Rendering.Sprites;
 using Xemio.GameLibrary.Math;
 using Xemio.GameLibrary.Events;
 using Xemio.GameLibrary;
-using PrincessDefense.Entities.Events;
-using PrincessDefense.Entities.Upgrades;
-using PrincessDefense.Entities;
-using PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Events;
+using Xemio.PrincessDefense.Entities.Upgrades;
+using Xemio.PrincessDefense.Entities;
+using Xemio.PrincessDefense.Entities.Components;
 
-namespace PrincessDefense.Entities.Characters
+namespace Xemio.PrincessDefense.Entities.Characters
 {
     public class Player : Character
     {

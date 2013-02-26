@@ -9,10 +9,10 @@ using Xemio.GameLibrary.Rendering.GDIPlus;
 using Xemio.GameLibrary.Rendering.Fonts;
 using Xemio.GameLibrary.Input;
 using Xemio.GameLibrary;
-using PrincessDefense.Scenes;
-using PrincessDefense.Scenes.Menues;
+using Xemio.PrincessDefense.Scenes;
+using Xemio.PrincessDefense.Scenes.Menues;
 
-namespace PrincessDefense.App
+namespace Xemio.PrincessDefense.App
 {
     static class Program
     {

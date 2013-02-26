@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace PrincessDefense.Entities
+namespace Xemio.PrincessDefense.Entities
 {
     public enum Direction
     {

@@ -8,12 +8,12 @@ using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Rendering.Geometry;
 using Xemio.GameLibrary.Rendering.Fonts;
 using Xemio.GameLibrary.Math;
-using PrincessDefense.Entities.Characters;
-using PrincessDefense.Entities.Upgrades;
+using Xemio.PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities.Upgrades;
 using System.Windows.Forms;
-using PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Components;
 
-namespace PrincessDefense.Scenes.Menues
+namespace Xemio.PrincessDefense.Scenes.Menues
 {
     public class UpgradeMenu : Scene
     {

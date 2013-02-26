@@ -7,7 +7,7 @@ using Xemio.GameLibrary.Game;
 using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Math;
 
-namespace PrincessDefense.Scenes
+namespace Xemio.PrincessDefense.Scenes
 {
     public class SpellButtons : Scene
     {

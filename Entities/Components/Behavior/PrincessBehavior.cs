@@ -5,9 +5,9 @@ using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Common.Randomization;
-using PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities.Characters;
 
-namespace PrincessDefense.Entities.Components.Behavior
+namespace Xemio.PrincessDefense.Entities.Components.Behavior
 {
     public class PrincessBehavior : EntityComponent
     {

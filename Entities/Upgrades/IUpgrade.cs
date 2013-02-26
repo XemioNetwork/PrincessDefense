@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Rendering;
 
-namespace PrincessDefense.Entities.Upgrades
+namespace Xemio.PrincessDefense.Entities.Upgrades
 {
     public interface IUpgrade
     {

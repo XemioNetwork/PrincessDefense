@@ -6,11 +6,11 @@ using System.IO;
 using Xemio.GameLibrary.Events;
 using Xemio.GameLibrary;
 using Xemio.GameLibrary.Rendering.Sprites;
-using PrincessDefense.Entities.Events;
-using PrincessDefense.Entities.Components;
-using PrincessDefense.Entities.Components.Behavior;
+using Xemio.PrincessDefense.Entities.Events;
+using Xemio.PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Components.Behavior;
 
-namespace PrincessDefense.Entities.Characters
+namespace Xemio.PrincessDefense.Entities.Characters
 {
     public class Princess : Character
     {

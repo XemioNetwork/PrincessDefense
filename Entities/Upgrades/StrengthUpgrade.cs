@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using PrincessDefense.Entities.Characters;
-using PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities.Components;
 using Xemio.GameLibrary.Rendering;
 
-namespace PrincessDefense.Entities.Upgrades
+namespace Xemio.PrincessDefense.Entities.Upgrades
 {
     public class StrengthUpgrade : IUpgrade
     {
