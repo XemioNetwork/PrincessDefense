@@ -117,7 +117,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\objects\" />
     <Folder Include="Resources\particles\" />
   </ItemGroup>
   <ItemGroup>
@@ -142,7 +141,23 @@
     <Content Include="Resources\misc\title.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\projectiles\arrowDown.png" />
+    <Content Include="Resources\projectiles\arrowLeft.png" />
+    <Content Include="Resources\projectiles\arrowRight.png" />
+    <Content Include="Resources\projectiles\arrowUp.png" />
     <Content Include="Resources\terrain\grass.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\tree.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ui\scroll.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ui\scrollBottom.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ui\scrollTop.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
