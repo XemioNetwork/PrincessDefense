@@ -7,7 +7,7 @@ using Xemio.GameLibrary.Rendering.Sprites;
 using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary;
 
-namespace PrincessDefense
+namespace Xemio.PrincessDefense
 {
     public static class Art
     {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Rendering;
-using PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities.Characters;
 
-namespace PrincessDefense.Entities.Upgrades
+namespace Xemio.PrincessDefense.Entities.Upgrades
 {
     public class MultipleArrowUpgrade : IUpgrade
     {

@@ -6,7 +6,7 @@ using System.IO;
 using Xemio.GameLibrary.Common.Randomization;
 using Xemio.GameLibrary.Math;
 
-namespace PrincessDefense.Entities.Environment
+namespace Xemio.PrincessDefense.Entities.Environment
 {
     public class WorldGenerator
     {

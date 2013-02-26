@@ -7,11 +7,11 @@ using Xemio.GameLibrary;
 using Xemio.GameLibrary.Math;
 using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Components;
-using PrincessDefense.Entities;
-using PrincessDefense.Entities.Components;
-using PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities;
+using Xemio.PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Characters;
 
-namespace PrincessDefense.Entities.Environment
+namespace Xemio.PrincessDefense.Entities.Environment
 {
     public class Camera
     {

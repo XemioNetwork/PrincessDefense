@@ -7,10 +7,10 @@ using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Math;
 using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Rendering.Geometry;
-using PrincessDefense.Entities.Characters;
-using PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities.Components;
 
-namespace PrincessDefense.Entities.Rendering
+namespace Xemio.PrincessDefense.Entities.Rendering
 {
     public class CharacterRenderer : EntityRenderer
     {

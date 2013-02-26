@@ -6,7 +6,7 @@ using System.IO;
 using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Math;
 
-namespace PrincessDefense.Entities.Components
+namespace Xemio.PrincessDefense.Entities.Components
 {
     public class CollidableComponent : EntityComponent
     {

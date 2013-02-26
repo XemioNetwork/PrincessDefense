@@ -8,7 +8,7 @@ using Xemio.GameLibrary.Math;
 using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary;
 
-namespace PrincessDefense.Extensions
+namespace Xemio.PrincessDefense.Extensions
 {
     public static class SpriteFontExtensions
     {

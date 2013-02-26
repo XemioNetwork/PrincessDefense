@@ -1,4 +1,4 @@
-﻿namespace PrincessDefense.App
+﻿namespace Xemio.PrincessDefense.App
 {
     partial class MainForm
     {

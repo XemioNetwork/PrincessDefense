@@ -6,7 +6,7 @@ using System.IO;
 using Xemio.GameLibrary.Events;
 using Xemio.GameLibrary.Math;
 
-namespace PrincessDefense.Entities.Events
+namespace Xemio.PrincessDefense.Entities.Events
 {
     public class CollisionEvent : Event
     {

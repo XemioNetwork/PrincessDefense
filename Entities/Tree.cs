@@ -8,11 +8,11 @@ using Xemio.GameLibrary.Rendering.Sprites;
 using Xemio.GameLibrary.Events;
 using Xemio.GameLibrary;
 using Xemio.GameLibrary.Math;
-using PrincessDefense.Entities.Events;
-using PrincessDefense.Entities.Rendering;
-using PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Events;
+using Xemio.PrincessDefense.Entities.Rendering;
+using Xemio.PrincessDefense.Entities.Components;
 
-namespace PrincessDefense.Entities
+namespace Xemio.PrincessDefense.Entities
 {
     public class Tree : BaseEntity
     {

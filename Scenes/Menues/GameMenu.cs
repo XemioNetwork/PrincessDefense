@@ -10,7 +10,7 @@ using Xemio.GameLibrary.Rendering.Fonts;
 using Xemio.GameLibrary.Rendering.Fonts.Utility;
 using Xemio.GameLibrary.Game;
 
-namespace PrincessDefense.Scenes.Menues
+namespace Xemio.PrincessDefense.Scenes.Menues
 {
     public class GameMenu : Scene
     {

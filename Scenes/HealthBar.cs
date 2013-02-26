@@ -8,11 +8,11 @@ using Xemio.GameLibrary.Rendering.Geometry;
 using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Math;
 using Xemio.GameLibrary.Rendering.Fonts;
-using PrincessDefense.Entities.Characters;
-using PrincessDefense.Entities.Components;
-using PrincessDefense.Extensions;
+using Xemio.PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Extensions;
 
-namespace PrincessDefense.Scenes
+namespace Xemio.PrincessDefense.Scenes
 {
     public class HealthBar : Scene
     {

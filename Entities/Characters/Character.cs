@@ -6,10 +6,10 @@ using System.IO;
 using Xemio.GameLibrary.Math;
 using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Rendering.Sprites;
-using PrincessDefense.Entities.Rendering;
-using PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Rendering;
+using Xemio.PrincessDefense.Entities.Components;
 
-namespace PrincessDefense.Entities.Characters
+namespace Xemio.PrincessDefense.Entities.Characters
 {
     public class Character : BaseEntity
     {

@@ -8,7 +8,7 @@ using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary;
 using Xemio.GameLibrary.Math;
 
-namespace PrincessDefense.Entities.Environment
+namespace Xemio.PrincessDefense.Entities.Environment
 {
     public class World : EntityEnvironment
     {

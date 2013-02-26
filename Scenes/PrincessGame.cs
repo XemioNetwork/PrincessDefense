@@ -12,14 +12,14 @@ using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Rendering.Sprites;
 using Xemio.GameLibrary.Rendering.Geometry;
 using Xemio.GameLibrary.Common.Randomization;
-using PrincessDefense;
-using PrincessDefense.Entities;
-using PrincessDefense.Entities.Components;
-using PrincessDefense.Entities.Environment;
-using PrincessDefense.Entities.Characters;
-using PrincessDefense.Scenes.Menues;
+using Xemio.PrincessDefense;
+using Xemio.PrincessDefense.Entities;
+using Xemio.PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Environment;
+using Xemio.PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Scenes.Menues;
 
-namespace PrincessDefense.Scenes
+namespace Xemio.PrincessDefense.Scenes
 {
     public class PrincessGame : Scene
     {

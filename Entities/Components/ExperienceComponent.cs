@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Entities;
 
-namespace PrincessDefense.Entities.Components
+namespace Xemio.PrincessDefense.Entities.Components
 {
     public class ExperienceComponent : EntityComponent
     {

@@ -8,7 +8,7 @@
     <ProjectGuid>{6BA09D43-FFE4-44B0-B29A-12084AACB5CB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PrincessDefense</RootNamespace>
+    <RootNamespace>Xemio.PrincessDefense</RootNamespace>
     <AssemblyName>PrincessDefense</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -162,10 +162,18 @@
     <Content Include="Resources\misc\title.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\projectiles\arrowDown.png" />
-    <Content Include="Resources\projectiles\arrowLeft.png" />
-    <Content Include="Resources\projectiles\arrowRight.png" />
-    <Content Include="Resources\projectiles\arrowUp.png" />
+    <Content Include="Resources\projectiles\arrowDown.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\projectiles\arrowLeft.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\projectiles\arrowRight.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\projectiles\arrowUp.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\terrain\grass.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

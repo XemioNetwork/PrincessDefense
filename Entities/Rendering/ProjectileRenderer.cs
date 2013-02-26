@@ -6,9 +6,9 @@ using System.IO;
 using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Math;
-using PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Components;
 
-namespace PrincessDefense.Entities.Rendering
+namespace Xemio.PrincessDefense.Entities.Rendering
 {
     public class ProjectileRenderer : EntityRenderer
     {

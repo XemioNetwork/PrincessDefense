@@ -7,12 +7,12 @@ using Xemio.GameLibrary.Game;
 using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Rendering.Geometry;
 using Xemio.GameLibrary.Math;
-using PrincessDefense.Entities.Environment;
-using PrincessDefense.Entities;
+using Xemio.PrincessDefense.Entities.Environment;
+using Xemio.PrincessDefense.Entities;
 using Xemio.GameLibrary.Entities;
-using PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities.Characters;
 
-namespace PrincessDefense.Scenes
+namespace Xemio.PrincessDefense.Scenes
 {
     public class MiniMap : Scene
     {

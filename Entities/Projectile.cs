@@ -5,11 +5,11 @@ using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Math;
-using PrincessDefense.Entities.Rendering;
-using PrincessDefense.Entities.Components;
-using PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities.Rendering;
+using Xemio.PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Characters;
 
-namespace PrincessDefense.Entities
+namespace Xemio.PrincessDefense.Entities
 {
     public class Projectile : BaseEntity
     {

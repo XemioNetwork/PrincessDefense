@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Entities;
 
-namespace PrincessDefense.Entities
+namespace Xemio.PrincessDefense.Entities
 {
     public class BaseEntity : Entity
     {

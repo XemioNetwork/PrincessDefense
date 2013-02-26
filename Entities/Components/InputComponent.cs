@@ -8,9 +8,9 @@ using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Input;
 using Xemio.GameLibrary;
 using Xemio.GameLibrary.Math;
-using PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities.Characters;
 
-namespace PrincessDefense.Entities.Components
+namespace Xemio.PrincessDefense.Entities.Components
 {
     public class InputComponent : EntityComponent
     {
