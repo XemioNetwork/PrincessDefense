@@ -50,7 +50,6 @@
     <Reference Include="XGL.GDIPlus">
       <HintPath>..\GameLibrary\Xemio.GameLibrary.Rendering.GDIPlus\bin\Release\XGL.GDIPlus.dll</HintPath>
     </Reference>
-    <Reference Include="XGL.Xna, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\MainForm.cs">
@@ -151,7 +150,6 @@
   <ItemGroup>
     <Content Include="Libraries\XGL.dll" />
     <Content Include="Libraries\XGL.GDIPlus.dll" />
-    <Content Include="Libraries\XGL.Xna.dll" />
     <Content Include="Resources\characters\heroShooting.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

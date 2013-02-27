@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using Xemio.GameLibrary.Components;
 using Xemio.GameLibrary.Game;
 using Xemio.GameLibrary.Rendering;
-using Xemio.GameLibrary.Rendering.Xna;
 using Xemio.GameLibrary.Rendering.GDIPlus;
 using Xemio.GameLibrary.Rendering.Fonts;
 using Xemio.GameLibrary.Input;
@@ -22,7 +21,7 @@ namespace Xemio.PrincessDefense.App
         {
             MainForm mainForm = new MainForm();
 
-            XGL.Initialize(new XnaGraphicsInitializer());
+            XGL.Initialize(new GDIGraphicsInitializer());
             XGL.Run(mainForm.Handle, 400, 300, 60);
 
             SceneManager sceneManager = XGL.GetComponent<SceneManager>();
