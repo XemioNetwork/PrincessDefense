@@ -6,6 +6,7 @@ using System.IO;
 using Xemio.GameLibrary.Rendering;
 using Xemio.PrincessDefense.Entities.Characters;
 using Xemio.PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Components.Attributes;
 
 namespace Xemio.PrincessDefense.Entities.Upgrades
 {

@@ -9,6 +9,7 @@ using Xemio.GameLibrary.Input;
 using Xemio.GameLibrary;
 using Xemio.GameLibrary.Math;
 using Xemio.PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities.Components.Attributes;
 
 namespace Xemio.PrincessDefense.Entities.Components
 {

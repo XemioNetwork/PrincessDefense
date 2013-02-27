@@ -7,7 +7,7 @@ using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Math;
 using Xemio.PrincessDefense.Entities.Characters;
 
-namespace Xemio.PrincessDefense.Entities.Components
+namespace Xemio.PrincessDefense.Entities.Components.Attributes
 {
     public class BowComponent : EntityComponent
     {

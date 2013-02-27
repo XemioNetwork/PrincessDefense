@@ -8,7 +8,7 @@ using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Events;
 using Xemio.PrincessDefense.Entities.Events;
 
-namespace Xemio.PrincessDefense.Entities.Components
+namespace Xemio.PrincessDefense.Entities.Components.Attributes
 {
     public class HealthComponent : EntityComponent
     {

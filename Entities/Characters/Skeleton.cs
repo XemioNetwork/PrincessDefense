@@ -6,9 +6,10 @@ using System.IO;
 using Xemio.GameLibrary.Events;
 using Xemio.GameLibrary;
 using Xemio.PrincessDefense.Entities.Events;
+using Xemio.PrincessDefense.Entities.Spells;
 using Xemio.PrincessDefense.Entities.Components;
 using Xemio.PrincessDefense.Entities.Components.Behavior;
-using Xemio.PrincessDefense.Entities.Spells;
+using Xemio.PrincessDefense.Entities.Components.Attributes;
 
 namespace Xemio.PrincessDefense.Entities.Characters
 {

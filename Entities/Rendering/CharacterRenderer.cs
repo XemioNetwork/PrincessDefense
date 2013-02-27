@@ -9,6 +9,7 @@ using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Rendering.Geometry;
 using Xemio.PrincessDefense.Entities.Characters;
 using Xemio.PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Components.Attributes;
 
 namespace Xemio.PrincessDefense.Entities.Rendering
 {

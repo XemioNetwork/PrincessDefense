@@ -11,7 +11,7 @@ using Xemio.PrincessDefense.Entities.Events;
 using Xemio.PrincessDefense.Entities.Characters;
 using Xemio.PrincessDefense.Entities.Spells;
 
-namespace Xemio.PrincessDefense.Entities.Components
+namespace Xemio.PrincessDefense.Entities.Components.Attributes
 {
     public class FireLionComponent : EntityComponent
     {

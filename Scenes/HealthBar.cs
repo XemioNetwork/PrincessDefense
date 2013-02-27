@@ -8,9 +8,10 @@ using Xemio.GameLibrary.Rendering.Geometry;
 using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Math;
 using Xemio.GameLibrary.Rendering.Fonts;
+using Xemio.PrincessDefense.Extensions;
 using Xemio.PrincessDefense.Entities.Characters;
 using Xemio.PrincessDefense.Entities.Components;
-using Xemio.PrincessDefense.Extensions;
+using Xemio.PrincessDefense.Entities.Components.Attributes;
 
 namespace Xemio.PrincessDefense.Scenes
 {

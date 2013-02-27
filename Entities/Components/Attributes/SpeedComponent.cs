@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Entities;
 
-namespace Xemio.PrincessDefense.Entities.Components
+namespace Xemio.PrincessDefense.Entities.Components.Attributes
 {
     public class SpeedComponent : EntityComponent
     {
