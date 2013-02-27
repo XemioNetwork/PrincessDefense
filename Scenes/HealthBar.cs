@@ -48,7 +48,9 @@ namespace Xemio.PrincessDefense.Scenes
         /// </summary>
         public override void Render()
         {
+            ExperienceComponent experience = this._player.GetComponent<ExperienceComponent>();
             HealthComponent health = this._player.GetComponent<HealthComponent>();
+
             IGeometryProvider geometry = this.GraphicsDevice.Geometry;
             IRenderManager renderManager = this.GraphicsDevice.RenderManager;
 
@@ -78,9 +80,9 @@ namespace Xemio.PrincessDefense.Scenes
                     new Rectangle(position.X + 1, position.Y + 1, width - 3, height - 3));
             }
 
-            ExperienceComponent experience = this._player.GetComponent<ExperienceComponent>();
+            string healthMessage = string.Format("Health: {0}/{1}", health.Health, health.MaxHealth);
 
-            this._font.RenderShadowed("Health:", position - new Vector2(1, height + 3), 0.7f);
+            this._font.RenderShadowed(healthMessage, position - new Vector2(1, height + 3), 0.7f);
             this._font.RenderShadowed("Level " + experience.GetLevel(), position - new Vector2(-225, height + 3), 0.7f);
         }
         #endregion

@@ -18,6 +18,7 @@ using Xemio.PrincessDefense.Entities.Components;
 using Xemio.PrincessDefense.Entities.Environment;
 using Xemio.PrincessDefense.Entities.Characters;
 using Xemio.PrincessDefense.Scenes.Menues;
+using Xemio.PrincessDefense.Entities.Spells;
 
 namespace Xemio.PrincessDefense.Scenes
 {

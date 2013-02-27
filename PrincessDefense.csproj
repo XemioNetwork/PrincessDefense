@@ -61,9 +61,11 @@
     <Compile Include="App\Program.cs" />
     <Compile Include="Art.cs" />
     <Compile Include="Entities\Components\AnimationComponent.cs" />
+    <Compile Include="Entities\Components\BowComponent.cs" />
     <Compile Include="Entities\Components\CollidableComponent.cs" />
     <Compile Include="Entities\Components\DamageComponent.cs" />
     <Compile Include="Entities\Components\ExperienceComponent.cs" />
+    <Compile Include="Entities\Components\FireLionComponent.cs" />
     <Compile Include="Entities\Components\HealthComponent.cs" />
     <Compile Include="Entities\Components\InputComponent.cs" />
     <Compile Include="Entities\Components\KnockbackComponent.cs" />
@@ -72,7 +74,10 @@
     <Compile Include="Entities\Components\Behavior\PrincessBehavior.cs" />
     <Compile Include="Entities\Components\Behavior\TargetingBehavior.cs" />
     <Compile Include="Entities\Characters\Character.cs" />
+    <Compile Include="Entities\Components\ProjectileKnockback.cs" />
+    <Compile Include="Entities\Components\RegenerationComponent.cs" />
     <Compile Include="Entities\Components\SpeedComponent.cs" />
+    <Compile Include="Entities\DirectionHelper.cs" />
     <Compile Include="Entities\Environment\WaveManager.cs" />
     <Compile Include="Entities\Environment\WorldCollision.cs" />
     <Compile Include="Entities\Environment\WorldGenerator.cs" />
@@ -82,15 +87,22 @@
     <Compile Include="Entities\Environment\World.cs" />
     <Compile Include="Entities\Characters\Princess.cs" />
     <Compile Include="Entities\Projectile.cs" />
+    <Compile Include="Entities\Rendering\FireLionRenderer.cs" />
     <Compile Include="Entities\Rendering\ProjectileRenderer.cs" />
     <Compile Include="Entities\Characters\Skeleton.cs" />
     <Compile Include="Entities\Rendering\TreeRenderer.cs" />
+    <Compile Include="Entities\Spells\FireLion.cs" />
     <Compile Include="Entities\Team.cs" />
     <Compile Include="Entities\Direction.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Tree.cs" />
+    <Compile Include="Entities\Upgrades\BowSpeedUpgrade.cs" />
+    <Compile Include="Entities\Upgrades\FireLionUpgrade.cs" />
+    <Compile Include="Entities\Upgrades\HealthUpgrade.cs" />
     <Compile Include="Entities\Upgrades\IUpgrade.cs" />
-    <Compile Include="Entities\Upgrades\MultipleArrowUpgrade.cs" />
+    <Compile Include="Entities\Upgrades\ArrowUpgrade.cs" />
+    <Compile Include="Entities\Upgrades\KnockbackUpgrade.cs" />
+    <Compile Include="Entities\Upgrades\RegenerationUpgrade.cs" />
     <Compile Include="Entities\Upgrades\SpeedUpgrade.cs" />
     <Compile Include="Entities\Upgrades\StrengthUpgrade.cs" />
     <Compile Include="Entities\Upgrades\UpgradeManager.cs" />
@@ -98,6 +110,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\Announcer.cs" />
     <Compile Include="Scenes\FpsCounter.cs" />
+    <Compile Include="Scenes\GameOver.cs" />
     <Compile Include="Scenes\Menues\GameMenu.cs" />
     <Compile Include="Scenes\HealthBar.cs" />
     <Compile Include="Scenes\MiniMap.cs" />
@@ -179,6 +192,18 @@
     <Content Include="Resources\projectiles\arrowUp.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\spells\firelionDown.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\spells\firelionLeft.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\spells\firelionRight.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\spells\firelionUp.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\terrain\grass.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -186,6 +211,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\ui\buttons.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ui\gameOver.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\ui\scroll.png">
@@ -219,6 +247,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\upgrades\health.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\upgrades\knockback.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

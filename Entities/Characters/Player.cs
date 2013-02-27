@@ -11,6 +11,8 @@ using Xemio.PrincessDefense.Entities.Events;
 using Xemio.PrincessDefense.Entities.Upgrades;
 using Xemio.PrincessDefense.Entities;
 using Xemio.PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Scenes;
+using Xemio.GameLibrary.Game;
 
 namespace Xemio.PrincessDefense.Entities.Characters
 {
@@ -39,19 +41,22 @@ namespace Xemio.PrincessDefense.Entities.Characters
             this.Components.Add(new SpeedComponent(this));
             this.Components.Add(knockback);
             this.Components.Add(new ExperienceComponent(this));
+            this.Components.Add(new RegenerationComponent(this));
+            this.Components.Add(new BowComponent(this));
 
             this.Upgrades = new List<IUpgrade>();
+            this.Upgrades.Add(new HealthUpgrade(this));
+            this.Upgrades.Add(new RegenerationUpgrade(this));
             this.Upgrades.Add(new StrengthUpgrade(this));
             this.Upgrades.Add(new SpeedUpgrade(this));
-            this.Upgrades.Add(new MultipleArrowUpgrade(this));
-
-            this.ArrowsPerShot = 3;
+            this.Upgrades.Add(new BowSpeedUpgrade(this));
+            this.Upgrades.Add(new ArrowUpgrade(this));
+            this.Upgrades.Add(new FireLionUpgrade(this));
+            this.Upgrades.Add(new KnockbackUpgrade(this));
         }
         #endregion
 
         #region Fields
-        private float _shootingTime;
-        private float _shootingDelay;
         #endregion
 
         #region Properties
@@ -70,10 +75,6 @@ namespace Xemio.PrincessDefense.Entities.Characters
             get { return this.GetComponent<SpeedComponent>().Speed; }
         }
         /// <summary>
-        /// Gets or sets the arrows per shot.
-        /// </summary>
-        public int ArrowsPerShot { get; set; }
-        /// <summary>
         /// Gets the upgrades.
         /// </summary>
         public List<IUpgrade> Upgrades { get; private set; }
@@ -81,55 +82,14 @@ namespace Xemio.PrincessDefense.Entities.Characters
 
         #region Methods
         /// <summary>
-        /// Shoots an arrow.
+        /// Destroys this instance.
         /// </summary>
-        public void Shoot(Direction direction)
+        public override void Destroy()
         {
-            if (!this.Locked && this._shootingDelay < 0)
-            {
-                Vector2 projectileDirection = this.GetDirection(direction);
-                string animationName = "Shoot" + this.GetAnimationName(direction);
+            SceneManager sceneManager = XGL.GetComponent<SceneManager>();
+            sceneManager.Add(new GameOver());
 
-                AnimationComponent animation = this.GetComponent<AnimationComponent>();
-                animation.PlayAnimation(animationName);
-
-                this.Locked = true;
-                this.Facing = direction;
-
-                this._shootingTime = 40 * 10;
-            }
-        }
-        /// <summary>
-        /// Ticks the specified elapsed.
-        /// </summary>
-        /// <param name="elapsed">The elapsed.</param>
-        public override void Tick(float elapsed)
-        {
-            this._shootingDelay -= elapsed;
-
-            if (this._shootingTime > 0)
-            {
-                this._shootingTime -= elapsed;
-                if (this._shootingTime <= 0)
-                {
-                    this._shootingDelay = 100;
-                    this._shootingTime = 0;
-
-                    float maxAngle = MathHelper.ToRadians(45);
-                    float segmentSize = maxAngle / (float)this.ArrowsPerShot;
-
-                    Projectile projectile = new Projectile(this, this.Facing);
-                    projectile.Position = this.Position + new Vector2(0, 25);
-
-                    /*projectile.Vector += MathHelper.ToVector(segmentSize * i);
-                    projectile.Vector.Normalize();*/
-
-                    this.Environment.Add(projectile);
-
-                    this.Locked = false;
-                }
-            }
-            base.Tick(elapsed);
+            base.Destroy();
         }
         #endregion
     }

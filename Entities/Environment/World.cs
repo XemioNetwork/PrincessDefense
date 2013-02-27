@@ -7,6 +7,7 @@ using Xemio.GameLibrary.Entities;
 using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary;
 using Xemio.GameLibrary.Math;
+using Xemio.PrincessDefense.Entities.Characters;
 
 namespace Xemio.PrincessDefense.Entities.Environment
 {
@@ -56,6 +57,14 @@ namespace Xemio.PrincessDefense.Entities.Environment
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Gets the player.
+        /// </summary>
+        /// <returns></returns>
+        public Player GetPlayer()
+        {
+            return (Player)this.Entities.FirstOrDefault(e => e is Player);
+        }
         /// <summary>
         /// Generates the world.
         /// </summary>

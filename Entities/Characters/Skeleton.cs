@@ -8,6 +8,7 @@ using Xemio.GameLibrary;
 using Xemio.PrincessDefense.Entities.Events;
 using Xemio.PrincessDefense.Entities.Components;
 using Xemio.PrincessDefense.Entities.Components.Behavior;
+using Xemio.PrincessDefense.Entities.Spells;
 
 namespace Xemio.PrincessDefense.Entities.Characters
 {
@@ -23,7 +24,8 @@ namespace Xemio.PrincessDefense.Entities.Characters
             animation.Add(Art.Skeleton);
 
             KnockbackComponent knockback = new KnockbackComponent(this);
-            knockback.Entries.Add(new Knockback<Projectile>(3));
+            knockback.Entries.Add(new Knockback<Projectile>(4));
+            knockback.Entries.Add(new Knockback<FireLion>(2));
 
             DamageComponent damage = this.GetComponent<DamageComponent>();
             damage.Damage = 2;
@@ -35,6 +37,7 @@ namespace Xemio.PrincessDefense.Entities.Characters
             this.Components.Add(knockback);
             this.Components.Add(new TargetingBehavior(this, Team.Princess));
             this.Components.Add(new ExperienceComponent(this, 1));
+            this.Components.Add(new ProjectileKnockback(this));
         }
         #endregion
 

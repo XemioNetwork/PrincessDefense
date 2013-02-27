@@ -6,17 +6,18 @@ using System.IO;
 using Xemio.GameLibrary.Rendering;
 using Xemio.PrincessDefense.Entities.Characters;
 using Xemio.PrincessDefense.Entities.Components;
+using Xemio.GameLibrary.Entities;
 
 namespace Xemio.PrincessDefense.Entities.Upgrades
 {
-    public class SpeedUpgrade : IUpgrade
+    public class KnockbackUpgrade : IUpgrade
     {
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpeedUpgrade"/> class.
+        /// Initializes a new instance of the <see cref="KnockbackUpgrade"/> class.
         /// </summary>
         /// <param name="player">The player.</param>
-        public SpeedUpgrade(Player player)
+        public KnockbackUpgrade(Player player)
         {
             this._player = player;
         }
@@ -43,21 +44,21 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
         /// </summary>
         public int Costs
         {
-            get { return this.Level * this.Level * this.Level + 2; }
+            get { return this.Level * 4 + 2; }
         }
         /// <summary>
         /// Gets the name.
         /// </summary>
         public string Name
         {
-            get { return "Speed"; }
+            get { return "Knockback"; }
         }
         /// <summary>
         /// Gets the icon.
         /// </summary>
         public ITexture Icon
         {
-            get { return Art.SpeedUpgrade; }
+            get { return Art.KnockbackUpgrade; }
         }
         /// <summary>
         /// Upgrades this instance.
@@ -65,9 +66,7 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
         public void Upgrade()
         {
             this.Level++;
-
-            SpeedComponent speed = this._player.GetComponent<SpeedComponent>();
-            speed.Speed += 0.05f * this.Level;
+            ProjectileKnockback.Strength = this.Level * 2 + 3;
         }
         #endregion
     }

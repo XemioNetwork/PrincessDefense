@@ -69,7 +69,7 @@ namespace Xemio.PrincessDefense.Entities.Environment
                     {
                         Vector2 translation = Vector2.Normalize(distance) * (totalRadius - distance.Length);
 
-                        if (collisionA.IsStatic == collisionB.IsStatic)
+                        if (!collisionA.IsStatic && !collisionB.IsStatic)
                         {
                             a.Position += translation * 0.5f;
                             b.Position -= translation * 0.5f;

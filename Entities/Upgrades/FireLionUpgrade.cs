@@ -5,21 +5,27 @@ using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Rendering;
 using Xemio.PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities.Components;
 
 namespace Xemio.PrincessDefense.Entities.Upgrades
 {
-    public class MultipleArrowUpgrade : IUpgrade
+    public class FireLionUpgrade : IUpgrade
     {
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="MultipleArrowUpgrade"/> class.
+        /// Initializes a new instance of the <see cref="FireLionUpgrade"/> class.
         /// </summary>
         /// <param name="player">The player.</param>
-        public MultipleArrowUpgrade(Player player)
+        public FireLionUpgrade(Player player)
         {
+            this._player = player;
         }
         #endregion
 
+        #region Fields
+        private Player _player;
+        #endregion
+        
         #region IUpgrade Member
         /// <summary>
         /// Gets the level.
@@ -37,21 +43,21 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
         /// </summary>
         public int Costs
         {
-            get { return this.Level * this.Level * this.Level * 2 + 6; }
+            get { return this.Level * this.Level * this.Level * 2 + 8; }
         }
         /// <summary>
         /// Gets the name.
         /// </summary>
         public string Name
         {
-            get { return "Multiple Arrows"; }
+            get { return "Magical Fire Arrows"; }
         }
         /// <summary>
         /// Gets the icon.
         /// </summary>
         public ITexture Icon
         {
-            get { return Art.MultipleArrowsUpgrade; }
+            get { return Art.FireLionUpgrade; }
         }
         /// <summary>
         /// Upgrades this instance.
@@ -59,6 +65,9 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
         public void Upgrade()
         {
             this.Level++;
+
+            BowComponent bow = this._player.GetComponent<BowComponent>();
+            bow.FireLionPropability += 0.12f;
         }
         #endregion
     }

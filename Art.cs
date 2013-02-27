@@ -32,6 +32,10 @@ namespace Xemio.PrincessDefense
         /// Gets the textures for the arrow.
         /// </summary>
         public static ITexture[] Arrow { get; private set; }
+        /// <summary>
+        /// Gets the sprite animations for the fire lion spell.
+        /// </summary>
+        public static SpriteAnimation[] FireLion { get; private set; }
         #endregion
 
         #region Icons
@@ -48,9 +52,36 @@ namespace Xemio.PrincessDefense
         /// </summary>
         public static ITexture MultipleArrowsUpgrade { get; private set; }
         /// <summary>
+        /// Gets the texture for "fireLion.png".
+        /// </summary>
+        public static ITexture FireLionUpgrade { get; private set; }
+        /// <summary>
+        /// Gets the texture for "knockback.png".
+        /// </summary>
+        public static ITexture KnockbackUpgrade { get; private set; }
+        /// <summary>
+        /// Gets the texture for "regeneration.png".
+        /// </summary>
+        public static ITexture RegenerationUpgrade { get; private set; }
+        /// <summary>
+        /// Gets the texture for "bowSpeed.png".
+        /// </summary>
+        public static ITexture BowSpeedUpgrade { get; private set; }
+        /// <summary>
+        /// Gets the texture for "health.png".
+        /// </summary>
+        public static ITexture HealthUpgrade { get; private set; }
+        /// <summary>
         /// Gets the texture for "skillPoint.png".
         /// </summary>
         public static ITexture SkillPoint { get; private set; }
+        #endregion
+
+        #region User Interface
+        /// <summary>
+        /// Gets the texture for "gameOver.png".
+        /// </summary>
+        public static ITexture GameOver { get; private set; }
         #endregion
 
         #region Methods
@@ -72,11 +103,25 @@ namespace Xemio.PrincessDefense
                 @"Resources\projectiles\arrowLeft.png",
                 @"Resources\projectiles\arrowRight.png");
 
+            Art.FireLion = new SpriteAnimation[] 
+            {
+                LoadDirectionalAnimation(@"Resources\spells\firelionLeft.png", "Left", 128, 128),
+                LoadDirectionalAnimation(@"Resources\spells\firelionRight.png", "Right", 128, 128),
+                LoadDirectionalAnimation(@"Resources\spells\firelionUp.png", "Up", 128, 128),
+                LoadDirectionalAnimation(@"Resources\spells\firelionDown.png", "Down", 128, 128)
+            };
+
             Art.StrengthUpgrade = LoadTexture(@"Resources\upgrades\strength.png");
             Art.SpeedUpgrade = LoadTexture(@"Resources\upgrades\speed.png");
             Art.MultipleArrowsUpgrade = LoadTexture(@"Resources\upgrades\multiArrows.png");
+            Art.FireLionUpgrade = LoadTexture(@"Resources\upgrades\fireLion.png");
+            Art.KnockbackUpgrade = LoadTexture(@"Resources\upgrades\knockback.png");
+            Art.RegenerationUpgrade = LoadTexture(@"Resources\upgrades\regeneration.png");
+            Art.BowSpeedUpgrade = LoadTexture(@"Resources\upgrades\bowSpeed.png");
+            Art.HealthUpgrade = LoadTexture(@"Resources\upgrades\health.png");
 
             Art.SkillPoint = LoadTexture(@"Resources\ui\skillPoint.png");
+            Art.GameOver = LoadTexture(@"Resources\ui\gameOver.png");
         }
         /// <summary>
         /// Loads a walking animation.
@@ -121,10 +166,10 @@ namespace Xemio.PrincessDefense
             SpriteSheet shootDown = new SpriteSheet(fileName, 64, 64, 26, 11);
             SpriteSheet shootRight = new SpriteSheet(fileName, 64, 64, 39, 11);
 
-            animations.Add(new SpriteAnimation("ShootUp", shootUp, 40, false));
-            animations.Add(new SpriteAnimation("ShootLeft", shootLeft, 40, false));
-            animations.Add(new SpriteAnimation("ShootDown", shootDown, 40, false));
-            animations.Add(new SpriteAnimation("ShootRight", shootRight, 40, false));
+            animations.Add(new SpriteAnimation("ShootUp", shootUp, 30, false));
+            animations.Add(new SpriteAnimation("ShootLeft", shootLeft, 30, false));
+            animations.Add(new SpriteAnimation("ShootDown", shootDown, 30, false));
+            animations.Add(new SpriteAnimation("ShootRight", shootRight, 30, false));
 
             return animations.ToArray();
         }
@@ -151,6 +196,17 @@ namespace Xemio.PrincessDefense
             }
 
             return textures.ToArray();
+        }
+        /// <summary>
+        /// Loads a directional animation.
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        private static SpriteAnimation LoadDirectionalAnimation(string fileName, string name, int width, int height)
+        {
+            SpriteSheet sheet = new SpriteSheet(fileName, width, height, 0, 16);
+            SpriteAnimation animation = new SpriteAnimation(name, sheet, 40, false);
+
+            return animation;
         }
         #endregion
     }

@@ -38,5 +38,30 @@ namespace Xemio.PrincessDefense.Entities.Events
         /// </summary>
         public Vector2 Translation { get; private set; }
         #endregion
+
+        #region Methods
+        /// <summary>
+        /// Gets an entity by a specified type.
+        /// </summary>
+        public T Get<T>() where T : BaseEntity
+        {
+            if (this.Entity is T)
+                return (T)this.Entity;
+            if (this.CollidingEntity is T)
+                return (T)this.CollidingEntity;
+
+            return default(T);
+        }
+        /// <summary>
+        /// Determines whether is an intersection of the specific type.
+        /// </summary>
+        /// <typeparam name="T1">The type of the 1.</typeparam>
+        /// <typeparam name="T2">The type of the 2.</typeparam>
+        public bool IsIntersectionOf<T1, T2>()
+        {
+            return this.Entity is T1 && this.CollidingEntity is T2 || 
+                this.Entity is T2 && this.CollidingEntity is T1;
+        }
+        #endregion
     }
 }

@@ -91,21 +91,22 @@ namespace Xemio.PrincessDefense.Entities.Components
                 this.Player.Walk(Direction.Up);
             }
 
+            BowComponent bowComponent = this.Player.GetComponent<BowComponent>();
             if (shootLeft)
             {
-                this.Player.Shoot(Direction.Left);
+                bowComponent.Shoot(Direction.Left);
             }
             if (shootRight)
             {
-                this.Player.Shoot(Direction.Right);
+                bowComponent.Shoot(Direction.Right);
             }
             if (shootUp)
             {
-                this.Player.Shoot(Direction.Up);
+                bowComponent.Shoot(Direction.Up);
             }
             if (shootDown)
             {
-                this.Player.Shoot(Direction.Down);
+                bowComponent.Shoot(Direction.Down);
             }
         }
         #endregion

@@ -9,14 +9,14 @@ using Xemio.PrincessDefense.Entities.Components;
 
 namespace Xemio.PrincessDefense.Entities.Upgrades
 {
-    public class SpeedUpgrade : IUpgrade
+    public class BowSpeedUpgrade : IUpgrade
     {
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpeedUpgrade"/> class.
+        /// Initializes a new instance of the <see cref="BowSpeedUpgrade"/> class.
         /// </summary>
         /// <param name="player">The player.</param>
-        public SpeedUpgrade(Player player)
+        public BowSpeedUpgrade(Player player)
         {
             this._player = player;
         }
@@ -36,28 +36,28 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
         /// </summary>
         public int MaximumLevel
         {
-            get { return 3; }
+            get { return 5; }
         }
         /// <summary>
         /// Gets the upgrade costs.
         /// </summary>
         public int Costs
         {
-            get { return this.Level * this.Level * this.Level + 2; }
+            get { return this.Level * 4 + 4; }
         }
         /// <summary>
         /// Gets the name.
         /// </summary>
         public string Name
         {
-            get { return "Speed"; }
+            get { return "Bowspeed"; }
         }
         /// <summary>
         /// Gets the icon.
         /// </summary>
         public ITexture Icon
         {
-            get { return Art.SpeedUpgrade; }
+            get { return Art.BowSpeedUpgrade; }
         }
         /// <summary>
         /// Upgrades this instance.
@@ -66,8 +66,8 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
         {
             this.Level++;
 
-            SpeedComponent speed = this._player.GetComponent<SpeedComponent>();
-            speed.Speed += 0.05f * this.Level;
+            BowComponent bow = this._player.GetComponent<BowComponent>();
+            bow.BowTime -= 50;
         }
         #endregion
     }

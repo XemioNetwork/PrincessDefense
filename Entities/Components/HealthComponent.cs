@@ -70,6 +70,16 @@ namespace Xemio.PrincessDefense.Entities.Components
 
         #region Methods
         /// <summary>
+        /// Heals this entity.
+        /// </summary>
+        public void Heal()
+        {
+            if (this.Health < this.MaxHealth)
+            {
+                this.Health++;
+            }
+        }
+        /// <summary>
         /// Sets the health.
         /// </summary>
         /// <param name="health">The health.</param>

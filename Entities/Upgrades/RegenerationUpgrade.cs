@@ -9,14 +9,14 @@ using Xemio.PrincessDefense.Entities.Components;
 
 namespace Xemio.PrincessDefense.Entities.Upgrades
 {
-    public class SpeedUpgrade : IUpgrade
+    public class RegenerationUpgrade : IUpgrade
     {
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpeedUpgrade"/> class.
+        /// Initializes a new instance of the <see cref="RegenerationUpgrade"/> class.
         /// </summary>
         /// <param name="player">The player.</param>
-        public SpeedUpgrade(Player player)
+        public RegenerationUpgrade(Player player)
         {
             this._player = player;
         }
@@ -25,7 +25,7 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
         #region Fields
         private Player _player;
         #endregion
-
+        
         #region IUpgrade Member
         /// <summary>
         /// Gets the level.
@@ -36,28 +36,28 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
         /// </summary>
         public int MaximumLevel
         {
-            get { return 3; }
+            get { return 5; }
         }
         /// <summary>
         /// Gets the upgrade costs.
         /// </summary>
         public int Costs
         {
-            get { return this.Level * this.Level * this.Level + 2; }
+            get { return this.Level * 10 + 5; }
         }
         /// <summary>
         /// Gets the name.
         /// </summary>
         public string Name
         {
-            get { return "Speed"; }
+            get { return "Regeneration"; }
         }
         /// <summary>
         /// Gets the icon.
         /// </summary>
         public ITexture Icon
         {
-            get { return Art.SpeedUpgrade; }
+            get { return Art.RegenerationUpgrade; }
         }
         /// <summary>
         /// Upgrades this instance.
@@ -66,8 +66,8 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
         {
             this.Level++;
 
-            SpeedComponent speed = this._player.GetComponent<SpeedComponent>();
-            speed.Speed += 0.05f * this.Level;
+            RegenerationComponent regeneration = this._player.GetComponent<RegenerationComponent>();
+            regeneration.HealTime = 2000 / (float)(this.Level * this.Level);
         }
         #endregion
     }

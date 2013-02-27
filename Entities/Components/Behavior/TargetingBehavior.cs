@@ -107,7 +107,7 @@ namespace Xemio.PrincessDefense.Entities.Components.Behavior
                 Vector2 direction = this.Target.Position - this.Character.Position;
                 direction.Normalize();
 
-                Direction closestFacing = this.Character.GetClosestFacing(direction);
+                Direction closestFacing = DirectionHelper.GetClosestFacing(direction);
                 this.Character.Walk(closestFacing);
             }
         }

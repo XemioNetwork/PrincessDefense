@@ -17,22 +17,22 @@ namespace Xemio.PrincessDefense.Entities
         /// <summary>
         /// Initializes a new instance of the <see cref="Projectile"/> class.
         /// </summary>
-        /// <param name="player">The player.</param>
+        /// <param name="character">The player.</param>
         /// <param name="facing">The facing.</param>
-        public Projectile(Player player, Direction facing) : this(player, facing, player.GetDirection())
+        public Projectile(Character character, Direction facing) : this(character, facing, character.GetDirection())
         {
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="Projectile"/> class.
         /// </summary>
-        /// <param name="player">The player.</param>
+        /// <param name="character">The player.</param>
         /// <param name="facing">The direction.</param>
         /// <param name="vector">The vector.</param>
-        public Projectile(Player player, Direction facing, Vector2 vector)
+        public Projectile(Character character, Direction facing, Vector2 vector)
         {
             this.Renderer = new ProjectileRenderer(this);
 
-            this.Player = player;
+            this.Character = character;
             this.Facing = facing;
             this.Vector = vector;
             
@@ -46,7 +46,7 @@ namespace Xemio.PrincessDefense.Entities
             health.SetHealth(0);
 
             DamageComponent damage = new DamageComponent(
-                this, player.GetComponent<DamageComponent>().Damage);
+                this, character.GetComponent<DamageComponent>().Damage);
 
             this.Components.Add(collision);
             this.Components.Add(health);
@@ -74,7 +74,7 @@ namespace Xemio.PrincessDefense.Entities
         /// <summary>
         /// Gets the player.
         /// </summary>
-        public Player Player { get; private set; }
+        public Character Character { get; private set; }
         /// <summary>
         /// Gets or sets the speed.
         /// </summary>
@@ -103,7 +103,7 @@ namespace Xemio.PrincessDefense.Entities
         /// </summary>
         public override BaseEntity Owner
         {
-            get { return this.Player; }
+            get { return this.Character; }
         }
         #endregion
 

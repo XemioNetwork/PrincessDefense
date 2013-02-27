@@ -35,6 +35,13 @@ namespace Xemio.PrincessDefense.Entities.Components
         /// </summary>
         public List<SpriteAnimationInstance> Instances { get; private set; }
         /// <summary>
+        /// Gets the instance.
+        /// </summary>
+        public SpriteAnimationInstance Instance
+        {
+            get { return this._currentInstance; }
+        }
+        /// <summary>
         /// Gets the current frame.
         /// </summary>
         public ITexture Frame { get; private set; }
