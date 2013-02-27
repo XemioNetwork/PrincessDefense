@@ -98,39 +98,42 @@ namespace Xemio.PrincessDefense.Scenes.Menues
         /// <param name="elapsed">The elapsed.</param>
         public override void Tick(float elapsed)
         {
-            if (this.Keyboard.IsKeyPressed(Keys.Down))
+            if (this.Visible)
             {
-                if (this._selectedIndex - this._scrollIndex == this.DisplayCount - 1 &&
-                    this._selectedIndex < this._player.Upgrades.Count - 1)
+                if (this.Keyboard.IsKeyPressed(Keys.Down))
                 {
-                    this._scrollIndex++;
+                    if (this._selectedIndex - this._scrollIndex == this.DisplayCount - 1 &&
+                        this._selectedIndex < this._player.Upgrades.Count - 1)
+                    {
+                        this._scrollIndex++;
+                    }
+
+                    this._selectedIndex++;
+                    if (this._selectedIndex >= this._player.Upgrades.Count)
+                    {
+                        this._selectedIndex = 0;
+                        this._scrollIndex = 0;
+                    }
+                }
+                if (this.Keyboard.IsKeyPressed(Keys.Up))
+                {
+                    if (this._selectedIndex - this._scrollIndex == 0 && this._selectedIndex > 0)
+                    {
+                        this._scrollIndex--;
+                    }
+
+                    this._selectedIndex--;
+                    if (this._selectedIndex < 0)
+                    {
+                        this._selectedIndex = this._player.Upgrades.Count - 1;
+                        this._scrollIndex = this._player.Upgrades.Count - this.DisplayCount;
+                    }
                 }
 
-                this._selectedIndex++;
-                if (this._selectedIndex >= this._player.Upgrades.Count)
+                if (this.Keyboard.IsKeyPressed(Keys.Enter))
                 {
-                    this._selectedIndex = 0;
-                    this._scrollIndex = 0;
+                    UpgradeManager.Upgrade(this._player, this.SelectedUpgrade);
                 }
-            }
-            if (this.Keyboard.IsKeyPressed(Keys.Up))
-            {
-                if (this._selectedIndex - this._scrollIndex == 0 && this._selectedIndex > 0)
-                {
-                    this._scrollIndex--;
-                }
-
-                this._selectedIndex--;
-                if (this._selectedIndex < 0)
-                {
-                    this._selectedIndex = this._player.Upgrades.Count - 1;
-                    this._scrollIndex = this._player.Upgrades.Count - this.DisplayCount;
-                }
-            }
-
-            if (this.Keyboard.IsKeyPressed(Keys.Enter))
-            {
-                UpgradeManager.Upgrade(this._player, this.SelectedUpgrade);
             }
         }
         /// <summary>
