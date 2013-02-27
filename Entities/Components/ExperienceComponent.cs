@@ -16,8 +16,6 @@ namespace Xemio.PrincessDefense.Entities.Components
         /// <param name="entity">The entity.</param>
         public ExperienceComponent(Entity entity) : base(entity)
         {
-            //TODO: only for debugging purposes
-            this.SkillPoints = 1000;
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="ExperienceComponent"/> class.
