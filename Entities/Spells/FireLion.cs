@@ -33,7 +33,7 @@ namespace Xemio.PrincessDefense.Entities.Spells
             CollidableComponent collision = new CollidableComponent(this, 40);
             collision.IsStatic = true;
 
-            DamageComponent damage = new DamageComponent(this, 2);
+            DamageComponent damage = new DamageComponent(this, 1);
             damage.DamageOnContact = true;
 
             this.Components.Add(animation);

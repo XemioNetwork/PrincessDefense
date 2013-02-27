@@ -25,14 +25,14 @@ namespace Xemio.PrincessDefense.Entities.Characters
 
             KnockbackComponent knockback = new KnockbackComponent(this);
             knockback.Entries.Add(new Knockback<Projectile>(4));
-            knockback.Entries.Add(new Knockback<FireLion>(2));
+            knockback.Entries.Add(new Knockback<FireLion>(3));
 
             DamageComponent damage = this.GetComponent<DamageComponent>();
             damage.Damage = 2;
             damage.DamageOnContact = true;
 
             HealthComponent health = this.GetComponent<HealthComponent>();
-            health.SetHealth(3);
+            health.SetHealth(5);
 
             this.Components.Add(knockback);
             this.Components.Add(new TargetingBehavior(this, Team.Princess));

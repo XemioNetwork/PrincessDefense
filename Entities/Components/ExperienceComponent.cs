@@ -84,6 +84,8 @@ namespace Xemio.PrincessDefense.Entities.Components
                 int skillPoints = 1;
                 if (level % 2 == 0) skillPoints++;
                 if (level % 3 == 0) skillPoints++;
+                if (level % 5 == 0) skillPoints += 5;
+                if (level % 7 == 0) skillPoints += 3;
 
                 this.SkillPoints += skillPoints;
             }

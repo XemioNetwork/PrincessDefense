@@ -29,7 +29,7 @@ namespace Xemio.PrincessDefense.Entities.Characters
             DamageComponent damage = this.GetComponent<DamageComponent>();
 
             health.MaxHealth = 20;
-            damage.Damage = 1;
+            damage.Damage = 2;
 
             animation.Add(Art.HeroWalking);
             animation.Add(Art.HeroShooting);
