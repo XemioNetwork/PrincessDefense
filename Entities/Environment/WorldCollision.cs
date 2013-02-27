@@ -50,6 +50,7 @@ namespace Xemio.PrincessDefense.Entities.Environment
 
                     if (a == b) continue;
                     if (a.Team == Team.Princess && b.Team == Team.Princess) continue;
+                    if (!a.IsDirty && !b.IsDirty) continue;
 
                     CollidableComponent collisionA = a.GetComponent<CollidableComponent>();
                     CollidableComponent collisionB = b.GetComponent<CollidableComponent>();
