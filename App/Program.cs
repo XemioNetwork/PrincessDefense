@@ -11,6 +11,8 @@ using Xemio.GameLibrary.Input;
 using Xemio.GameLibrary;
 using Xemio.PrincessDefense.Scenes;
 using Xemio.PrincessDefense.Scenes.Menues;
+using Xemio.PrincessDefense.Scenes.Components;
+using Xemio.PrincessDefense.Levels;
 
 namespace Xemio.PrincessDefense.App
 {
@@ -24,11 +26,12 @@ namespace Xemio.PrincessDefense.App
             XGL.Initialize(new GDIGraphicsInitializer());
             XGL.Run(mainForm.Handle, 400, 300, 60);
 
+            Art.LoadContent();
+
             SceneManager sceneManager = XGL.GetComponent<SceneManager>();
             sceneManager.Add(new GameMenu());
-            sceneManager.Add(new FpsCounter());
+            sceneManager.Add(new FPSCounter());
 
-            Art.LoadContent();
             Application.Run(mainForm);
         }
     }

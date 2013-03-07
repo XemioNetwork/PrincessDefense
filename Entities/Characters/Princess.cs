@@ -9,6 +9,7 @@ using Xemio.GameLibrary.Rendering.Sprites;
 using Xemio.PrincessDefense.Entities.Events;
 using Xemio.PrincessDefense.Entities.Components;
 using Xemio.PrincessDefense.Entities.Components.Behavior;
+using Xemio.PrincessDefense.Entities.Components.Attributes;
 
 namespace Xemio.PrincessDefense.Entities.Characters
 {
@@ -23,11 +24,11 @@ namespace Xemio.PrincessDefense.Entities.Characters
             this.Components.Add(new TargetingBehavior(this, Team.Princess, 32, 128));
             this.Components.Add(new PrincessBehavior(this));
 
-            EventManager eventManager = XGL.GetComponent<EventManager>();
-            eventManager.Subscribe<CollisionEvent>(this.OnCollide);
+            HealthComponent health = this.GetComponent<HealthComponent>();
+            health.SetHealth(10);
 
-            AnimationComponent animation = this.GetComponent<AnimationComponent>();
-            animation.Add(Art.Princess);
+            AnimationComponent animations = this.GetComponent<AnimationComponent>();
+            animations.Add(Art.Princess);
         }
         #endregion
 
@@ -45,21 +46,6 @@ namespace Xemio.PrincessDefense.Entities.Characters
         public override float Speed
         {
             get { return 0.2f; }
-        }
-        #endregion
-
-        #region Methods
-        /// <summary>
-        /// Handles an entity collision.
-        /// </summary>
-        /// <param name="collisionEvent">The collision event.</param>
-        protected void OnCollide(CollisionEvent collisionEvent)
-        {
-            if (collisionEvent.Entity is Princess && collisionEvent.CollidingEntity is Skeleton ||
-                collisionEvent.Entity is Skeleton && collisionEvent.CollidingEntity is Princess)
-            {
-                this.Destroy();
-            }
         }
         #endregion
     }

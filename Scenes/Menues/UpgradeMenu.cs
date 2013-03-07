@@ -37,8 +37,6 @@ namespace Xemio.PrincessDefense.Scenes.Menues
         private IBrush _overlayBrush;
         private IBrush _selectedBrush;
 
-        private SpriteFont _font;
-
         private int _selectedIndex;
         private int _scrollIndex;
         #endregion
@@ -90,7 +88,6 @@ namespace Xemio.PrincessDefense.Scenes.Menues
         {
             this._overlayBrush = this.Geometry.Factory.CreateSolid(new Color(0, 0, 0, 0.6f));
             this._selectedBrush = this.Geometry.Factory.CreateSolid(new Color(0.8f, 0.3f, 0.1f, 0.6f));
-            this._font = this.GraphicsDevice.TextureFactory.CreateSpriteFont(@"Resources\fonts\kenPixel.sf");
         }
         /// <summary>
         /// Handles a game tick.
@@ -149,10 +146,10 @@ namespace Xemio.PrincessDefense.Scenes.Menues
                 string title = "Upgrades: (" + experience.SkillPoints.ToString() + "P)";
 
                 this.RenderManager.Tint(new Color(0, 0, 0, 0.5f));
-                this._font.Render(title, new Vector2(40, 50 + 1));
+                Art.Font.Render(title, new Vector2(40, 50 + 1));
 
                 this.RenderManager.Tint(Color.White);
-                this._font.Render(title, new Vector2(40, 50));
+                Art.Font.Render(title, new Vector2(40, 50));
 
                 for (int i = this._scrollIndex; i < this._player.Upgrades.Count && i - this._scrollIndex < this.DisplayCount; i++)
                 {
@@ -176,7 +173,7 @@ namespace Xemio.PrincessDefense.Scenes.Menues
                     }
 
                     this.RenderManager.Render(upgrade.Icon, new Vector2(44, index * 44 + 72));
-                    this._font.RenderShadowed(message, new Vector2(80, index * 44 + 74), 0.7f);
+                    Art.Font.RenderShadowed(message, new Vector2(80, index * 44 + 74), 0.7f);
 
                     string costs = upgrade.Costs.ToString() + "P";
                     if (upgrade.Level == upgrade.MaximumLevel)
@@ -184,7 +181,7 @@ namespace Xemio.PrincessDefense.Scenes.Menues
                         costs = "max";
                     }
 
-                    this._font.RenderShadowed(costs, new Vector2(220, index * 44 + 81), 0.7f);
+                    Art.Font.RenderShadowed(costs, new Vector2(220, index * 44 + 81), 0.7f);
                 }
 
                 float y = (this._scrollIndex / (float)this._player.Upgrades.Count) * this.DisplayCount * 44 + 68;

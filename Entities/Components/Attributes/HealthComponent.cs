@@ -100,8 +100,11 @@ namespace Xemio.PrincessDefense.Entities.Components.Attributes
         {
             this._elapsed = 0;
 
-            this.Health -= damage;
-            this.IsHurt = true;
+            if (damage > 0)
+            {
+                this.Health -= damage;
+                this.IsHurt = true;
+            }
 
             if (this.Health <= 0)
             {
@@ -144,25 +147,29 @@ namespace Xemio.PrincessDefense.Entities.Components.Attributes
                     collidingEntity = collisionEvent.Entity;
                 }
 
-                DamageComponent damage = collidingEntity.GetComponent<DamageComponent>();
-                if (damage != null && damage.DamageOnContact)
+                DamageComponent damageComponent = collidingEntity.GetComponent<DamageComponent>();
+                int damageAmount = 0;
+
+                if (damageComponent != null && damageComponent.DamageOnContact)
                 {
-                    BaseEntity entity = collidingEntity as BaseEntity;
-                    while (entity.Owner != null)
-                    {
-                        entity = entity.Owner;
-                    }
+                    damageAmount = damageComponent.Damage;
+                }
 
-                    this.Hurt(damage.Damage);
-                    if (this.Entity.IsDestroyed)
-                    {
-                        ExperienceComponent targetExperience = entity.GetComponent<ExperienceComponent>();
-                        ExperienceComponent sourceExperience = this.Entity.GetComponent<ExperienceComponent>();
+                BaseEntity entity = collidingEntity as BaseEntity;
+                while (entity.Owner != null)
+                {
+                    entity = entity.Owner;
+                }
 
-                        if (targetExperience != null && sourceExperience != null)
-                        {
-                            targetExperience.Add(sourceExperience.Experience);
-                        }
+                this.Hurt(damageAmount);
+                if (this.Entity.IsDestroyed)
+                {
+                    ExperienceComponent targetExperience = entity.GetComponent<ExperienceComponent>();
+                    ExperienceComponent sourceExperience = this.Entity.GetComponent<ExperienceComponent>();
+
+                    if (targetExperience != null && sourceExperience != null)
+                    {
+                        targetExperience.Add(sourceExperience.Experience);
                     }
                 }
             }

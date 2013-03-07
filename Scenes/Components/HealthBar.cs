@@ -13,7 +13,7 @@ using Xemio.PrincessDefense.Entities.Characters;
 using Xemio.PrincessDefense.Entities.Components;
 using Xemio.PrincessDefense.Entities.Components.Attributes;
 
-namespace Xemio.PrincessDefense.Scenes
+namespace Xemio.PrincessDefense.Scenes.Components
 {
     public class HealthBar : Scene
     {
@@ -30,8 +30,6 @@ namespace Xemio.PrincessDefense.Scenes
 
         #region Fields
         private Player _player;
-        private SpriteFont _font;
-
         private IBrush _background;
         #endregion
 
@@ -41,7 +39,6 @@ namespace Xemio.PrincessDefense.Scenes
         /// </summary>
         public override void LoadContent()
         {
-            this._font = this.GraphicsDevice.TextureFactory.CreateSpriteFont(@"Resources\fonts\kenPixel.sf");
             this._background = this.GraphicsDevice.Geometry.Factory.CreateSolid(new Color(0.2f, 0.1f, 0.05f, 1.0f));
         }
         /// <summary>
@@ -83,8 +80,8 @@ namespace Xemio.PrincessDefense.Scenes
 
             string healthMessage = string.Format("Health: {0}/{1}", health.Health, health.MaxHealth);
 
-            this._font.RenderShadowed(healthMessage, position - new Vector2(1, height + 3), 0.7f);
-            this._font.RenderShadowed("Level " + experience.GetLevel(), position - new Vector2(-225, height + 3), 0.7f);
+            Art.Font.RenderShadowed(healthMessage, position - new Vector2(1, height + 3), 0.7f);
+            Art.Font.RenderShadowed("Level " + experience.GetLevel(), position - new Vector2(-225, height + 3), 0.7f);
         }
         #endregion
     }

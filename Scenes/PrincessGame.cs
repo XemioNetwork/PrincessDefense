@@ -19,6 +19,8 @@ using Xemio.PrincessDefense.Entities.Environment;
 using Xemio.PrincessDefense.Entities.Characters;
 using Xemio.PrincessDefense.Scenes.Menues;
 using Xemio.PrincessDefense.Entities.Spells;
+using Xemio.PrincessDefense.Scenes.Components;
+using Xemio.PrincessDefense.Levels;
 
 namespace Xemio.PrincessDefense.Scenes
 {
@@ -28,13 +30,15 @@ namespace Xemio.PrincessDefense.Scenes
         /// <summary>
         /// Initializes a new instance of the <see cref="PrincessGame"/> class.
         /// </summary>
-        public PrincessGame()
+        public PrincessGame(ILevel level)
         {
+            this._world = new World(level);
         }
         #endregion
 
         #region Fields
         private World _world;
+        private float _counter;
         #endregion
 
         #region Properties
@@ -43,7 +47,7 @@ namespace Xemio.PrincessDefense.Scenes
         /// </summary>
         public UpgradeMenu UpgradeMenu
         {
-            get { return (UpgradeMenu)this.SceneManager.GetScene(scene => scene is UpgradeMenu); }
+            get { return this.GetScene<UpgradeMenu>(); }
         }
         #endregion
 
@@ -53,16 +57,14 @@ namespace Xemio.PrincessDefense.Scenes
         /// </summary>
         public override void LoadContent()
         {
-            this._world = new World();
-
-            Player player = new Player();
+            Player player = Player.Instance;
             player.Position = new Vector2(180, 100);
 
-            this.SceneManager.Add(new UpgradeMenu(player));
-            this.SceneManager.Add(new MiniMap(this._world));
-            this.SceneManager.Add(new HealthBar(player));
-            this.SceneManager.Add(new SpellButtons());
-            this.SceneManager.Add(new Announcer());
+            this.Scenes.Add(new UpgradeMenu(player));
+            this.Scenes.Add(new MiniMap(this._world));
+            this.Scenes.Add(new HealthBar(player));
+            this.Scenes.Add(new SpellButtons());
+            this.Scenes.Add(new Announcer());
 
             Princess princess = new Princess();
             princess.Position = new Vector2(300, 300);
@@ -80,6 +82,14 @@ namespace Xemio.PrincessDefense.Scenes
         /// <param name="elapsed">The elapsed.</param>
         public override void Tick(float elapsed)
         {
+            if (this._world.LevelCompleted)
+            {
+                ILevel level = this._world.Level;
+                level.Unlock();
+
+                this.SceneManager.Remove(this);
+                this.SceneManager.Add(new LevelSelection(level.Root, level));
+            }
             if (this.Keyboard.IsKeyPressed(Keys.E))
             {
                 this.UpgradeMenu.ToggleVisibility();

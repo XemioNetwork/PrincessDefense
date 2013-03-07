@@ -9,6 +9,8 @@ using Xemio.GameLibrary.Math;
 using Xemio.GameLibrary.Rendering.Fonts;
 using Xemio.GameLibrary.Rendering.Fonts.Utility;
 using Xemio.GameLibrary.Game;
+using Xemio.PrincessDefense.Scenes.Components;
+using Xemio.PrincessDefense.Levels;
 
 namespace Xemio.PrincessDefense.Scenes.Menues
 {
@@ -26,7 +28,6 @@ namespace Xemio.PrincessDefense.Scenes.Menues
         #region Fields
         private ITexture _background;
         private ITexture _title;
-        private SpriteFont _font;
 
         private float _remainingInvertTime;
         private float _maxRemainingTime;
@@ -46,7 +47,6 @@ namespace Xemio.PrincessDefense.Scenes.Menues
 
             this._background = factory.CreateTexture(@"Resources\misc\menu.png");
             this._title = factory.CreateTexture(@"Resources\misc\title.png");
-            this._font = factory.CreateSpriteFont(@"Resources\fonts\kenPixel.sf");
 
             this._maxRemainingTime = 500;
             this._remainingInvertTime = this._maxRemainingTime;
@@ -79,8 +79,8 @@ namespace Xemio.PrincessDefense.Scenes.Menues
                 {
                     this.SceneManager.Remove(this);
 
-                    this.SceneManager.Add(new PrincessGame());
-                    this.SceneManager.GetScene(scene => scene is FpsCounter)
+                    this.SceneManager.Add(new LevelSelection());
+                    this.SceneManager.GetScene(scene => scene is FPSCounter)
                         .BringToFront();
                 }
             }
@@ -101,15 +101,16 @@ namespace Xemio.PrincessDefense.Scenes.Menues
             if (this._render)
             {
                 string message = "Press Enter to start the game";
-                Vector2 fontCenter = this._font.MeasureString(message) * .5f - new Vector2(0, 120);
-                Vector2 shadowOffset = new Vector2(1, 1);
 
-                this._font.Render(
+                Vector2 fontCenter = Art.Font.MeasureString(message) * 0.5f - new Vector2(0, 120);
+                Vector2 shadowOffset = new Vector2(0, 1);
+
+                Art.Font.Render(
                     message,
                     this.GraphicsDevice.DisplayMode.Center - fontCenter + shadowOffset,
                     new Color(0.0f, 0.0f, 0.0f, 0.8f));
 
-                this._font.Render(
+                Art.Font.Render(
                     message,
                     this.GraphicsDevice.DisplayMode.Center - fontCenter);
             }

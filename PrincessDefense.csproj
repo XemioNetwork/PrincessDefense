@@ -60,6 +60,12 @@
     </Compile>
     <Compile Include="App\Program.cs" />
     <Compile Include="Art.cs" />
+    <Compile Include="Levels\BreadLevel.cs" />
+    <Compile Include="Levels\BreadWaveProvider.cs" />
+    <Compile Include="Levels\CherryLevel.cs" />
+    <Compile Include="Levels\Level.cs" />
+    <Compile Include="Levels\LevelContainer.cs" />
+    <Compile Include="Levels\ILevel.cs" />
     <Compile Include="Entities\Components\AnimationComponent.cs" />
     <Compile Include="Entities\Components\Attributes\BowComponent.cs" />
     <Compile Include="Entities\Components\CollidableComponent.cs" />
@@ -78,6 +84,7 @@
     <Compile Include="Entities\Components\Attributes\RegenerationComponent.cs" />
     <Compile Include="Entities\Components\Attributes\SpeedComponent.cs" />
     <Compile Include="Entities\DirectionHelper.cs" />
+    <Compile Include="Entities\Characters\Slime.cs" />
     <Compile Include="Entities\Environment\WaveManager.cs" />
     <Compile Include="Entities\Environment\WorldCollision.cs" />
     <Compile Include="Entities\Environment\WorldGenerator.cs" />
@@ -107,17 +114,25 @@
     <Compile Include="Entities\Upgrades\StrengthUpgrade.cs" />
     <Compile Include="Entities\Upgrades\UpgradeManager.cs" />
     <Compile Include="Extensions\SpriteFontExtensions.cs" />
+    <Compile Include="Levels\DirectionIndex.cs" />
+    <Compile Include="Levels\MushroomLevel.cs" />
+    <Compile Include="Levels\Waves\Spawners\SlimeSpawner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scenes\Announcer.cs" />
-    <Compile Include="Scenes\FpsCounter.cs" />
+    <Compile Include="Scenes\Components\Announcer.cs" />
+    <Compile Include="Scenes\Components\FPSCounter.cs" />
     <Compile Include="Scenes\GameOver.cs" />
     <Compile Include="Scenes\Menues\GameMenu.cs" />
-    <Compile Include="Scenes\HealthBar.cs" />
-    <Compile Include="Scenes\MiniMap.cs" />
+    <Compile Include="Scenes\Components\HealthBar.cs" />
+    <Compile Include="Scenes\Components\MiniMap.cs" />
     <Compile Include="Scenes\PrincessGame.cs" />
     <Compile Include="Entities\Environment\Camera.cs" />
-    <Compile Include="Scenes\SpellButtons.cs" />
+    <Compile Include="Scenes\Components\SpellButtons.cs" />
     <Compile Include="Scenes\Menues\UpgradeMenu.cs" />
+    <Compile Include="Scenes\Menues\LevelSelection.cs" />
+    <Compile Include="Levels\Waves\IWaveProvider.cs" />
+    <Compile Include="Levels\Waves\Spawners\SkeletonSpawner.cs" />
+    <Compile Include="Levels\Waves\SpawnInstruction.cs" />
+    <Compile Include="Levels\Waves\WaveInstruction.cs" />
     <EmbeddedResource Include="App\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -143,9 +158,10 @@
     <None Include="Resources\fonts\kenPixel.sf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Compile Include="Levels\Waves\Spawners\IMobSpawner.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\particles\" />
+    <Folder Include="Resources\savegames\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Libraries\XGL.dll" />
@@ -160,6 +176,24 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\characters\skeleton.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\cups\bone.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\cups\bread.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\cups\cherry.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\cups\iron.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\cups\mushroom.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\cups\tutorial.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\items\potion.png">
@@ -190,6 +224,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\projectiles\arrowUp.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\characters\slime.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\spells\firelionDown.png">

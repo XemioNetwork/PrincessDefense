@@ -15,6 +15,16 @@ namespace Xemio.PrincessDefense.Entities.Environment
 {
     public class Camera
     {
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Camera"/> class.
+        /// </summary>
+        public Camera()
+        {
+            this.Clamped = true;
+        }
+        #endregion
+
         #region Properties
         /// <summary>
         /// Gets or sets the min.
@@ -24,6 +34,10 @@ namespace Xemio.PrincessDefense.Entities.Environment
         /// Gets or sets the max.
         /// </summary>
         public Vector2 Max { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="Camera"/> is clamped.
+        /// </summary>
+        public bool Clamped { get; set; }
         /// <summary>
         /// Gets or sets the target.
         /// </summary>
@@ -71,7 +85,10 @@ namespace Xemio.PrincessDefense.Entities.Environment
             Vector2 max = new Vector2(this.Max.X - screenCenter.X, this.Max.Y - screenCenter.Y);
             
             this.DisplayOffset += (this.Position - this.DisplayOffset) * 0.15f;
-            this.DisplayOffset = Vector2.Clamp(this.DisplayOffset, min, max);
+            if (this.Clamped)
+            {
+                this.DisplayOffset = Vector2.Clamp(this.DisplayOffset, min, max);
+            }
         }
         #endregion
     }

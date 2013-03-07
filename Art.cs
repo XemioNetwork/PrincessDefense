@@ -6,11 +6,19 @@ using System.IO;
 using Xemio.GameLibrary.Rendering.Sprites;
 using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary;
+using Xemio.GameLibrary.Rendering.Fonts;
 
 namespace Xemio.PrincessDefense
 {
     public static class Art
     {
+        #region Factory
+        /// <summary>
+        /// Gets the factory.
+        /// </summary>
+        public static ITextureFactory Factory { get; private set; }
+        #endregion
+
         #region Characters & Projectiles
         /// <summary>
         /// Gets the sprite animations for "heroWalking.png".
@@ -28,6 +36,10 @@ namespace Xemio.PrincessDefense
         /// Gets the sprite animations for "princess.png".
         /// </summary>
         public static SpriteAnimation[] Princess { get; private set; }
+        /// <summary>
+        /// Gets the sprite animations for "slime.png".
+        /// </summary>
+        public static SpriteAnimation[] Slime { get; private set; }
         /// <summary>
         /// Gets the textures for the arrow.
         /// </summary>
@@ -82,6 +94,63 @@ namespace Xemio.PrincessDefense
         /// Gets the texture for "gameOver.png".
         /// </summary>
         public static ITexture GameOver { get; private set; }
+        /// <summary>
+        /// Gets the texture for "scrollTop.png".
+        /// </summary>
+        public static ITexture ScrollTop { get; private set; }
+        /// <summary>
+        /// Gets the texture for "scrollBottom.png".
+        /// </summary>
+        public static ITexture ScrollBottom { get; private set; }
+        /// <summary>
+        /// Gets the texture for "scroll.png".
+        /// </summary>
+        public static ITexture Scroll { get; private set; }
+        /// <summary>
+        /// Gets the texture for "buttons.png".
+        /// </summary>
+        public static ITexture Buttons { get; private set; }
+        #endregion
+
+        #region Cups
+        /// <summary>
+        /// Gets the texture for "tutorial.png".
+        /// </summary>
+        public static ITexture Tutorial { get; private set; }
+        /// <summary>
+        /// Gets the texture for "bread.png".
+        /// </summary>
+        public static ITexture Bread { get; private set; }
+        /// <summary>
+        /// Gets the texture for "mushroom.png".
+        /// </summary>
+        public static ITexture Mushroom { get; private set; }
+        /// <summary>
+        /// Gets the texture for "cherry.png".
+        /// </summary>
+        public static ITexture Cherry { get; private set; }
+        /// <summary>
+        /// Gets the texture for "bone.png".
+        /// </summary>
+        public static ITexture Bone { get; private set; }
+        /// <summary>
+        /// Gets the texture for "iron.png".
+        /// </summary>
+        public static ITexture Iron { get; private set; }
+        #endregion
+
+        #region Map
+        /// <summary>
+        /// Gets the texture for "map.png".
+        /// </summary>
+        public static ITexture Map { get; private set; }
+        #endregion
+
+        #region Fonts
+        /// <summary>
+        /// Gets the font.
+        /// </summary>
+        public static SpriteFont Font { get; private set; }
         #endregion
 
         #region Methods
@@ -91,11 +160,14 @@ namespace Xemio.PrincessDefense
         /// <param name="factory">The factory.</param>
         public static void LoadContent()
         {
+            Art.Factory = XGL.GetComponent<ITextureFactory>();
+
             Art.HeroWalking = LoadWalkingAnimation(@"Resources\characters\heroWalking.png");
             Art.HeroShooting = LoadBowAnimation(@"Resources\characters\heroShooting.png");
 
             Art.Skeleton = LoadWalkingAnimation(@"Resources\characters\skeleton.png");
             Art.Princess = LoadWalkingAnimation(@"Resources\characters\princess.png");
+            Art.Slime = LoadEnemyAnimation(@"Resources\characters\slime.png");
 
             Art.Arrow = LoadTextures(
                 @"Resources\projectiles\arrowUp.png",
@@ -121,7 +193,22 @@ namespace Xemio.PrincessDefense
             Art.HealthUpgrade = LoadTexture(@"Resources\upgrades\health.png");
 
             Art.SkillPoint = LoadTexture(@"Resources\ui\skillPoint.png");
+
             Art.GameOver = LoadTexture(@"Resources\ui\gameOver.png");
+            Art.ScrollTop = LoadTexture(@"Resources\ui\scrollTop.png");
+            Art.ScrollBottom = LoadTexture(@"Resources\ui\scrollBottom.png");
+            Art.Scroll = LoadTexture(@"Resources\ui\scroll.png");
+            Art.Buttons = LoadTexture(@"Resources\ui\buttons.png");
+
+            Art.Tutorial = LoadTexture(@"Resources\cups\tutorial.png");
+            Art.Bread = LoadTexture(@"Resources\cups\bread.png");
+            Art.Mushroom = LoadTexture(@"Resources\cups\mushroom.png");
+            Art.Cherry = LoadTexture(@"Resources\cups\cherry.png");
+            Art.Bone = LoadTexture(@"Resources\cups\bone.png");
+            Art.Iron = LoadTexture(@"Resources\cups\iron.png");
+
+            Art.Map = LoadTexture(@"Resources\map.png");
+            Art.Font = Art.Factory.CreateSpriteFont(@"Resources\fonts\kenPixel.sf");
         }
         /// <summary>
         /// Loads a walking animation.
@@ -150,6 +237,40 @@ namespace Xemio.PrincessDefense
             animations.Add(new SpriteAnimation("WalkLeft", walkLeft, 60));
             animations.Add(new SpriteAnimation("WalkDown", walkDown, 60));
             animations.Add(new SpriteAnimation("WalkRight", walkRight, 60));
+
+            return animations.ToArray();
+        }
+        /// <summary>
+        /// Loads an enemy animation.
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        private static SpriteAnimation[] LoadEnemyAnimation(string fileName)
+        {
+            List<SpriteAnimation> animations = new List<SpriteAnimation>();
+            ITexture texture = Art.Factory.CreateTexture(fileName);
+
+            int frameWidth = texture.Width / 3;
+            int frameHeight = texture.Height / 4;
+
+            SpriteSheet idleDown = new SpriteSheet(fileName, frameWidth, frameHeight, 0, 1);
+            SpriteSheet idleRight = new SpriteSheet(fileName, frameWidth, frameHeight, 3, 1);
+            SpriteSheet idleUp = new SpriteSheet(fileName, frameWidth, frameHeight, 6, 1);
+            SpriteSheet idleLeft = new SpriteSheet(fileName, frameWidth, frameHeight, 9, 1);
+
+            SpriteSheet walkDown = new SpriteSheet(fileName, frameWidth, frameHeight, 0, 3);
+            SpriteSheet walkRight = new SpriteSheet(fileName, frameWidth, frameHeight, 3, 3);
+            SpriteSheet walkUp = new SpriteSheet(fileName, frameWidth, frameHeight, 6, 3);
+            SpriteSheet walkLeft = new SpriteSheet(fileName, frameWidth, frameHeight, 9, 3);
+
+            animations.Add(new SpriteAnimation("IdleUp", idleUp, 100));
+            animations.Add(new SpriteAnimation("IdleLeft", idleLeft, 100));
+            animations.Add(new SpriteAnimation("IdleDown", idleDown, 100));
+            animations.Add(new SpriteAnimation("IdleRight", idleRight, 100));
+
+            animations.Add(new SpriteAnimation("WalkUp", walkUp, 120));
+            animations.Add(new SpriteAnimation("WalkLeft", walkLeft, 120));
+            animations.Add(new SpriteAnimation("WalkDown", walkDown, 120));
+            animations.Add(new SpriteAnimation("WalkRight", walkRight, 120));
 
             return animations.ToArray();
         }

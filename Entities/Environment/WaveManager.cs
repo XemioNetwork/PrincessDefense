@@ -5,9 +5,13 @@ using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Game;
 using Xemio.GameLibrary;
-using Xemio.PrincessDefense.Scenes;
-using Xemio.PrincessDefense.Entities.Characters;
 using Xemio.GameLibrary.Math;
+using Xemio.GameLibrary.Entities;
+using Xemio.PrincessDefense.Scenes;
+using Xemio.PrincessDefense.Scenes.Components;
+using Xemio.PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Levels;
+using Xemio.PrincessDefense.Levels.Waves;
 
 namespace Xemio.PrincessDefense.Entities.Environment
 {
@@ -20,17 +24,30 @@ namespace Xemio.PrincessDefense.Entities.Environment
         /// <param name="world">The world.</param>
         public WaveManager(World world)
         {
+            this._spawnDelay = 0;
+            this._waveIndex = 0;
+
+            this._firstWave = true;
+            this._entities = new List<Entity>();
+
             this.World = world;
-            this.WaveDelay = 3000;
         }
         #endregion
 
         #region Fields
-        private float _elapsed = 2000;
-        private float _spawnRate = 1;
+        private int _waveIndex;
 
-        private int _waveIndex = 1;
-        private int _lastCount = -1;
+        private int _spawnIndex;
+        private float _spawnDelay;
+        private float _spawnElapsed;
+
+        private float _nextWaveDelay;
+        private float _nextWaveElapsed;
+
+        private bool _nextWave;
+        private bool _firstWave;
+
+        private List<Entity> _entities;
         #endregion
 
         #region Properties
@@ -39,9 +56,45 @@ namespace Xemio.PrincessDefense.Entities.Environment
         /// </summary>
         public World World { get; private set; }
         /// <summary>
-        /// Gets or sets the wave delay.
+        /// Gets the current wave.
         /// </summary>
-        public float WaveDelay { get; set; }
+        public WaveInstruction CurrentWave { get; private set; }
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="WaveManager"/> is completed.
+        /// </summary>
+        public bool WaveCompleted
+        {
+            get 
+            {
+                if (this.WaveProvider == null) return true;
+
+                int enemyCount = this.WaveProvider.GetEnemyCount(this._waveIndex);
+                bool allEnemiesSpawned = this._entities.Count == enemyCount;
+                bool allEnemiesDestroyed = this._entities.All(e => e.IsDestroyed);
+
+                return allEnemiesSpawned && allEnemiesDestroyed;
+            }
+        }
+        /// <summary>
+        /// Gets a value indicating whether the current level is completed.
+        /// </summary>
+        public bool LevelCompleted
+        {
+            get 
+            { 
+                bool hasNoWaves = this.WaveProvider == null;
+                bool allWavesCompleted = this.CurrentWave == null && this.WaveCompleted && !this._firstWave;
+
+                return hasNoWaves || allWavesCompleted;
+            }
+        }
+        /// <summary>
+        /// Gets the wave provider.
+        /// </summary>
+        public IWaveProvider WaveProvider
+        {
+            get { return this.World.Level.WaveProvider; }
+        }
         /// <summary>
         /// Gets the scene manager.
         /// </summary>
@@ -53,13 +106,65 @@ namespace Xemio.PrincessDefense.Entities.Environment
 
         #region Methods
         /// <summary>
+        /// Announces the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        private void Announce(string message)
+        {
+            PrincessGame game = this.SceneManager.GetScene<PrincessGame>();
+
+            if (game != null)
+            {
+                Announcer announcer = game.GetScene<Announcer>();
+                announcer.Announce(message);
+            }
+        }
+        /// <summary>
         /// Announces a wave.
         /// </summary>
-        /// <param name="announcer">The announcer.</param>
         /// <param name="waveIndex">Index of the wave.</param>
-        private void AnnounceWave(Announcer announcer, int waveIndex)
+        private void AnnounceWave(int waveIndex)
         {
-            announcer.Announce("Wave " + waveIndex + " incoming");
+            this.Announce("Wave " + (waveIndex + 1) + " incoming");
+        }
+        /// <summary>
+        /// Announces a wave completion.
+        /// </summary>
+        private void AnnounceCompleted()
+        {
+            this.Announce("Wave completed.");
+        }
+        /// <summary>
+        /// Processes the instruction.
+        /// </summary>
+        /// <param name="instruction">The instruction.</param>
+        private void ProcessInstruction(SpawnInstruction instruction)
+        {
+            Vector2 top = new Vector2(Art.Map.Width * 0.5f, -100);
+            Vector2 right = new Vector2(Art.Map.Width + 100, Art.Map.Height * 0.5f);
+            Vector2 bottom = new Vector2(Art.Map.Width * 0.5f, Art.Map.Height + 100);
+            Vector2 left = new Vector2(-100, Art.Map.Height * 0.5f);
+
+            for (int t = 0; t < instruction.Top; t++)
+                this.Add(instruction.Spawner.Spawn(top + new Vector2(0, -0.1f * t)));
+
+            for (int r = 0; r < instruction.Right; r++)
+                this.Add(instruction.Spawner.Spawn(right + new Vector2(0.1f * r, 0)));
+
+            for (int b = 0; b < instruction.Bottom; b++)
+                this.Add(instruction.Spawner.Spawn(bottom + new Vector2(0, 0.1f * b)));
+
+            for (int l = 0; l < instruction.Left; l++)
+                this.Add(instruction.Spawner.Spawn(left + new Vector2(-0.1f * l, 0)));
+        }
+        /// <summary>
+        /// Spawns the entity.
+        /// </summary>
+        /// <param name="entity">The entity.</param>
+        private void Add(Entity entity)
+        {
+            this._entities.Add(entity);
+            this.World.Add(entity);
         }
         /// <summary>
         /// Handles a game tick.
@@ -67,34 +172,63 @@ namespace Xemio.PrincessDefense.Entities.Environment
         /// <param name="elapsed">The elapsed.</param>
         public void Tick(float elapsed)
         {
-            Announcer announcer = (Announcer)this.SceneManager.GetScene(a => a is Announcer);
-
-            int count = this.World.Count(e => e is Skeleton);
-            if (count == 0 && this._lastCount != 0 && this._waveIndex > 1)
+            if (this.WaveCompleted && !this._nextWave)
             {
-                announcer.Announce("Wave completed.");
+                if (!this._firstWave)
+                {
+                    this.AnnounceCompleted();
+                }
+
+                if (this.CurrentWave != null)
+                {
+                    this._entities.Clear();
+
+                    this._nextWaveDelay = 3000;
+                    this._nextWaveElapsed = 0;
+                    this._nextWave = true;
+                }
             }
 
-            this._lastCount = count;
-
-            if (count == 0)
+            if (this._nextWave || this._firstWave)
             {
-                this._elapsed += elapsed;
-                if (this._elapsed >= this.WaveDelay)
+                this._nextWaveElapsed += elapsed;
+
+                if (this._nextWaveElapsed >= this._nextWaveDelay)
                 {
-                    for (int i = 0; i < this._spawnRate; i++)
+                    if (!this._firstWave)
                     {
-                        this.World.Add(new Skeleton { Position = new Vector2(320 + i, -200) });
-                        this.World.Add(new Skeleton { Position = new Vector2(-200, 320 + i) });
-                        this.World.Add(new Skeleton { Position = new Vector2(320 + i, 840) });
-                        this.World.Add(new Skeleton { Position = new Vector2(840, 320 + i) });
+                        this._spawnIndex = 0;
+                        this._waveIndex++;
                     }
 
-                    this.AnnounceWave(announcer, this._waveIndex);
+                    if (this.WaveProvider != null)
+                    {
+                        this.CurrentWave = this.WaveProvider.CreateWave(this._waveIndex);
+                        this.AnnounceWave(this._waveIndex);
+                    }
 
-                    this._waveIndex++;
-                    this._spawnRate += 0.5f;
-                    this._elapsed = 0;
+                    this._spawnElapsed = 0;
+                    this._spawnDelay = 0;
+
+                    this._nextWave = false;
+                    this._firstWave = false;
+                }
+            }
+            
+            if (this.CurrentWave != null)
+            {
+                this._spawnElapsed += elapsed;
+
+                if (this._spawnElapsed >= this._spawnDelay &&
+                    this._spawnIndex < this.CurrentWave.Spawns.Count)
+                {
+                    SpawnInstruction instruction = this.CurrentWave.Spawns[this._spawnIndex];
+                    this.ProcessInstruction(instruction);
+
+                    this._spawnDelay = instruction.NextSpawn;
+
+                    this._spawnElapsed = 0;
+                    this._spawnIndex++;
                 }
             }
         }

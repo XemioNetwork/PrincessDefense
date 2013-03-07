@@ -12,7 +12,7 @@ using Xemio.PrincessDefense.Entities;
 using Xemio.GameLibrary.Entities;
 using Xemio.PrincessDefense.Entities.Characters;
 
-namespace Xemio.PrincessDefense.Scenes
+namespace Xemio.PrincessDefense.Scenes.Components
 {
     public class MiniMap : Scene
     {
@@ -36,10 +36,6 @@ namespace Xemio.PrincessDefense.Scenes
         private IBrush _enemyColor;
         private IBrush _neutralColor;
         private IBrush _transparentColor;
-
-        private ITexture _top;
-        private ITexture _bottom;
-        private ITexture _scroll;
         #endregion
 
         #region Methods
@@ -57,10 +53,6 @@ namespace Xemio.PrincessDefense.Scenes
             this._enemyColor = geometryFactory.CreateSolid(new Color(0.8f, 0.2f, 0.1f, 0.9f));
             this._neutralColor = geometryFactory.CreateSolid(new Color(0.5f, 0.5f, 0.5f, 0.9f));
             this._transparentColor = geometryFactory.CreateSolid(Color.Transparent);
-
-            this._top = factory.CreateTexture(@"Resources\ui\scrollTop.png");
-            this._bottom = factory.CreateTexture(@"Resources\ui\scrollBottom.png");
-            this._scroll = factory.CreateTexture(@"Resources\ui\scroll.png");
         }
         /// <summary>
         /// Renders this instance.
@@ -78,10 +70,10 @@ namespace Xemio.PrincessDefense.Scenes
 
             for (int i = 0; i < 80; i++)
             {
-                renderManager.Render(this._scroll, new Rectangle(-5, 0, 79 + 10, 1) + offset + new Vector2(0, i));
+                renderManager.Render(Art.Scroll, new Rectangle(-5, 0, 79 + 10, 1) + offset + new Vector2(0, i));
             }
 
-            renderManager.Render(this._top, new Rectangle(-8, -25, this._top.Width + 11, this._top.Height) + offset);
+            renderManager.Render(Art.ScrollTop, new Rectangle(-8, -25, Art.ScrollTop.Width + 11, Art.ScrollTop.Height) + offset);
             
             foreach (Entity entity in this._world)
             {

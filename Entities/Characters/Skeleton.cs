@@ -37,7 +37,7 @@ namespace Xemio.PrincessDefense.Entities.Characters
 
             this.Components.Add(knockback);
             this.Components.Add(new TargetingBehavior(this, Team.Princess));
-            this.Components.Add(new ExperienceComponent(this, 1));
+            this.Components.Add(new ExperienceComponent(this, 3));
             this.Components.Add(new ProjectileKnockback(this));
         }
         #endregion

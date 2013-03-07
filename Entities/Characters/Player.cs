@@ -8,6 +8,7 @@ using Xemio.GameLibrary.Math;
 using Xemio.GameLibrary.Events;
 using Xemio.GameLibrary;
 using Xemio.GameLibrary.Game;
+using Xemio.GameLibrary.Common;
 using Xemio.PrincessDefense.Scenes;
 using Xemio.PrincessDefense.Entities;
 using Xemio.PrincessDefense.Entities.Events;
@@ -37,6 +38,7 @@ namespace Xemio.PrincessDefense.Entities.Characters
 
             KnockbackComponent knockback = new KnockbackComponent(this);
             knockback.Entries.Add(new Knockback<Skeleton>(3));
+            knockback.Entries.Add(new Knockback<Slime>(0.1f));
 
             this.Components.Add(new InputComponent(this));
             this.Components.Add(new SpeedComponent(this));
@@ -58,6 +60,16 @@ namespace Xemio.PrincessDefense.Entities.Characters
         #endregion
 
         #region Fields
+        #endregion
+
+        #region Singleton
+        /// <summary>
+        /// Gets the instance.
+        /// </summary>
+        public static Player Instance
+        {
+            get { return Singleton<Player>.Value; }
+        }
         #endregion
 
         #region Properties

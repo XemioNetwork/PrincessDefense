@@ -26,6 +26,7 @@ namespace Xemio.PrincessDefense.Entities.Rendering
         #endregion
 
         #region Fields
+        private IPen _healthPen;
         private IBrush _shadowBrush;
         #endregion
 
@@ -51,6 +52,7 @@ namespace Xemio.PrincessDefense.Entities.Rendering
             if (this._shadowBrush == null)
             {
                 this._shadowBrush = this.Geometry.Factory.CreateSolid(new Color(0, 0, 0, 0.2f));
+                this._healthPen = this.Geometry.Factory.CreatePen(new Color(0.6f, 0.1f, 0, 0.8f), 6);
             }
 
             if (animation != null && animation.Frame != null)
@@ -63,8 +65,17 @@ namespace Xemio.PrincessDefense.Entities.Rendering
 
                 position -= new Vector2(width * 0.5f, height * 0.5f);
 
-                this.Geometry.FillEllipse(this._shadowBrush, new Rectangle(18, 48, 28, 18) + position);
-                this.Geometry.FillEllipse(this._shadowBrush, new Rectangle(22, 54, 20, 10) + position);
+                this.Geometry.FillEllipse(this._shadowBrush,
+                    new Rectangle(
+                        animation.Frame.Width * 0.5f - 15,
+                        animation.Frame.Height - 15,
+                        28, 18) + position);
+
+                this.Geometry.FillEllipse(this._shadowBrush,
+                    new Rectangle(
+                        animation.Frame.Width * 0.5f - 10,
+                        animation.Frame.Height - 10,
+                        20, 10) + position);
 
                 this.RenderManager.Render(animation.Frame, position);
 

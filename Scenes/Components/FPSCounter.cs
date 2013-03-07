@@ -10,23 +10,19 @@ using Xemio.GameLibrary.Math;
 using Xemio.GameLibrary;
 using Xemio.GameLibrary.Rendering;
 
-namespace Xemio.PrincessDefense.Scenes
+namespace Xemio.PrincessDefense.Scenes.Components
 {
-    public class FpsCounter : Scene
+    public class FPSCounter : Scene
     {
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="FpsCounter"/> class.
+        /// Initializes a new instance of the <see cref="FPSCounter"/> class.
         /// </summary>
-        public FpsCounter()
+        public FPSCounter()
         {
         }
         #endregion
-
-        #region Fields
-        private SpriteFont _font;
-        #endregion
-
+        
         #region Properties
         /// <summary>
         /// Gets the game loop.
@@ -46,14 +42,6 @@ namespace Xemio.PrincessDefense.Scenes
 
         #region Methods
         /// <summary>
-        /// Loads the content.
-        /// </summary>
-        public override void LoadContent()
-        {
-            this._font = this.TextureFactory.CreateSpriteFont(@"Resources\fonts\kenPixel.sf");
-            base.LoadContent();
-        }
-        /// <summary>
         /// Renders this instance.
         /// </summary>
         public override void Render()
@@ -62,7 +50,11 @@ namespace Xemio.PrincessDefense.Scenes
                 "FPS: {0:#}",
                 1000.0 / this.GameLoop.FrameTime);
 
-            this._font.Render(display, new Vector2(5, 5));
+            this.GraphicsDevice.RenderManager.Tint(new Color(0, 0, 0, 0.7f));
+            Art.Font.Render(display, new Vector2(5, 6));
+
+            this.GraphicsDevice.RenderManager.Tint(Color.White);
+            Art.Font.Render(display, new Vector2(5, 5));
         }
         #endregion
     }

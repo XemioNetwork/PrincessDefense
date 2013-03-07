@@ -8,7 +8,7 @@ using Xemio.GameLibrary.Rendering.Fonts;
 using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Math;
 
-namespace Xemio.PrincessDefense.Scenes
+namespace Xemio.PrincessDefense.Scenes.Components
 {
     public class Announcer : Scene
     {
@@ -31,7 +31,6 @@ namespace Xemio.PrincessDefense.Scenes
         private float _elapsedDisplayTime;
 
         private int _displayLength;
-        private SpriteFont _font;
         #endregion
 
         #region Properties
@@ -88,13 +87,6 @@ namespace Xemio.PrincessDefense.Scenes
             this._message = message;
         }
         /// <summary>
-        /// Loads the content.
-        /// </summary>
-        public override void LoadContent()
-        {
-            this._font = this.GraphicsDevice.TextureFactory.CreateSpriteFont(@"Resources\fonts\kenPixel.sf");
-        }
-        /// <summary>
         /// Handles a game tick.
         /// </summary>
         /// <param name="elapsed">The elapsed.</param>
@@ -137,13 +129,13 @@ namespace Xemio.PrincessDefense.Scenes
             if (this.Visible)
             {
                 IRenderManager renderManager = this.GraphicsDevice.RenderManager;
-                Vector2 position = this.GraphicsDevice.DisplayMode.Center - this._font.MeasureString(this.Message) * 0.5f;
+                Vector2 position = this.GraphicsDevice.DisplayMode.Center - Art.Font.MeasureString(this.Message) * 0.5f;
 
                 renderManager.Tint(new Color(0, 0, 0, 0.6f));
-                this._font.Render(this.Message, position + new Vector2(0, 1));
+                Art.Font.Render(this.Message, position + new Vector2(0, 1));
 
                 renderManager.Tint(Color.White);
-                this._font.Render(this.Message, position);
+                Art.Font.Render(this.Message, position);
             }
         }
         #endregion
