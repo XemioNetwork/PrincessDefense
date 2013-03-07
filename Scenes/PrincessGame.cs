@@ -74,7 +74,7 @@ namespace Xemio.PrincessDefense.Scenes
             this._world.Add(player);
             this._world.Add(princess);
 
-            this._world.GenerateWorld("Forest");
+            this._world.GenerateWorld();
         }
         /// <summary>
         /// Ticks the specified elapsed.

@@ -15,6 +15,10 @@ namespace Xemio.PrincessDefense.Levels
         /// </summary>
         string Name { get; }
         /// <summary>
+        /// Gets the seed.
+        /// </summary>
+        string Seed { get; }
+        /// <summary>
         /// Gets the icon.
         /// </summary>
         ITexture Icon { get; }

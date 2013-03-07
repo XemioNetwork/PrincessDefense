@@ -73,10 +73,9 @@ namespace Xemio.PrincessDefense.Entities.Environment
         /// <summary>
         /// Generates the world.
         /// </summary>
-        /// <param name="seed">The seed.</param>
-        public void GenerateWorld(string seed)
+        public void GenerateWorld()
         {
-            this.Generator.Generate(seed);
+            this.Generator.Generate(this.Level.Seed);
         }
         /// <summary>
         /// Sorteds the entity collection.

@@ -41,6 +41,13 @@ namespace Xemio.PrincessDefense.Levels
             get { return "Level"; }
         }
         /// <summary>
+        /// Gets the seed.
+        /// </summary>
+        public virtual string Seed
+        {
+            get { return "Forest"; }
+        }
+        /// <summary>
         /// Gets the icon.
         /// </summary>
         public virtual ITexture Icon
