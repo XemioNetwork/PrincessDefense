@@ -20,6 +20,13 @@ namespace Xemio.PrincessDefense.Levels.Waves
 
         #region Properties
         /// <summary>
+        /// Gets the enemy count.
+        /// </summary>
+        public int EnemyCount
+        {
+            get { return this.Spawns.Sum(spawn => spawn.Count); }
+        }
+        /// <summary>
         /// Gets the spawns.
         /// </summary>
         public List<SpawnInstruction> Spawns { get; set; }

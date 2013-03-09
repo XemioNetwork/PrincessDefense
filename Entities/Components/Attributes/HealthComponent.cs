@@ -104,6 +104,11 @@ namespace Xemio.PrincessDefense.Entities.Components.Attributes
             {
                 this.Health -= damage;
                 this.IsHurt = true;
+
+                if (this.Health > 0)
+                {
+                    Sounds.Hit.Play();
+                }
             }
 
             if (this.Health <= 0)

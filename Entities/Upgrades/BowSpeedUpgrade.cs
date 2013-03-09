@@ -37,14 +37,14 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
         /// </summary>
         public int MaximumLevel
         {
-            get { return 5; }
+            get { return 4; }
         }
         /// <summary>
         /// Gets the upgrade costs.
         /// </summary>
         public int Costs
         {
-            get { return this.Level * 4 + 4; }
+            get { return this.Level * this.Level * 8 + 4; }
         }
         /// <summary>
         /// Gets the name.

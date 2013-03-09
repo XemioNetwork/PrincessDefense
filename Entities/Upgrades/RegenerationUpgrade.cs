@@ -37,7 +37,7 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
         /// </summary>
         public int MaximumLevel
         {
-            get { return 5; }
+            get { return 8; }
         }
         /// <summary>
         /// Gets the upgrade costs.

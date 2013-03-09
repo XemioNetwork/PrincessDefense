@@ -31,11 +31,25 @@ namespace Xemio.PrincessDefense.Entities.Environment
             this._entities = new List<Entity>();
 
             this.World = world;
+
+            int waveIndex = 0;
+            WaveInstruction wave;
+
+            this._enemies = new List<int>();
+            if (this.WaveProvider != null)
+            {
+                while ((wave = this.WaveProvider.CreateWave(waveIndex)) != null)
+                {
+                    this._enemies.Add(wave.EnemyCount);
+                    waveIndex++;
+                }
+            }
         }
         #endregion
 
         #region Fields
         private int _waveIndex;
+        private List<int> _enemies;
 
         private int _spawnIndex;
         private float _spawnDelay;
@@ -67,8 +81,9 @@ namespace Xemio.PrincessDefense.Entities.Environment
             get 
             {
                 if (this.WaveProvider == null) return true;
+                if (this._waveIndex >= this._enemies.Count) return true;
 
-                int enemyCount = this.WaveProvider.GetEnemyCount(this._waveIndex);
+                int enemyCount = this._enemies[this._waveIndex];
                 bool allEnemiesSpawned = this._entities.Count == enemyCount;
                 bool allEnemiesDestroyed = this._entities.All(e => e.IsDestroyed);
 
@@ -132,7 +147,14 @@ namespace Xemio.PrincessDefense.Entities.Environment
         /// </summary>
         private void AnnounceCompleted()
         {
-            this.Announce("Wave completed.");
+            if (this._waveIndex + 1 == this._enemies.Count)
+            {
+                this.Announce("Congratulations! Level completed.");
+            }
+            else
+            {
+                this.Announce("Wave completed.");
+            }
         }
         /// <summary>
         /// Processes the instruction.

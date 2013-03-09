@@ -42,6 +42,13 @@ namespace Xemio.PrincessDefense.Levels.Waves
         /// </summary>
         public IMobSpawner Spawner { get; set; }
         /// <summary>
+        /// Gets the enemy count.
+        /// </summary>
+        public int Count
+        {
+            get { return this.Top + this.Right + this.Bottom + this.Left; }
+        }
+        /// <summary>
         /// Gets the top skeleton count.
         /// </summary>
         public int Top { get; set; }

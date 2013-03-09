@@ -21,6 +21,7 @@ using Xemio.PrincessDefense.Scenes.Menues;
 using Xemio.PrincessDefense.Entities.Spells;
 using Xemio.PrincessDefense.Scenes.Components;
 using Xemio.PrincessDefense.Levels;
+using Xemio.PrincessDefense.Entities.Particles;
 
 namespace Xemio.PrincessDefense.Scenes
 {

@@ -7,7 +7,7 @@ using Xemio.GameLibrary.Rendering;
 
 namespace Xemio.PrincessDefense.Levels
 {
-    public class CherryLevel : Level
+    public class MeatLevel : Level
     {
         #region Constructors
         /// <summary>
@@ -15,7 +15,7 @@ namespace Xemio.PrincessDefense.Levels
         /// </summary>
         /// <param name="parent">The parent.</param>
         /// <param name="directionIndex">The direction.</param>
-        public CherryLevel(ILevel parent, int directionIndex) : base(parent, directionIndex)
+        public MeatLevel(ILevel parent, int directionIndex) : base(parent, directionIndex)
         {
         }
         #endregion
@@ -26,14 +26,14 @@ namespace Xemio.PrincessDefense.Levels
         /// </summary>
         public override string Name
         {
-            get { return "Cherry"; }
+            get { return "Meat"; }
         }
         /// <summary>
         /// Gets the icon.
         /// </summary>
         public override ITexture Icon
         {
-            get { return Art.Cherry; }
+            get { return Art.Meat; }
         }
         #endregion
     }

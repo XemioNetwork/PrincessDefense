@@ -17,7 +17,7 @@ namespace Xemio.PrincessDefense.Entities.Rendering
         /// Initializes a new instance of the <see cref="FireLionRenderer"/> class.
         /// </summary>
         /// <param name="fireLion">The fire lion.</param>
-        public FireLionRenderer(FireLion fireLion) : base(fireLion)
+        public FireLionRenderer(FireLionSpell fireLion) : base(fireLion)
         {
         }
         #endregion

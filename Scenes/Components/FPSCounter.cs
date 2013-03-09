@@ -25,6 +25,13 @@ namespace Xemio.PrincessDefense.Scenes.Components
         
         #region Properties
         /// <summary>
+        /// Gets the render index.
+        /// </summary>
+        public override int RenderIndex
+        {
+            get { return 1; }
+        }
+        /// <summary>
         /// Gets the game loop.
         /// </summary>
         public GameLoop GameLoop

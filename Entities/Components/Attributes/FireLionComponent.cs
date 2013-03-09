@@ -55,7 +55,7 @@ namespace Xemio.PrincessDefense.Entities.Components.Attributes
                 Projectile projectile = collisionEvent.Get<Projectile>();
                 if (projectile == this.Entity)
                 {
-                    FireLion lion = new FireLion(
+                    FireLionSpell lion = new FireLionSpell(
                         projectile.Owner as Player,
                         projectile.Vector * projectile.Speed * 0.4f,
                         projectile.Facing);

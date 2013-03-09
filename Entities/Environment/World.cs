@@ -20,6 +20,8 @@ namespace Xemio.PrincessDefense.Entities.Environment
         /// </summary>
         public World(ILevel level)
         {
+            this.Level = level;
+
             this.Camera = new Camera();
             this.Camera.Max = new Vector2(Art.Map.Width, Art.Map.Height);
 
@@ -27,7 +29,6 @@ namespace Xemio.PrincessDefense.Entities.Environment
             this.Generator = new WorldGenerator(this);
 
             this.WaveManager = new WaveManager(this);
-            this.Level = level;
         }
         #endregion
 

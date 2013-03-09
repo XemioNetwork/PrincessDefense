@@ -9,6 +9,7 @@ using Xemio.GameLibrary.Rendering.Sprites;
 using Xemio.PrincessDefense.Entities.Rendering;
 using Xemio.PrincessDefense.Entities.Components;
 using Xemio.PrincessDefense.Entities.Components.Attributes;
+using Xemio.PrincessDefense.Entities.Particles;
 
 namespace Xemio.PrincessDefense.Entities.Characters
 {
@@ -55,6 +56,23 @@ namespace Xemio.PrincessDefense.Entities.Characters
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Destroys this instance.
+        /// </summary>
+        public override void Destroy()
+        {
+            if (!this.IsDestroyed)
+            {
+                Sounds.Explosion.Play();
+
+                ExplosionEmitter explosion = new ExplosionEmitter();
+                explosion.Position = this.Position;
+
+                this.Environment.Add(explosion);
+            }
+
+            base.Destroy();
+        }
         /// <summary>
         /// Ticks the specified elapsed.
         /// </summary>

@@ -27,6 +27,7 @@ namespace Xemio.PrincessDefense.App
             XGL.Run(mainForm.Handle, 400, 300, 60);
 
             Art.LoadContent();
+            Sounds.LoadContent();
 
             SceneManager sceneManager = XGL.GetComponent<SceneManager>();
             sceneManager.Add(new GameMenu());

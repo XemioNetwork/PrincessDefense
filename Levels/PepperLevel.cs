@@ -7,7 +7,7 @@ using Xemio.GameLibrary.Rendering;
 
 namespace Xemio.PrincessDefense.Levels
 {
-    public class MushroomLevel : Level
+    public class PepperLevel : Level
     {
         #region Constructors
         /// <summary>
@@ -15,12 +15,8 @@ namespace Xemio.PrincessDefense.Levels
         /// </summary>
         /// <param name="parent">The parent.</param>
         /// <param name="directionIndex">The direction.</param>
-        public MushroomLevel(ILevel parent, int directionIndex) : base(parent, directionIndex)
+        public PepperLevel(ILevel parent, int directionIndex) : base(parent, directionIndex)
         {
-            this.WaveProvider = new MushroomWaveProvider();
-
-            this.Neighbors[DirectionIndex.Right] = new PepperLevel(this, DirectionIndex.Right);
-            this.Neighbors[DirectionIndex.Bottom] = new MeatLevel(this, DirectionIndex.Bottom);
         }
         #endregion
 
@@ -30,21 +26,14 @@ namespace Xemio.PrincessDefense.Levels
         /// </summary>
         public override string Name
         {
-            get { return "Mushroom"; }
-        }
-        /// <summary>
-        /// Gets the seed.
-        /// </summary>
-        public override string Seed
-        {
-            get { return "Insane"; }
+            get { return "Red Pepper"; }
         }
         /// <summary>
         /// Gets the icon.
         /// </summary>
         public override ITexture Icon
         {
-            get { return Art.Mushroom; }
+            get { return Art.RedPepper; }
         }
         #endregion
     }

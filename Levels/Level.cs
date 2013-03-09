@@ -98,6 +98,8 @@ namespace Xemio.PrincessDefense.Levels
         /// </summary>
         public void Unlock()
         {
+            this.Container.IsCompleted = true;
+
             foreach (ILevel level in this.Neighbors)
             {
                 if (level != null) level.Container.IsUnlocked = true;

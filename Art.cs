@@ -137,6 +137,14 @@ namespace Xemio.PrincessDefense
         /// Gets the texture for "iron.png".
         /// </summary>
         public static ITexture Iron { get; private set; }
+        /// <summary>
+        /// Gets the texture for "redPepper.png".
+        /// </summary>
+        public static ITexture RedPepper { get; private set; }
+        /// <summary>
+        /// Gets the texture for "meat.png".
+        /// </summary>
+        public static ITexture Meat { get; private set; }
         #endregion
 
         #region Map
@@ -206,6 +214,8 @@ namespace Xemio.PrincessDefense
             Art.Cherry = LoadTexture(@"Resources\cups\cherry.png");
             Art.Bone = LoadTexture(@"Resources\cups\bone.png");
             Art.Iron = LoadTexture(@"Resources\cups\iron.png");
+            Art.RedPepper = LoadTexture(@"Resources\cups\redPepper.png");
+            Art.Meat = LoadTexture(@"Resources\cups\meat.png");
 
             Art.Map = LoadTexture(@"Resources\map.png");
             Art.Font = Art.Factory.CreateSpriteFont(@"Resources\fonts\kenPixel.sf");

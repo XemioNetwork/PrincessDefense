@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Xemio.PrincessDefense</RootNamespace>
-    <AssemblyName>PrincessDefense</AssemblyName>
+    <AssemblyName>princess</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -60,9 +60,13 @@
     </Compile>
     <Compile Include="App\Program.cs" />
     <Compile Include="Art.cs" />
+    <Compile Include="Entities\Particles\ExplosionEmitter.cs" />
+    <Compile Include="Entities\Particles\Particle.cs" />
+    <Compile Include="Entities\Rendering\ParticleRenderer.cs" />
     <Compile Include="Levels\BreadLevel.cs" />
     <Compile Include="Levels\BreadWaveProvider.cs" />
-    <Compile Include="Levels\CherryLevel.cs" />
+    <Compile Include="Levels\MeatLevel.cs" />
+    <Compile Include="Levels\PepperLevel.cs" />
     <Compile Include="Levels\Level.cs" />
     <Compile Include="Levels\LevelContainer.cs" />
     <Compile Include="Levels\ILevel.cs" />
@@ -98,7 +102,7 @@
     <Compile Include="Entities\Rendering\ProjectileRenderer.cs" />
     <Compile Include="Entities\Characters\Skeleton.cs" />
     <Compile Include="Entities\Rendering\TreeRenderer.cs" />
-    <Compile Include="Entities\Spells\FireLion.cs" />
+    <Compile Include="Entities\Spells\FireLionSpell.cs" />
     <Compile Include="Entities\Team.cs" />
     <Compile Include="Entities\Direction.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
@@ -116,6 +120,7 @@
     <Compile Include="Extensions\SpriteFontExtensions.cs" />
     <Compile Include="Levels\DirectionIndex.cs" />
     <Compile Include="Levels\MushroomLevel.cs" />
+    <Compile Include="Levels\MushroomWaveProvider.cs" />
     <Compile Include="Levels\Waves\Spawners\SlimeSpawner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\Components\Announcer.cs" />
@@ -133,6 +138,7 @@
     <Compile Include="Levels\Waves\Spawners\SkeletonSpawner.cs" />
     <Compile Include="Levels\Waves\SpawnInstruction.cs" />
     <Compile Include="Levels\Waves\WaveInstruction.cs" />
+    <Compile Include="Sounds.cs" />
     <EmbeddedResource Include="App\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -190,7 +196,13 @@
     <Content Include="Resources\cups\iron.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\cups\meat.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\cups\mushroom.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\cups\redPepper.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\cups\tutorial.png">
@@ -227,6 +239,24 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\characters\slime.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\sounds\completed.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\sounds\explosion.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\sounds\fireLion.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\sounds\hit.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\sounds\playLevel.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\sounds\select.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\spells\firelionDown.png">

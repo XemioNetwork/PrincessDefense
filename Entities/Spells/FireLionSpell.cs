@@ -10,16 +10,16 @@ using Xemio.GameLibrary.Math;
 
 namespace Xemio.PrincessDefense.Entities.Spells
 {
-    public class FireLion : BaseEntity
+    public class FireLionSpell : BaseEntity
     {
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="FireLion"/> class.
+        /// Initializes a new instance of the <see cref="FireLionSpell"/> class.
         /// </summary>
         /// <param name="owner">The owner.</param>
         /// <param name="velocity">The velocity.</param>
         /// <param name="direction">The direction.</param>
-        public FireLion(Player owner, Vector2 velocity, Direction direction)
+        public FireLionSpell(Player owner, Vector2 velocity, Direction direction)
         {
             this.Renderer = new FireLionRenderer(this);
 
@@ -39,6 +39,8 @@ namespace Xemio.PrincessDefense.Entities.Spells
             this.Components.Add(animation);
             this.Components.Add(collision);
             this.Components.Add(damage);
+
+            Sounds.FireLion.Play();
         }
         #endregion
 

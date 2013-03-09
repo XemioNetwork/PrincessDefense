@@ -98,6 +98,7 @@ namespace Xemio.PrincessDefense.Scenes.Menues
             this._elapsed = 0;
             this._yOffset = 0;
 
+            Sounds.Select.Play();
             this.SelectedLevel = level;
         }
         /// <summary>
@@ -138,6 +139,8 @@ namespace Xemio.PrincessDefense.Scenes.Menues
 
             if (this.Keyboard.IsKeyPressed(Keys.Enter))
             {
+                Sounds.PlayLevel.Play();
+
                 this.SceneManager.Add(new PrincessGame(this.SelectedLevel));
                 this.SceneManager.Remove(this);
             }
@@ -225,8 +228,16 @@ namespace Xemio.PrincessDefense.Scenes.Menues
                 }
             }
 
-            IPen levelPen = level.Container.IsUnlocked ? this._levelPen : this._lockedPen;
+            IPen levelPen = this._lockedPen;
+            if (level.Container.IsUnlocked) levelPen = this._levelPen;
+
             geometry.DrawCircle(levelPen, position, 10);
+
+            Vector2 iconPosition = position - new Vector2(17, 28);
+            if (isSelected)
+            {
+                iconPosition += new Vector2(0, this._yOffset);
+            }
 
             if (isSelected)
             {
@@ -234,13 +245,7 @@ namespace Xemio.PrincessDefense.Scenes.Menues
             }
             if (!level.Container.IsUnlocked)
             {
-                renderManager.Tint(new Color(0, 0, 0, 0.8f));
-            }
-
-            Vector2 iconPosition = position - new Vector2(17, 28);
-            if (isSelected)
-            {
-                iconPosition += new Vector2(0, this._yOffset);
+                renderManager.Tint(new Color(0.3f, 0.3f, 0.3f, 0.8f));
             }
 
             renderManager.Render(level.Icon, iconPosition);

@@ -44,7 +44,7 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
         /// </summary>
         public int Costs
         {
-            get { return this.Level * this.Level * this.Level * 3 + 8; }
+            get { return this.Level * this.Level * this.Level * this.Level * 4 + 8; }
         }
         /// <summary>
         /// Gets the name.

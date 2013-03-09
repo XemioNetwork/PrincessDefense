@@ -26,7 +26,7 @@ namespace Xemio.PrincessDefense.Entities.Characters
 
             KnockbackComponent knockback = new KnockbackComponent(this);
             knockback.Entries.Add(new Knockback<Projectile>(4));
-            knockback.Entries.Add(new Knockback<FireLion>(3));
+            knockback.Entries.Add(new Knockback<FireLionSpell>(3));
 
             DamageComponent damage = this.GetComponent<DamageComponent>();
             damage.Damage = 2;

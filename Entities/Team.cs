@@ -8,8 +8,8 @@ namespace Xemio.PrincessDefense.Entities
 {
     public enum Team
     {
+        None,
         Neutral,
-
         Skeletons,
         Princess
     }

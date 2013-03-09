@@ -12,22 +12,6 @@ namespace Xemio.PrincessDefense.Levels
     {
         #region IWaveProvider Member
         /// <summary>
-        /// Gets the enemy count.
-        /// </summary>
-        /// <param name="waveIndex">Index of the wave.</param>
-        /// <returns></returns>
-        public int GetEnemyCount(int waveIndex)
-        {
-            switch (waveIndex)
-            {
-                case 0: return 4;
-                case 1: return 14;
-                case 2: return 30;
-            }
-
-            return 0;
-        }
-        /// <summary>
         /// Creates wave instructions for the current wave.
         /// </summary>
         public WaveInstruction CreateWave(int waveIndex)
@@ -38,7 +22,7 @@ namespace Xemio.PrincessDefense.Levels
                 {
                     Spawns = new List<SpawnInstruction>()
                     {
-                        new SpawnInstruction { Top = 2, Spawner = new SlimeSpawner(), NextSpawn = 2000 },
+                        new SpawnInstruction { Top = 2, Spawner = new SlimeSpawner(), NextSpawn = 3000 },
                         new SpawnInstruction { Top = 1, Left = 1, Spawner = new SlimeSpawner(), NextSpawn = 0 }
                     }
                 };
@@ -47,19 +31,19 @@ namespace Xemio.PrincessDefense.Levels
                     Spawns = new List<SpawnInstruction>()
                     {
                         new SpawnInstruction { Top = 2, Spawner = new SlimeSpawner(), NextSpawn = 1000 },
-                        new SpawnInstruction { Bottom = 3, Spawner = new SlimeSpawner(), NextSpawn = 1500 },
-                        new SpawnInstruction { Top = 4, Spawner = new SlimeSpawner(), NextSpawn = 2000 },
-                        new SpawnInstruction { Bottom = 5, Spawner = new SlimeSpawner(), NextSpawn = 0 },
+                        new SpawnInstruction { Bottom = 2, Spawner = new SlimeSpawner(), NextSpawn = 1500 },
+                        new SpawnInstruction { Top = 2, Spawner = new SlimeSpawner(), NextSpawn = 2000 },
+                        new SpawnInstruction { Bottom = 2, Spawner = new SlimeSpawner(), NextSpawn = 0 },
                     }
                 };
                 case 2: return new WaveInstruction
                 {
                     Spawns = new List<SpawnInstruction>()
                     {
-                        new SpawnInstruction { Bottom = 3, Right = 3, Spawner = new SlimeSpawner(), NextSpawn = 3000 },
-                        new SpawnInstruction { Top = 3, Left = 3, Spawner = new SlimeSpawner(), NextSpawn = 3000 },
-                        new SpawnInstruction { Bottom = 4, Left = 4, Spawner = new SlimeSpawner(), NextSpawn = 4000 },
-                        new SpawnInstruction { Top = 5, Right = 5, Spawner = new SlimeSpawner(), NextSpawn = 0 },
+                        new SpawnInstruction { Bottom = 1, Right = 1, Spawner = new SlimeSpawner(), NextSpawn = 3000 },
+                        new SpawnInstruction { Top = 1, Left = 1, Spawner = new SlimeSpawner(), NextSpawn = 3000 },
+                        new SpawnInstruction { Bottom = 2, Left = 2, Spawner = new SlimeSpawner(), NextSpawn = 4000 },
+                        new SpawnInstruction { Top = 2, Right = 2, Spawner = new SlimeSpawner(), NextSpawn = 0 },
                     }
                 };
             }

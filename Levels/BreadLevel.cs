@@ -26,7 +26,7 @@ namespace Xemio.PrincessDefense.Levels
         {
             this.WaveProvider = new BreadWaveProvider();
             this.Container.IsUnlocked = true;
-
+            
             this.Neighbors[DirectionIndex.Right] = new MushroomLevel(this, DirectionIndex.Right);
         }
         #endregion
