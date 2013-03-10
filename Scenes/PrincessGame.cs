@@ -61,11 +61,11 @@ namespace Xemio.PrincessDefense.Scenes
             Player player = Player.Instance;
             player.Position = new Vector2(180, 100);
 
-            this.Scenes.Add(new UpgradeMenu(player));
-            this.Scenes.Add(new MiniMap(this._world));
-            this.Scenes.Add(new HealthBar(player));
-            this.Scenes.Add(new SpellButtons());
-            this.Scenes.Add(new Announcer());
+            this.Add(new UpgradeMenu(player));
+            this.Add(new MiniMap(this._world));
+            this.Add(new HealthBar(player));
+            this.Add(new SpellButtons());
+            this.Add(new Announcer());
 
             Princess princess = new Princess();
             princess.Position = new Vector2(300, 300);
@@ -75,7 +75,7 @@ namespace Xemio.PrincessDefense.Scenes
             this._world.Add(player);
             this._world.Add(princess);
 
-            this._world.GenerateWorld();
+            MapLoader.Load(this._world, this._world.Level.FileName);
         }
         /// <summary>
         /// Ticks the specified elapsed.

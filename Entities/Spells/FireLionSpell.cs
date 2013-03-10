@@ -34,19 +34,19 @@ namespace Xemio.PrincessDefense.Entities.Spells
             collision.IsStatic = true;
 
             DamageComponent damage = new DamageComponent(this, 1);
-            damage.DamageOnContact = true;
+            damage.DamageOnImpact = true;
 
             this.Components.Add(animation);
             this.Components.Add(collision);
             this.Components.Add(damage);
-
-            Sounds.FireLion.Play();
         }
         #endregion
 
         #region Fields
         private Player _owner;
         private Vector2 _velocity;
+
+        private bool _hasPlayed;
         #endregion
 
         #region Properties
@@ -84,7 +84,16 @@ namespace Xemio.PrincessDefense.Entities.Spells
                 this.Destroy();
             }
 
+
             this.Position += this._velocity;
+
+            if (!this._hasPlayed)
+            {
+                this._hasPlayed = true;
+                Sounds.Play(Sounds.FireLion, this);
+            }
+
+            Sounds.Locate(Sounds.FireLion, this);
             base.Tick(elapsed);
         }
         #endregion

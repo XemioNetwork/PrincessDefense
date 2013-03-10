@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Math;
+using Xemio.GameLibrary.Rendering;
 using Xemio.PrincessDefense.Levels.Waves.Spawners;
 using Xemio.PrincessDefense.Entities;
 using Xemio.PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities.Enemies;
 
 namespace Xemio.PrincessDefense.Levels.Waves.Spawners
 {
@@ -14,13 +16,20 @@ namespace Xemio.PrincessDefense.Levels.Waves.Spawners
     {
         #region IMobSpawner Member
         /// <summary>
+        /// Gets the mob icon.
+        /// </summary>
+        public ITexture Icon
+        {
+            get { return Art.Slime[2].Sheet.Textures[0]; }
+        }
+        /// <summary>
         /// Spawns an entity at the specified position.
         /// </summary>
         /// <param name="position">The position.</param>
         /// <returns></returns>
         public BaseEntity Spawn(Vector2 position)
         {
-            return new Slime { Position = position };
+            return new SlimeEnemy { Position = position };
         }
         #endregion
     }

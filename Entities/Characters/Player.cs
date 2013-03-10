@@ -15,6 +15,7 @@ using Xemio.PrincessDefense.Entities.Events;
 using Xemio.PrincessDefense.Entities.Upgrades;
 using Xemio.PrincessDefense.Entities.Components;
 using Xemio.PrincessDefense.Entities.Components.Attributes;
+using Xemio.PrincessDefense.Entities.Enemies;
 
 namespace Xemio.PrincessDefense.Entities.Characters
 {
@@ -37,8 +38,7 @@ namespace Xemio.PrincessDefense.Entities.Characters
             animation.Add(Art.HeroShooting);
 
             KnockbackComponent knockback = new KnockbackComponent(this);
-            knockback.Entries.Add(new Knockback<Skeleton>(3));
-            knockback.Entries.Add(new Knockback<Slime>(0.1f));
+            knockback.Entries.Add(new Knockback<Enemy>(3));
 
             this.Components.Add(new InputComponent(this));
             this.Components.Add(new SpeedComponent(this));
@@ -48,14 +48,6 @@ namespace Xemio.PrincessDefense.Entities.Characters
             this.Components.Add(new BowComponent(this));
 
             this.Upgrades = new List<IUpgrade>();
-            this.Upgrades.Add(new HealthUpgrade(this));
-            this.Upgrades.Add(new RegenerationUpgrade(this));
-            this.Upgrades.Add(new StrengthUpgrade(this));
-            this.Upgrades.Add(new SpeedUpgrade(this));
-            this.Upgrades.Add(new BowSpeedUpgrade(this));
-            this.Upgrades.Add(new ArrowUpgrade(this));
-            this.Upgrades.Add(new FireLionUpgrade(this));
-            this.Upgrades.Add(new KnockbackUpgrade(this));
         }
         #endregion
 
@@ -94,6 +86,17 @@ namespace Xemio.PrincessDefense.Entities.Characters
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Initializes the upgrades.
+        /// </summary>
+        public void InitializeUpgrades(int count)
+        {
+            IList<IUpgrade> availableUpgrades = UpgradeManager.GetAvailableUpgrades();
+            if (availableUpgrades.Count >= count)
+            {
+                this.Upgrades = availableUpgrades.Take(count).ToList();
+            }
+        }
         /// <summary>
         /// Destroys this instance.
         /// </summary>

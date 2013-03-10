@@ -32,16 +32,15 @@ namespace Xemio.PrincessDefense.Entities.Environment
 
             this.World = world;
 
-            int waveIndex = 0;
-            WaveInstruction wave;
-
             this._enemies = new List<int>();
             if (this.WaveProvider != null)
             {
-                while ((wave = this.WaveProvider.CreateWave(waveIndex)) != null)
+                int waveIndex = 0;
+                WaveInstruction wave;
+
+                while ((wave = this.WaveProvider.CreateWave(waveIndex++)) != null)
                 {
                     this._enemies.Add(wave.EnemyCount);
-                    waveIndex++;
                 }
             }
         }

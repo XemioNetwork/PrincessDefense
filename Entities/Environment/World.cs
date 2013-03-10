@@ -76,7 +76,7 @@ namespace Xemio.PrincessDefense.Entities.Environment
         /// </summary>
         public void GenerateWorld()
         {
-            this.Generator.Generate(this.Level.Seed);
+            this.Generator.Generate(this.Level.FileName);
         }
         /// <summary>
         /// Sorteds the entity collection.

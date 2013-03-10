@@ -63,7 +63,7 @@ namespace Xemio.PrincessDefense.Entities.Characters
         {
             if (!this.IsDestroyed)
             {
-                Sounds.Explosion.Play();
+                Sounds.Play(Sounds.Explosion, this);
 
                 ExplosionEmitter explosion = new ExplosionEmitter();
                 explosion.Position = this.Position;

@@ -60,11 +60,21 @@
     </Compile>
     <Compile Include="App\Program.cs" />
     <Compile Include="Art.cs" />
+    <Compile Include="Entities\Enemies\BatEnemy.cs" />
+    <Compile Include="Entities\Enemies\Enemy.cs" />
+    <Compile Include="Entities\Enemies\GhostEnemy.cs" />
+    <Compile Include="Entities\Enemies\SnakeEnemy.cs" />
     <Compile Include="Entities\Particles\ExplosionEmitter.cs" />
     <Compile Include="Entities\Particles\Particle.cs" />
+    <Compile Include="Entities\Rendering\GhostRenderer.cs" />
     <Compile Include="Entities\Rendering\ParticleRenderer.cs" />
     <Compile Include="Levels\BreadLevel.cs" />
     <Compile Include="Levels\BreadWaveProvider.cs" />
+    <Compile Include="Levels\CookingLevel.cs" />
+    <Compile Include="Levels\Maps\Commands\EntityCommand.cs" />
+    <Compile Include="Levels\Maps\Commands\TreeCommand.cs" />
+    <Compile Include="Levels\Maps\IMapCommand.cs" />
+    <Compile Include="Levels\Maps\MapLoader.cs" />
     <Compile Include="Levels\MeatLevel.cs" />
     <Compile Include="Levels\PepperLevel.cs" />
     <Compile Include="Levels\Level.cs" />
@@ -88,7 +98,7 @@
     <Compile Include="Entities\Components\Attributes\RegenerationComponent.cs" />
     <Compile Include="Entities\Components\Attributes\SpeedComponent.cs" />
     <Compile Include="Entities\DirectionHelper.cs" />
-    <Compile Include="Entities\Characters\Slime.cs" />
+    <Compile Include="Entities\Enemies\SlimeEnemy.cs" />
     <Compile Include="Entities\Environment\WaveManager.cs" />
     <Compile Include="Entities\Environment\WorldCollision.cs" />
     <Compile Include="Entities\Environment\WorldGenerator.cs" />
@@ -100,7 +110,6 @@
     <Compile Include="Entities\Projectile.cs" />
     <Compile Include="Entities\Rendering\FireLionRenderer.cs" />
     <Compile Include="Entities\Rendering\ProjectileRenderer.cs" />
-    <Compile Include="Entities\Characters\Skeleton.cs" />
     <Compile Include="Entities\Rendering\TreeRenderer.cs" />
     <Compile Include="Entities\Spells\FireLionSpell.cs" />
     <Compile Include="Entities\Team.cs" />
@@ -121,11 +130,18 @@
     <Compile Include="Levels\DirectionIndex.cs" />
     <Compile Include="Levels\MushroomLevel.cs" />
     <Compile Include="Levels\MushroomWaveProvider.cs" />
+    <Compile Include="Levels\PepperWaveProvider.cs" />
+    <Compile Include="Levels\TutorialLevel.cs" />
+    <Compile Include="Levels\TutorialWaveProvider.cs" />
+    <Compile Include="Levels\Waves\Spawners\BatSpawner.cs" />
+    <Compile Include="Levels\Waves\Spawners\GhostSpawner.cs" />
+    <Compile Include="Levels\Waves\Spawners\SkeletonSpawner.cs" />
     <Compile Include="Levels\Waves\Spawners\SlimeSpawner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\Components\Announcer.cs" />
     <Compile Include="Scenes\Components\FPSCounter.cs" />
     <Compile Include="Scenes\GameOver.cs" />
+    <Compile Include="Scenes\Menues\CookbookMenu.cs" />
     <Compile Include="Scenes\Menues\GameMenu.cs" />
     <Compile Include="Scenes\Components\HealthBar.cs" />
     <Compile Include="Scenes\Components\MiniMap.cs" />
@@ -135,7 +151,6 @@
     <Compile Include="Scenes\Menues\UpgradeMenu.cs" />
     <Compile Include="Scenes\Menues\LevelSelection.cs" />
     <Compile Include="Levels\Waves\IWaveProvider.cs" />
-    <Compile Include="Levels\Waves\Spawners\SkeletonSpawner.cs" />
     <Compile Include="Levels\Waves\SpawnInstruction.cs" />
     <Compile Include="Levels\Waves\WaveInstruction.cs" />
     <Compile Include="Sounds.cs" />
@@ -193,6 +208,9 @@
     <Content Include="Resources\cups\cherry.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\cups\cooking.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\cups\iron.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -208,6 +226,33 @@
     <Content Include="Resources\cups\tutorial.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\enemies\bat.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\enemies\bee.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\enemies\big_worm.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\enemies\eyeball.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\enemies\ghost.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\enemies\man_eater_flower.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\enemies\pumpking.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\enemies\small_worm.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\enemies\snake.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\items\potion.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -217,7 +262,10 @@
     <Content Include="Resources\map.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\map\main.png">
+    <Content Include="Resources\maps\BreadLevel.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\maps\Forest.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\misc\menu.png">
@@ -238,7 +286,7 @@
     <Content Include="Resources\projectiles\arrowUp.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\characters\slime.png">
+    <Content Include="Resources\enemies\slime.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\sounds\completed.wav">

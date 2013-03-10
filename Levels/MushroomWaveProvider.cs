@@ -30,25 +30,25 @@ namespace Xemio.PrincessDefense.Levels
                 {
                     Spawns = new List<SpawnInstruction>()
                     {
-                        new SpawnInstruction { Top = 1, Spawner = new SkeletonSpawner(), NextSpawn = 0 }
+                        new SpawnInstruction { Top = 2, Spawner = new SnakeSpawner(), NextSpawn = 0 }
                     }
                 };
                 case 2: return new WaveInstruction
                 {
                     Spawns = new List<SpawnInstruction>()
                     {
-                        new SpawnInstruction { Top = 3, Spawner = new SlimeSpawner(), NextSpawn = 3000 },
-                        new SpawnInstruction { Top = 2, Left = 2, Spawner = new SlimeSpawner(), NextSpawn = 5000 },                        
-                        new SpawnInstruction { Right = 2, Spawner = new SkeletonSpawner(), NextSpawn = 0 }
+                        new SpawnInstruction { Top = 3, Spawner = new SlimeSpawner(), NextSpawn = 1000 },
+                        new SpawnInstruction { Left = 1, Right = 1, Spawner = new SlimeSpawner(), NextSpawn = 5000 },                        
+                        new SpawnInstruction { Bottom = 2, Spawner = new SnakeSpawner(), NextSpawn = 0 }
                     }
                 };
                 case 3: return new WaveInstruction
                 {
                     Spawns = new List<SpawnInstruction>()
                     {
-                        new SpawnInstruction { Top = 3, Spawner = new SlimeSpawner(), NextSpawn = 3000 },
-                        new SpawnInstruction { Top = 1, Left = 1, Spawner = new SkeletonSpawner(), NextSpawn = 5000 },                        
-                        new SpawnInstruction { Right = 2, Spawner = new SkeletonSpawner(), NextSpawn = 0 }
+                        new SpawnInstruction { Top = 2, Spawner = new GhostSpawner(), NextSpawn = 3000 },
+                        new SpawnInstruction { Top = 1, Left = 1, Right = 1, Spawner = new SnakeSpawner(), NextSpawn = 5000 },                        
+                        new SpawnInstruction { Bottom = 2, Top = 2, Spawner = new SnakeSpawner(), NextSpawn = 0 }
                     }
                 };
             }

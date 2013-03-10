@@ -17,7 +17,7 @@ namespace Xemio.PrincessDefense.Levels
         /// <summary>
         /// Gets the seed.
         /// </summary>
-        string Seed { get; }
+        string FileName { get; }
         /// <summary>
         /// Gets the icon.
         /// </summary>
@@ -46,6 +46,14 @@ namespace Xemio.PrincessDefense.Levels
         /// Gets a value indicating whether this instance is hidden.
         /// </summary>
         bool IsHidden { get; }
+        /// <summary>
+        /// Gets a value indicating whether to show the level description.
+        /// </summary>
+        bool ShowDescription { get; }
+        /// <summary>
+        /// Plays this level.
+        /// </summary>
+        void Play();
         /// <summary>
         /// Unlocks this level.
         /// </summary>

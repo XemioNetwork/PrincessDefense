@@ -22,7 +22,7 @@ namespace Xemio.PrincessDefense.Entities
         /// </summary>
         public virtual Team Team
         {
-            get { return Team.Skeletons; }
+            get { return Team.None; }
         }
         #endregion
     }

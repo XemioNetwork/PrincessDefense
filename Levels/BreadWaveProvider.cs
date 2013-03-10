@@ -30,9 +30,9 @@ namespace Xemio.PrincessDefense.Levels
                 {
                     Spawns = new List<SpawnInstruction>()
                     {
-                        new SpawnInstruction { Top = 2, Spawner = new SlimeSpawner(), NextSpawn = 1000 },
-                        new SpawnInstruction { Bottom = 2, Spawner = new SlimeSpawner(), NextSpawn = 1500 },
-                        new SpawnInstruction { Top = 2, Spawner = new SlimeSpawner(), NextSpawn = 2000 },
+                        new SpawnInstruction { Top = 2, Spawner = new SlimeSpawner(), NextSpawn = 4000 },
+                        new SpawnInstruction { Bottom = 2, Spawner = new BatSpawner(), NextSpawn = 4000 },
+                        new SpawnInstruction { Top = 2, Spawner = new BatSpawner(), NextSpawn = 4000 },
                         new SpawnInstruction { Bottom = 2, Spawner = new SlimeSpawner(), NextSpawn = 0 },
                     }
                 };
@@ -41,7 +41,7 @@ namespace Xemio.PrincessDefense.Levels
                     Spawns = new List<SpawnInstruction>()
                     {
                         new SpawnInstruction { Bottom = 1, Right = 1, Spawner = new SlimeSpawner(), NextSpawn = 3000 },
-                        new SpawnInstruction { Top = 1, Left = 1, Spawner = new SlimeSpawner(), NextSpawn = 3000 },
+                        new SpawnInstruction { Top = 1, Left = 1, Spawner = new BatSpawner(), NextSpawn = 3000 },
                         new SpawnInstruction { Bottom = 2, Left = 2, Spawner = new SlimeSpawner(), NextSpawn = 4000 },
                         new SpawnInstruction { Top = 2, Right = 2, Spawner = new SlimeSpawner(), NextSpawn = 0 },
                     }

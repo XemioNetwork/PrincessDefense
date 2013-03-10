@@ -45,12 +45,32 @@ namespace Xemio.PrincessDefense.Entities.Events
         /// </summary>
         public T Get<T>() where T : BaseEntity
         {
-            if (this.Entity is T)
-                return (T)this.Entity;
-            if (this.CollidingEntity is T)
-                return (T)this.CollidingEntity;
+            return (T)this.Get(typeof(T));
+        }
+        /// <summary>
+        /// Gets an entity by a specified type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns></returns>
+        public BaseEntity Get(Type type)
+        {
+            if (type.IsAssignableFrom(this.Entity.GetType()))
+                return this.Entity;
+            if (type.IsAssignableFrom(this.CollidingEntity.GetType()))
+                return this.CollidingEntity;
 
-            return default(T);
+            return null;
+        }
+        /// <summary>
+        /// Determines whether the collision contains an entity with the specified type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        public bool Has(Type type)
+        {
+            if (type.IsAssignableFrom(this.Entity.GetType())) return true;
+            if (type.IsAssignableFrom(this.CollidingEntity.GetType())) return true;
+
+            return false;
         }
         /// <summary>
         /// Determines whether is an intersection of the specific type.

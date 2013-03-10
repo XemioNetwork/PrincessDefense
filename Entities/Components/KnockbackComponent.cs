@@ -41,7 +41,7 @@ namespace Xemio.PrincessDefense.Entities.Components
         /// <param name="type">The type.</param>
         public Knockback GetKnockback(Type type)
         {
-            return this.Entries.FirstOrDefault(k => k.Type == type);
+            return this.Entries.FirstOrDefault(k => k.Type.IsAssignableFrom(type));
         }
         /// <summary>
         /// Handles an entity collision.
@@ -59,14 +59,9 @@ namespace Xemio.PrincessDefense.Entities.Components
 
                 foreach (Knockback knockback in this.Entries)
                 {
-                    if (knockback.Type.IsAssignableFrom(entityType))
+                    if (collisionEvent.Has(knockback.Type))
                     {
-                        entity = collisionEvent.Entity;
-                        break;
-                    }
-                    if (knockback.Type.IsAssignableFrom(collidingType))
-                    {
-                        entity = collisionEvent.CollidingEntity;
+                        entity = collisionEvent.Get(knockback.Type);
                         break;
                     }
                 }
@@ -83,14 +78,6 @@ namespace Xemio.PrincessDefense.Entities.Components
                     physics.Acceleration += distance * strength;
                 }
             }
-        }
-        /// <summary>
-        /// Ticks the specified elapsed.
-        /// </summary>
-        /// <param name="elapsed">The elapsed.</param>
-        public override void Tick(float elapsed)
-        {
-            base.Tick(elapsed);
         }
         #endregion
     }

@@ -10,7 +10,7 @@ namespace Xemio.PrincessDefense.Entities
     {
         None,
         Neutral,
-        Skeletons,
+        Enemies,
         Princess
     }
 }

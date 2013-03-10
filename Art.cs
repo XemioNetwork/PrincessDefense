@@ -29,17 +29,9 @@ namespace Xemio.PrincessDefense
         /// </summary>
         public static SpriteAnimation[] HeroShooting { get; private set; }
         /// <summary>
-        /// Gets the sprite animations for "skeleton.png".
-        /// </summary>
-        public static SpriteAnimation[] Skeleton { get; private set; }
-        /// <summary>
         /// Gets the sprite animations for "princess.png".
         /// </summary>
         public static SpriteAnimation[] Princess { get; private set; }
-        /// <summary>
-        /// Gets the sprite animations for "slime.png".
-        /// </summary>
-        public static SpriteAnimation[] Slime { get; private set; }
         /// <summary>
         /// Gets the textures for the arrow.
         /// </summary>
@@ -48,6 +40,49 @@ namespace Xemio.PrincessDefense
         /// Gets the sprite animations for the fire lion spell.
         /// </summary>
         public static SpriteAnimation[] FireLion { get; private set; }
+        #endregion
+
+        #region Enemies
+        /// <summary>
+        /// Gets the sprite animations for "slime.png".
+        /// </summary>
+        public static SpriteAnimation[] Slime { get; private set; }
+        /// <summary>
+        /// Gets the sprite animations for "bat.png".
+        /// </summary>
+        public static SpriteAnimation[] Bat { get; private set; }
+        /// <summary>
+        /// Gets the sprite animations for "bee.png".
+        /// </summary>
+        public static SpriteAnimation[] Bee { get; private set; }
+        /// <summary>
+        /// Gets the sprite animations for "big_worm.png".
+        /// </summary>
+        public static SpriteAnimation[] BigWorm { get; private set; }
+        /// <summary>
+        /// Gets the sprite animations for "eyeball.png".
+        /// </summary>
+        public static SpriteAnimation[] Eyeball { get; private set; }
+        /// <summary>
+        /// Gets the sprite animations for "ghost.png".
+        /// </summary>
+        public static SpriteAnimation[] Ghost { get; private set; }
+        /// <summary>
+        /// Gets the sprite animations for "man_eater_flower.png".
+        /// </summary>
+        public static SpriteAnimation[] Boss { get; private set; }
+        /// <summary>
+        /// Gets the sprite animations for "pumpking.png".
+        /// </summary>
+        public static SpriteAnimation[] Pumpking { get; private set; }
+        /// <summary>
+        /// Gets the sprite animations for "small_worm.png".
+        /// </summary>
+        public static SpriteAnimation[] SmallWorm { get; private set; }
+        /// <summary>
+        /// Gets the sprite animations for "snake.png".
+        /// </summary>
+        public static SpriteAnimation[] Snake { get; private set; }
         #endregion
 
         #region Icons
@@ -114,6 +149,10 @@ namespace Xemio.PrincessDefense
 
         #region Cups
         /// <summary>
+        /// Gets the texture for "cooking.png".
+        /// </summary>
+        public static ITexture Cooking { get; private set; }
+        /// <summary>
         /// Gets the texture for "tutorial.png".
         /// </summary>
         public static ITexture Tutorial { get; private set; }
@@ -173,9 +212,12 @@ namespace Xemio.PrincessDefense
             Art.HeroWalking = LoadWalkingAnimation(@"Resources\characters\heroWalking.png");
             Art.HeroShooting = LoadBowAnimation(@"Resources\characters\heroShooting.png");
 
-            Art.Skeleton = LoadWalkingAnimation(@"Resources\characters\skeleton.png");
             Art.Princess = LoadWalkingAnimation(@"Resources\characters\princess.png");
-            Art.Slime = LoadEnemyAnimation(@"Resources\characters\slime.png");
+
+            Art.Slime = LoadEnemyAnimation(@"Resources\enemies\slime.png");
+            Art.Bat = LoadEnemyAnimation(@"Resources\enemies\bat.png");
+            Art.Ghost = LoadEnemyAnimation(@"Resources\enemies\ghost.png");
+            Art.Snake = LoadEnemyAnimation(@"Resources\enemies\snake.png");
 
             Art.Arrow = LoadTextures(
                 @"Resources\projectiles\arrowUp.png",
@@ -208,6 +250,7 @@ namespace Xemio.PrincessDefense
             Art.Scroll = LoadTexture(@"Resources\ui\scroll.png");
             Art.Buttons = LoadTexture(@"Resources\ui\buttons.png");
 
+            Art.Cooking = LoadTexture(@"Resources\cups\cooking.png");
             Art.Tutorial = LoadTexture(@"Resources\cups\tutorial.png");
             Art.Bread = LoadTexture(@"Resources\cups\bread.png");
             Art.Mushroom = LoadTexture(@"Resources\cups\mushroom.png");
@@ -262,15 +305,15 @@ namespace Xemio.PrincessDefense
             int frameWidth = texture.Width / 3;
             int frameHeight = texture.Height / 4;
 
-            SpriteSheet idleDown = new SpriteSheet(fileName, frameWidth, frameHeight, 0, 1);
-            SpriteSheet idleRight = new SpriteSheet(fileName, frameWidth, frameHeight, 3, 1);
-            SpriteSheet idleUp = new SpriteSheet(fileName, frameWidth, frameHeight, 6, 1);
-            SpriteSheet idleLeft = new SpriteSheet(fileName, frameWidth, frameHeight, 9, 1);
+            SpriteSheet idleUp = new SpriteSheet(fileName, frameWidth, frameHeight, 0, 1);
+            SpriteSheet idleLeft = new SpriteSheet(fileName, frameWidth, frameHeight, 3, 1);
+            SpriteSheet idleDown = new SpriteSheet(fileName, frameWidth, frameHeight, 6, 1);
+            SpriteSheet idleRight = new SpriteSheet(fileName, frameWidth, frameHeight, 9, 1);
 
-            SpriteSheet walkDown = new SpriteSheet(fileName, frameWidth, frameHeight, 0, 3);
-            SpriteSheet walkRight = new SpriteSheet(fileName, frameWidth, frameHeight, 3, 3);
-            SpriteSheet walkUp = new SpriteSheet(fileName, frameWidth, frameHeight, 6, 3);
-            SpriteSheet walkLeft = new SpriteSheet(fileName, frameWidth, frameHeight, 9, 3);
+            SpriteSheet walkUp = new SpriteSheet(fileName, frameWidth, frameHeight, 0, 3);
+            SpriteSheet walkLeft = new SpriteSheet(fileName, frameWidth, frameHeight, 3, 3);
+            SpriteSheet walkDown = new SpriteSheet(fileName, frameWidth, frameHeight, 6, 3);
+            SpriteSheet walkRight = new SpriteSheet(fileName, frameWidth, frameHeight, 9, 3);
 
             animations.Add(new SpriteAnimation("IdleUp", idleUp, 100));
             animations.Add(new SpriteAnimation("IdleLeft", idleLeft, 100));

@@ -34,7 +34,7 @@ namespace Xemio.PrincessDefense.Entities.Components
         public DamageComponent(Entity entity, int damage, bool damageOnContact) : base(entity)
         {
             this.Damage = damage;
-            this.DamageOnContact = true;
+            this.DamageOnImpact = true;
         }
         #endregion
 
@@ -46,7 +46,7 @@ namespace Xemio.PrincessDefense.Entities.Components
         /// <summary>
         /// Gets or sets a value indicating whether the entity damages other entities on contact.
         /// </summary>
-        public bool DamageOnContact { get; set; }
+        public bool DamageOnImpact { get; set; }
         #endregion
     }
 }

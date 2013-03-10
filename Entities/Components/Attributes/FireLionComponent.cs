@@ -48,7 +48,7 @@ namespace Xemio.PrincessDefense.Entities.Components.Attributes
         /// <param name="collisionEvent">The collision event.</param>
         protected void OnCollide(CollisionEvent collisionEvent)
         {
-            if (collisionEvent.IsIntersectionOf<Projectile, Skeleton>())
+            if (collisionEvent.IsIntersectionOf<Projectile, Character>())
             {
                 if (!random.NextBoolean(this.Propability)) return;
 

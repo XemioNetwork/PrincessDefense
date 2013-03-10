@@ -10,7 +10,34 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
 {
     public static class UpgradeManager
     {
+        #region Fields
+        private static List<IUpgrade> _upgrades;
+        #endregion
+
         #region Methods
+        /// <summary>
+        /// Gets the available upgrades.
+        /// </summary>
+        public static List<IUpgrade> GetAvailableUpgrades()
+        {
+            if (_upgrades == null)
+            {
+                _upgrades = new List<IUpgrade>();
+
+                _upgrades.Add(new HealthUpgrade(Player.Instance));
+                _upgrades.Add(new StrengthUpgrade(Player.Instance));
+                _upgrades.Add(new SpeedUpgrade(Player.Instance));
+                _upgrades.Add(new RegenerationUpgrade(Player.Instance));
+                _upgrades.Add(new BowSpeedUpgrade(Player.Instance));
+                _upgrades.Add(new ArrowUpgrade(Player.Instance));
+                _upgrades.Add(new FireLionUpgrade(Player.Instance));
+                _upgrades.Add(new KnockbackUpgrade(Player.Instance));
+
+                Player.Instance.InitializeUpgrades(3);
+            }
+
+            return _upgrades;
+        }
         /// <summary>
         /// Upgrades the specified player.
         /// </summary>

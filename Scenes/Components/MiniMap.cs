@@ -90,7 +90,7 @@ namespace Xemio.PrincessDefense.Scenes.Components
 
                 if (baseEntity is Player) color = this._playerColor;
                 if (baseEntity is Princess) color = this._princessColor;
-                if (baseEntity.Team == Team.Skeletons) color = this._enemyColor;
+                if (baseEntity.Team == Team.Enemies) color = this._enemyColor;
                 if (baseEntity.Team == Team.Neutral) color = this._neutralColor;
 
                 geometry.FillRectangle(color, new Rectangle(-1, -1, 3, 3) + position);

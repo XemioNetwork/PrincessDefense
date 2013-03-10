@@ -4,14 +4,24 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Math;
+using Xemio.GameLibrary.Rendering;
+using Xemio.PrincessDefense.Levels.Waves.Spawners;
 using Xemio.PrincessDefense.Entities;
 using Xemio.PrincessDefense.Entities.Characters;
+using Xemio.PrincessDefense.Entities.Enemies;
 
 namespace Xemio.PrincessDefense.Levels.Waves.Spawners
 {
-    public class SkeletonSpawner : IMobSpawner
+    public class SnakeSpawner : IMobSpawner
     {
         #region IMobSpawner Member
+        /// <summary>
+        /// Gets the mob icon.
+        /// </summary>
+        public ITexture Icon
+        {
+            get { return Art.Snake[2].Sheet.Textures[0]; }
+        }
         /// <summary>
         /// Spawns an entity at the specified position.
         /// </summary>
@@ -19,7 +29,7 @@ namespace Xemio.PrincessDefense.Levels.Waves.Spawners
         /// <returns></returns>
         public BaseEntity Spawn(Vector2 position)
         {
-            return new Skeleton { Position = position };
+            return new SnakeEnemy { Position = position };
         }
         #endregion
     }

@@ -57,6 +57,13 @@ namespace Xemio.PrincessDefense.Entities.Environment
         /// Gets or sets the position.
         /// </summary>
         public Vector2 Position { get; set; }
+        /// <summary>
+        /// Gets the distance.
+        /// </summary>
+        public Vector2 Distance
+        {
+            get { return this.DisplayOffset - this.Position; }
+        }
         #endregion
 
         #region Methods

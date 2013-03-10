@@ -10,6 +10,7 @@ using Xemio.PrincessDefense.Entities.Events;
 using Xemio.PrincessDefense.Entities.Components;
 using Xemio.PrincessDefense.Entities.Components.Behavior;
 using Xemio.PrincessDefense.Entities.Components.Attributes;
+using Xemio.PrincessDefense.Entities.Enemies;
 
 namespace Xemio.PrincessDefense.Entities.Characters
 {
@@ -21,6 +22,9 @@ namespace Xemio.PrincessDefense.Entities.Characters
         /// </summary>
         public Princess()
         {
+            KnockbackComponent knockback = new KnockbackComponent(this);
+            knockback.Entries.Add(new Knockback<Enemy>(3));
+
             this.Components.Add(new TargetingBehavior(this, Team.Princess, 32, 128));
             this.Components.Add(new PrincessBehavior(this));
 

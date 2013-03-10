@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.IO;
+using Xemio.GameLibrary;
+using Xemio.GameLibrary.Game;
 using Xemio.GameLibrary.Rendering;
 using Xemio.PrincessDefense.Levels.Waves;
+using Xemio.PrincessDefense.Scenes;
+using Xemio.PrincessDefense.Scenes.Menues;
 
 namespace Xemio.PrincessDefense.Levels
 {
@@ -32,6 +36,16 @@ namespace Xemio.PrincessDefense.Levels
         }
         #endregion
 
+        #region Methods
+        /// <summary>
+        /// Gets the game.
+        /// </summary>
+        public PrincessGame GetGame()
+        {
+            return XGL.GetComponent<SceneManager>().GetScene<PrincessGame>();
+        }
+        #endregion
+
         #region ILevel Member
         /// <summary>
         /// Gets the name.
@@ -43,9 +57,9 @@ namespace Xemio.PrincessDefense.Levels
         /// <summary>
         /// Gets the seed.
         /// </summary>
-        public virtual string Seed
+        public virtual string FileName
         {
-            get { return "Forest"; }
+            get { return @"Resources\maps\Forest.txt"; }
         }
         /// <summary>
         /// Gets the icon.
@@ -92,6 +106,24 @@ namespace Xemio.PrincessDefense.Levels
         public virtual bool IsHidden
         {
             get { return false; }
+        }
+        /// <summary>
+        /// Gets a value indicating whether to show the level description.
+        /// </summary>
+        public virtual bool ShowDescription
+        {
+            get { return true; }
+        }
+        /// <summary>
+        /// Plays this level.
+        /// </summary>
+        public virtual void Play()
+        {
+            Sounds.Play(Sounds.PlayLevel);
+
+            SceneManager sceneManager = XGL.GetComponent<SceneManager>();
+            sceneManager.Add(new PrincessGame(this));
+            sceneManager.Remove(sceneManager.GetScene<LevelSelection>());
         }
         /// <summary>
         /// Unlocks this level.

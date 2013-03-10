@@ -5,18 +5,15 @@ using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Rendering;
 using Xemio.PrincessDefense.Levels.Waves;
+using Xemio.PrincessDefense.Scenes;
+using Xemio.GameLibrary;
+using Xemio.GameLibrary.Game;
 
 namespace Xemio.PrincessDefense.Levels
 {
     public class BreadLevel : Level
     {
         #region Constructors
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BreadLevel"/> class.
-        /// </summary>
-        public BreadLevel() : this(null, 0)
-        {
-        }
         /// <summary>
         /// Initializes a new instance of the <see cref="BreadLevel"/> class.
         /// </summary>
@@ -28,6 +25,7 @@ namespace Xemio.PrincessDefense.Levels
             this.Container.IsUnlocked = true;
             
             this.Neighbors[DirectionIndex.Right] = new MushroomLevel(this, DirectionIndex.Right);
+            this.Unlock();
         }
         #endregion
 
@@ -40,12 +38,19 @@ namespace Xemio.PrincessDefense.Levels
             get { return "Bread"; }
         }
         /// <summary>
+        /// Gets the seed.
+        /// </summary>
+        public override string FileName
+        {
+            get { return @"Resources\maps\BreadLevel.txt"; }
+        }
+        /// <summary>
         /// Gets the icon.
         /// </summary>
         public override ITexture Icon
         {
             get { return Art.Bread; }
         }
-        #endregion
+        #endregion        
     }
 }

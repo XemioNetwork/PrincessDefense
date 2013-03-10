@@ -70,18 +70,24 @@ namespace Xemio.PrincessDefense.Entities.Environment
                     {
                         Vector2 translation = Vector2.Normalize(distance) * (totalRadius - distance.Length);
 
-                        if (!collisionA.IsStatic && !collisionB.IsStatic)
+                        Type typeA = a.GetType();
+                        Type typeB = b.GetType();
+
+                        if (collisionA.IsSeperating && collisionB.IsSeperating || typeA == typeB)
                         {
-                            a.Position += translation * 0.5f;
-                            b.Position -= translation * 0.5f;
-                        }
-                        else if (!collisionA.IsStatic && collisionB.IsStatic)
-                        {
-                            a.Position += translation;
-                        }
-                        else if (collisionA.IsStatic && !collisionB.IsStatic)
-                        {
-                            b.Position -= translation;
+                            if (!collisionA.IsStatic && !collisionB.IsStatic)
+                            {
+                                a.Position += translation * 0.5f;
+                                b.Position -= translation * 0.5f;
+                            }
+                            else if (!collisionA.IsStatic && collisionB.IsStatic)
+                            {
+                                a.Position += translation;
+                            }
+                            else if (collisionA.IsStatic && !collisionB.IsStatic)
+                            {
+                                b.Position -= translation;
+                            }
                         }
 
                         eventManager.Send(new CollisionEvent(a, b, translation));

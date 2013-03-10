@@ -32,6 +32,8 @@ namespace Xemio.PrincessDefense.Entities.Environment
         /// <param name="seed">The seed.</param>
         public void Generate(string seed)
         {
+            if (string.IsNullOrEmpty(seed)) return;
+
             PerlinNoise perlin = new PerlinNoise(seed);
             RandomProxy random = new RandomProxy(seed);
 

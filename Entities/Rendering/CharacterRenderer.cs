@@ -32,6 +32,13 @@ namespace Xemio.PrincessDefense.Entities.Rendering
 
         #region Properties
         /// <summary>
+        /// Gets the opacity.
+        /// </summary>
+        public virtual float Opacity
+        {
+            get { return 1.0f; }
+        }
+        /// <summary>
         /// Gets the character.
         /// </summary>
         public Character Character
@@ -48,6 +55,7 @@ namespace Xemio.PrincessDefense.Entities.Rendering
         {
             AnimationComponent animation = this.Entity.GetComponent<AnimationComponent>();
             HealthComponent health = this.Entity.GetComponent<HealthComponent>();
+            CollidableComponent collision = this.Entity.GetComponent<CollidableComponent>();
             
             if (this._shadowBrush == null)
             {
@@ -77,6 +85,11 @@ namespace Xemio.PrincessDefense.Entities.Rendering
                         animation.Frame.Height - 10,
                         20, 10) + position);
 
+                if (this.Opacity < 1.0f)
+                {
+                    this.RenderManager.Tint(new Color(1, 1, 1, this.Opacity));
+                }
+
                 this.RenderManager.Render(animation.Frame, position);
 
                 if (health.IsHurt)
@@ -85,9 +98,10 @@ namespace Xemio.PrincessDefense.Entities.Rendering
                     this.RenderManager.Render(
                         animation.Frame,
                         position);
-
-                    this.RenderManager.Tint(Color.White);
                 }
+
+                //this.Geometry.DrawCircle(Color.Red, this.Character.Position, collision.Radius);
+                this.RenderManager.Tint(Color.White);
             }
 
             base.Render();

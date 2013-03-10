@@ -33,13 +33,6 @@ namespace Xemio.PrincessDefense.Levels
             get { return "Mushroom"; }
         }
         /// <summary>
-        /// Gets the seed.
-        /// </summary>
-        public override string Seed
-        {
-            get { return "Insane"; }
-        }
-        /// <summary>
         /// Gets the icon.
         /// </summary>
         public override ITexture Icon

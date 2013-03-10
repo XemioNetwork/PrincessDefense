@@ -37,7 +37,7 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
         /// </summary>
         public int MaximumLevel
         {
-            get { return 8; }
+            get { return 6; }
         }
         /// <summary>
         /// Gets the upgrade costs.
@@ -68,7 +68,7 @@ namespace Xemio.PrincessDefense.Entities.Upgrades
             this.Level++;
 
             BowComponent bow = this._player.GetComponent<BowComponent>();
-            bow.FireLionPropability += 0.1f;
+            bow.FireLionPropability += 0.05f;
         }
         #endregion
     }

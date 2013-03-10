@@ -33,6 +33,10 @@ namespace Xemio.PrincessDefense.Entities.Components.Attributes
 
         #region Properties
         /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="HealthComponent"/> is invincible.
+        /// </summary>
+        public bool Invincible { get; set; }
+        /// <summary>
         /// Gets or sets the health.
         /// </summary>
         public int Health { get; set; }
@@ -100,20 +104,23 @@ namespace Xemio.PrincessDefense.Entities.Components.Attributes
         {
             this._elapsed = 0;
 
-            if (damage > 0)
+            if (!this.Invincible)
             {
-                this.Health -= damage;
-                this.IsHurt = true;
-
-                if (this.Health > 0)
+                if (damage > 0)
                 {
-                    Sounds.Hit.Play();
-                }
-            }
+                    this.Health -= damage;
+                    this.IsHurt = true;
 
-            if (this.Health <= 0)
-            {
-                this.Entity.Destroy();
+                    if (this.Health > 0)
+                    {
+                        Sounds.Play(Sounds.Hit, this.Entity);
+                    }
+                }
+
+                if (this.Health <= 0)
+                {
+                    this.Entity.Destroy();
+                }
             }
         }
         /// <summary>
@@ -155,7 +162,7 @@ namespace Xemio.PrincessDefense.Entities.Components.Attributes
                 DamageComponent damageComponent = collidingEntity.GetComponent<DamageComponent>();
                 int damageAmount = 0;
 
-                if (damageComponent != null && damageComponent.DamageOnContact)
+                if (damageComponent != null && damageComponent.DamageOnImpact)
                 {
                     damageAmount = damageComponent.Damage;
                 }

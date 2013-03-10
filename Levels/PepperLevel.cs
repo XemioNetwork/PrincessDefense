@@ -17,6 +17,7 @@ namespace Xemio.PrincessDefense.Levels
         /// <param name="directionIndex">The direction.</param>
         public PepperLevel(ILevel parent, int directionIndex) : base(parent, directionIndex)
         {
+            this.WaveProvider = new PepperWaveProvider();
         }
         #endregion
 

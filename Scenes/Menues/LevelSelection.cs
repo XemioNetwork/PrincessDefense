@@ -9,8 +9,10 @@ using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Rendering.Geometry;
 using Xemio.GameLibrary.Rendering.Fonts;
 using Xemio.GameLibrary.Math;
+using Xemio.PrincessDefense.Extensions;
 using Xemio.PrincessDefense.Levels;
 using Xemio.PrincessDefense.Entities.Environment;
+using Xemio.PrincessDefense.Levels.Waves;
 
 namespace Xemio.PrincessDefense.Scenes.Menues
 {
@@ -20,7 +22,7 @@ namespace Xemio.PrincessDefense.Scenes.Menues
         /// <summary>
         /// Initializes a new instance of the <see cref="LevelSelection"/> class.
         /// </summary>
-        public LevelSelection() : this(new BreadLevel())
+        public LevelSelection() : this(new CookingLevel())
         {
         }
         /// <summary>
@@ -43,16 +45,14 @@ namespace Xemio.PrincessDefense.Scenes.Menues
             this.RootLevel = root;
             this.SelectedLevel = selectedLevel;
 
-            this._camera = new Camera();
-            this._camera.Clamped = false;
+            this.Camera = new Camera();
+            this.Camera.Clamped = false;
 
-            this._camera.MoveTo(this.CalculatePosition(selectedLevel));
+            this.Camera.MoveTo(this.CalculatePosition(selectedLevel));
         }
         #endregion
 
         #region Fields
-        private Camera _camera;
-
         private IPen _levelPen;
         private IPen _selectedPen;
         private IPen _lockedPen;
@@ -60,7 +60,6 @@ namespace Xemio.PrincessDefense.Scenes.Menues
 
         private Dictionary<ILevel, bool> _renderedLevels;
 
-        private float _yOffset;
         private float _elapsed;
         #endregion
 
@@ -73,6 +72,14 @@ namespace Xemio.PrincessDefense.Scenes.Menues
         /// Gets the selected level.
         /// </summary>
         public ILevel SelectedLevel { get; private set; }
+        /// <summary>
+        /// Gets the camera.
+        /// </summary>
+        public Camera Camera { get; private set; }
+        /// <summary>
+        /// Gets the offset.
+        /// </summary>
+        public float Offset { get; private set; }
         #endregion
 
         #region Methods
@@ -96,10 +103,37 @@ namespace Xemio.PrincessDefense.Scenes.Menues
         private void SelectLevel(ILevel level)
         {
             this._elapsed = 0;
-            this._yOffset = 0;
+            this.Offset = 0;
 
-            Sounds.Select.Play();
+            Sounds.Play(Sounds.Select);
             this.SelectedLevel = level;
+        }
+        /// <summary>
+        /// Gets the mob icons.
+        /// </summary>
+        /// <param name="level">The level.</param>
+        private ITexture[] GetMobIcons(ILevel level)
+        {
+            List<ITexture> textures = new List<ITexture>();
+
+            if (level.WaveProvider != null)
+            {
+                int waveIndex = 0;
+                WaveInstruction wave;
+
+                while ((wave = level.WaveProvider.CreateWave(waveIndex++)) != null)
+                {
+                    foreach (SpawnInstruction spawn in wave.Spawns)
+                    {
+                        if (!textures.Contains(spawn.Spawner.Icon))
+                        {
+                            textures.Add(spawn.Spawner.Icon);
+                        }
+                    }
+                }
+            }
+
+            return textures.ToArray();
         }
         /// <summary>
         /// Handles a game tick.
@@ -107,42 +141,42 @@ namespace Xemio.PrincessDefense.Scenes.Menues
         /// <param name="elapsed">The elapsed.</param>
         public override void Tick(float elapsed)
         {
-            ILevel top = this.SelectedLevel.Neighbors[DirectionIndex.Top];
-            if (this.Keyboard.IsKeyPressed(Keys.Up) && top != null && top.Container.IsUnlocked)
-            {
-                this.SelectLevel(top);
-            }
-
-            ILevel right = this.SelectedLevel.Neighbors[DirectionIndex.Right];
-            if (this.Keyboard.IsKeyPressed(Keys.Right) && right != null && right.Container.IsUnlocked)
-            {
-                this.SelectLevel(right);
-            }
-
-            ILevel bottom = this.SelectedLevel.Neighbors[DirectionIndex.Bottom];
-            if (this.Keyboard.IsKeyPressed(Keys.Down) && bottom != null && bottom.Container.IsUnlocked)
-            {
-                this.SelectLevel(bottom);
-            }
-
-            ILevel left = this.SelectedLevel.Neighbors[DirectionIndex.Left];
-            if (this.Keyboard.IsKeyPressed(Keys.Left) && left != null && left.Container.IsUnlocked)
-            {
-                this.SelectLevel(left);
-            }
-
-            this._camera.Position = this.CalculatePosition(this.SelectedLevel);
-            this._camera.Tick(elapsed);
+            this.Camera.Position = this.CalculatePosition(this.SelectedLevel);
+            this.Camera.Tick(elapsed);
 
             this._elapsed += elapsed;
-            this._yOffset = MathHelper.Sin(this._elapsed / 100.0f) * 5;
+            this.Offset = MathHelper.Sin(this._elapsed / 100.0f) * 5;
 
-            if (this.Keyboard.IsKeyPressed(Keys.Enter))
+            if (this.Count() == 0)
             {
-                Sounds.PlayLevel.Play();
+                ILevel top = this.SelectedLevel.Neighbors[DirectionIndex.Top];
+                if (this.Keyboard.IsKeyPressed(Keys.Up) && top != null && top.Container.IsUnlocked)
+                {
+                    this.SelectLevel(top);
+                }
 
-                this.SceneManager.Add(new PrincessGame(this.SelectedLevel));
-                this.SceneManager.Remove(this);
+                ILevel right = this.SelectedLevel.Neighbors[DirectionIndex.Right];
+                if (this.Keyboard.IsKeyPressed(Keys.Right) && right != null && right.Container.IsUnlocked)
+                {
+                    this.SelectLevel(right);
+                }
+
+                ILevel bottom = this.SelectedLevel.Neighbors[DirectionIndex.Bottom];
+                if (this.Keyboard.IsKeyPressed(Keys.Down) && bottom != null && bottom.Container.IsUnlocked)
+                {
+                    this.SelectLevel(bottom);
+                }
+
+                ILevel left = this.SelectedLevel.Neighbors[DirectionIndex.Left];
+                if (this.Keyboard.IsKeyPressed(Keys.Left) && left != null && left.Container.IsUnlocked)
+                {
+                    this.SelectLevel(left);
+                }
+
+                if (this.Keyboard.IsKeyPressed(Keys.Enter))
+                {
+                    this.SelectedLevel.Play();
+                }
             }
         }
         /// <summary>
@@ -236,7 +270,7 @@ namespace Xemio.PrincessDefense.Scenes.Menues
             Vector2 iconPosition = position - new Vector2(17, 28);
             if (isSelected)
             {
-                iconPosition += new Vector2(0, this._yOffset);
+                iconPosition += new Vector2(0, this.Offset);
             }
 
             if (isSelected)
@@ -260,7 +294,7 @@ namespace Xemio.PrincessDefense.Scenes.Menues
             this._renderedLevels.Clear();
 
             Vector2 offset = this.GraphicsDevice.DisplayMode.Center;
-            offset -= this._camera.DisplayOffset;
+            offset -= this.Camera.DisplayOffset;
 
             this.GraphicsDevice.RenderManager.Offset(offset);
             this.RenderLevel(this.RootLevel, Vector2.Zero);
@@ -274,14 +308,24 @@ namespace Xemio.PrincessDefense.Scenes.Menues
             geometry.DrawLine(new Color(0, 0, 0, 0.4f), new Vector2(0, 240), new Vector2(400, 240));
 
             string levelInformation = this.SelectedLevel.Name + "\n";
-            levelInformation += string.Format("Best time: {0}", this.SelectedLevel.Container.BestTime) + "\n";
-            levelInformation += string.Format("Highscore: {0}", this.SelectedLevel.Container.Highscore) + "\n";
+            if (this.SelectedLevel.ShowDescription)
+            {
+                levelInformation += string.Format("Best time: {0}", this.SelectedLevel.Container.BestTime) + "\n";
+                levelInformation += string.Format("Highscore: {0}", this.SelectedLevel.Container.Highscore) + "\n";
+            }
 
-            renderManager.Tint(new Color(0, 0, 0, 0.7f));
-            Art.Font.Render(levelInformation, new Vector2(10, 251));
+            Art.Font.RenderShadowed(levelInformation, new Vector2(10, 250), 0.7f);
 
-            renderManager.Tint(Color.White);
-            Art.Font.Render(levelInformation, new Vector2(10, 250));
+            Vector2 iconPosition = new Vector2(395, 270);
+            ITexture[] icons = this.GetMobIcons(this.SelectedLevel);
+
+            for (int i = icons.Length - 1; i >= 0; i--)
+            {
+                iconPosition -= new Vector2(icons[i].Width + 5, 0);
+
+                renderManager.Render(icons[i],
+                    iconPosition - new Vector2(0, icons[i].Height * 0.5f));
+            }
         }
         #endregion
     }
