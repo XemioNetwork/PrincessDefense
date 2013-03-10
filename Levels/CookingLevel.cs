@@ -7,6 +7,7 @@ using Xemio.GameLibrary.Rendering;
 using Xemio.GameLibrary.Game;
 using Xemio.GameLibrary;
 using Xemio.PrincessDefense.Scenes.Menues;
+using Xemio.PrincessDefense.Levels.Base;
 
 namespace Xemio.PrincessDefense.Levels
 {

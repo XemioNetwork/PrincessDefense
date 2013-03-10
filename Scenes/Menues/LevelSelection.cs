@@ -13,6 +13,7 @@ using Xemio.PrincessDefense.Extensions;
 using Xemio.PrincessDefense.Levels;
 using Xemio.PrincessDefense.Entities.Environment;
 using Xemio.PrincessDefense.Levels.Waves;
+using Xemio.PrincessDefense.Levels.Base;
 
 namespace Xemio.PrincessDefense.Scenes.Menues
 {

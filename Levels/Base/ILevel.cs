@@ -6,7 +6,7 @@ using System.IO;
 using Xemio.GameLibrary.Rendering;
 using Xemio.PrincessDefense.Levels.Waves;
 
-namespace Xemio.PrincessDefense.Levels
+namespace Xemio.PrincessDefense.Levels.Base
 {
     public interface ILevel
     {

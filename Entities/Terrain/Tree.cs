@@ -12,7 +12,7 @@ using Xemio.PrincessDefense.Entities.Events;
 using Xemio.PrincessDefense.Entities.Rendering;
 using Xemio.PrincessDefense.Entities.Components;
 
-namespace Xemio.PrincessDefense.Entities
+namespace Xemio.PrincessDefense.Entities.Terrain
 {
     public class Tree : BaseEntity
     {

@@ -12,6 +12,8 @@ using Xemio.GameLibrary.Game;
 using Xemio.PrincessDefense.Editor.Entities;
 using System.IO;
 using Xemio.PrincessDefense.Editor.Commands;
+using Xemio.GameLibrary.Rendering;
+using Xemio.GameLibrary.Math;
 
 namespace Xemio.PrincessDefense.Editor.App
 {
@@ -111,7 +113,38 @@ namespace Xemio.PrincessDefense.Editor.App
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void mOpenClick(object sender, EventArgs e)
         {
+            using (OpenFileDialog fileDialog = new OpenFileDialog())
+            {
+                fileDialog.Filter = "Text files (*.txt)|*.txt";
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string content = File.ReadAllText(fileDialog.FileName, Encoding.Default);
 
+                    content = content.Replace("\r", string.Empty);
+                    content = content.Replace("\t", string.Empty);
+
+                    this.Editor.Environment.Clear();
+
+                    string[] lines = content.Split('\n');
+                    foreach (string line in lines)
+                    {
+                        string[] segments = line.Split(' ');
+                        if (segments.Length == 3)
+                        {
+                            string command = segments[0];
+                            float x = float.Parse(segments[1]);
+                            float y = float.Parse(segments[2]);
+                            
+                            MapEntity entity = new MapEntity();
+                            entity.Command = command;
+                            entity.Texture = Art.Get(Registry.GetFileName(command));;
+                            entity.Position = new Vector2(x, y);
+
+                            this.Editor.Environment.Add(entity);
+                        }
+                    }
+                }
+            }
         }
         /// <summary>
         /// Handles the Click event of the mSave control.

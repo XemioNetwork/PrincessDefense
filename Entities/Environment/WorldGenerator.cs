@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Common.Randomization;
 using Xemio.GameLibrary.Math;
+using Xemio.PrincessDefense.Entities.Terrain;
 
 namespace Xemio.PrincessDefense.Entities.Environment
 {

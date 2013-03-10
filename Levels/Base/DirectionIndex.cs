@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace Xemio.PrincessDefense.Levels
+namespace Xemio.PrincessDefense.Levels.Base
 {
     public static class DirectionIndex
     {

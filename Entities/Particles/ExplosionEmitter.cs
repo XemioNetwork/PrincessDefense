@@ -17,10 +17,15 @@ namespace Xemio.PrincessDefense.Entities.Particles
         /// </summary>
         public ExplosionEmitter()
         {
+            this.ParticleCount = 10;
         }
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Gets or sets the particle count.
+        /// </summary>
+        public int ParticleCount { get; set; }
         /// <summary>
         /// Gets the team.
         /// </summary>
@@ -38,7 +43,7 @@ namespace Xemio.PrincessDefense.Entities.Particles
         public override void Tick(float elapsed)
         {
             IRandom random = new RandomProxy();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < this.ParticleCount; i++)
             {
                 Particle particle = new Particle();
                 particle.Velocity = new Vector2(

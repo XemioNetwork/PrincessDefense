@@ -39,6 +39,14 @@ namespace Xemio.PrincessDefense
         /// Gets the sound for "completed.wav".
         /// </summary>
         public static ISound Completed { get; private set; }
+        /// <summary>
+        /// Gets the sound for "pickup.wav".
+        /// </summary>
+        public static ISound Pickup { get; private set; }
+        /// <summary>
+        /// Gets the sound for "lightningclaw.wav".
+        /// </summary>
+        public static ISound Lightningclaw { get; private set; }
         #endregion
 
         #region Methods
@@ -53,13 +61,19 @@ namespace Xemio.PrincessDefense
             Sounds.PlayLevel = soundManager.CreateSound(@"Resources\sounds\playLevel.wav");
 
             Sounds.Hit = soundManager.CreateSound(@"Resources\sounds\hit.wav");
-            Sounds.Hit.Radius = 300;
+            Sounds.Hit.Radius = 400;
 
             Sounds.Explosion = soundManager.CreateSound(@"Resources\sounds\explosion.wav");
-            Sounds.Explosion.Radius = 1000;
+            Sounds.Explosion.Radius = 500;
 
             Sounds.FireLion = soundManager.CreateSound(@"Resources\sounds\fireLion.wav");
             Sounds.FireLion.Radius = 800;
+
+            Sounds.Pickup = soundManager.CreateSound(@"Resources\sounds\pickup.wav");
+            Sounds.Pickup.Radius = 400;
+
+            Sounds.Lightningclaw = soundManager.CreateSound(@"Resources\sounds\lightningclaw.wav");
+            Sounds.Lightningclaw.Radius = 500;
 
             Sounds.Completed = soundManager.CreateSound(@"Resources\sounds\completed.wav");
         }

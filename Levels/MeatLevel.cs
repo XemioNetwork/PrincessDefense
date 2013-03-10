@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Xemio.GameLibrary.Rendering;
+using Xemio.PrincessDefense.Levels.Base;
 
 namespace Xemio.PrincessDefense.Levels
 {

@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using Xemio.PrincessDefense.Entities.Characters;
 using Xemio.PrincessDefense.Entities.Components;
+using Xemio.PrincessDefense.Entities.Spells;
 
 namespace Xemio.PrincessDefense.Entities.Enemies
 {
@@ -18,6 +19,7 @@ namespace Xemio.PrincessDefense.Entities.Enemies
         {
             KnockbackComponent knockback = new KnockbackComponent(this);
             knockback.Entries.Add(new Knockback<Projectile>(4));
+            knockback.Entries.Add(new Knockback<Spell>(3));
 
             this.Components.Add(knockback);
         }

@@ -22,6 +22,8 @@ using Xemio.PrincessDefense.Entities.Spells;
 using Xemio.PrincessDefense.Scenes.Components;
 using Xemio.PrincessDefense.Levels;
 using Xemio.PrincessDefense.Entities.Particles;
+using Xemio.PrincessDefense.Levels.Base;
+using Xemio.PrincessDefense.Entities.Items;
 
 namespace Xemio.PrincessDefense.Scenes
 {
@@ -64,7 +66,7 @@ namespace Xemio.PrincessDefense.Scenes
             this.Add(new UpgradeMenu(player));
             this.Add(new MiniMap(this._world));
             this.Add(new HealthBar(player));
-            this.Add(new SpellButtons());
+            this.Add(new ItemButtons());
             this.Add(new Announcer());
 
             Princess princess = new Princess();
@@ -75,6 +77,9 @@ namespace Xemio.PrincessDefense.Scenes
             this._world.Add(player);
             this._world.Add(princess);
 
+            //this._world.Add(new HealthPotion { Position = new Vector2(220, 100) });
+            this._world.Add(new InvincibilityPotion { Position = new Vector2(240, 100) });
+            
             MapLoader.Load(this._world, this._world.Level.FileName);
         }
         /// <summary>

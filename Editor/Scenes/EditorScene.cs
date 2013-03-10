@@ -9,6 +9,7 @@ using Xemio.GameLibrary.Entities;
 using System.Windows.Forms;
 using Xemio.PrincessDefense.Editor.Entities;
 using Xemio.PrincessDefense.Editor.Commands;
+using Xemio.GameLibrary.Rendering;
 
 namespace Xemio.PrincessDefense.Editor.Scenes
 {
@@ -103,6 +104,22 @@ namespace Xemio.PrincessDefense.Editor.Scenes
             foreach (Entity entity in this.Environment)
             {
                 entity.Renderer.Render();
+            }
+
+            if (this.GridSize > 1)
+            {
+                Color gridColor = new Color(0, 0, 0, 0.7f);
+
+                for (int x = 0; x < this.GraphicsDevice.DisplayMode.Width; x += this.GridSize)
+                {
+                    this.GraphicsDevice.Geometry.DrawLine(gridColor,
+                        new Vector2(x, 0), new Vector2(x, this.GraphicsDevice.DisplayMode.Height));
+                }
+                for (int y = 0; y < this.GraphicsDevice.DisplayMode.Height; y += this.GridSize)
+                {
+                    this.GraphicsDevice.Geometry.DrawLine(gridColor,
+                        new Vector2(0, y), new Vector2(this.GraphicsDevice.DisplayMode.Width, y));
+                }
             }
 
             base.Render();

@@ -39,7 +39,11 @@ namespace Xemio.PrincessDefense
         /// <summary>
         /// Gets the sprite animations for the fire lion spell.
         /// </summary>
-        public static SpriteAnimation[] FireLion { get; private set; }
+        public static SpriteAnimation[] FireLionSpell { get; private set; }
+        /// <summary>
+        /// Gets the sprite animation for the thunderstorm spell.
+        /// </summary>
+        public static SpriteAnimation LightningclawSpell { get; private set; }
         #endregion
 
         #region Enemies
@@ -186,6 +190,21 @@ namespace Xemio.PrincessDefense
         public static ITexture Meat { get; private set; }
         #endregion
 
+        #region Items
+        /// <summary>
+        /// Gets the texture for "potion.png".
+        /// </summary>
+        public static ITexture Potion { get; private set; }
+        /// <summary>
+        /// Gets the texture for "invincibility.png".
+        /// </summary>
+        public static ITexture Invincibility { get; private set; }
+        /// <summary>
+        /// Gets the texture for "thunder.png".
+        /// </summary>
+        public static ITexture Thunderstorm { get; private set; }
+        #endregion
+
         #region Map
         /// <summary>
         /// Gets the texture for "map.png".
@@ -225,13 +244,14 @@ namespace Xemio.PrincessDefense
                 @"Resources\projectiles\arrowLeft.png",
                 @"Resources\projectiles\arrowRight.png");
 
-            Art.FireLion = new SpriteAnimation[] 
+            Art.FireLionSpell = new SpriteAnimation[] 
             {
-                LoadDirectionalAnimation(@"Resources\spells\firelionLeft.png", "Left", 128, 128),
-                LoadDirectionalAnimation(@"Resources\spells\firelionRight.png", "Right", 128, 128),
-                LoadDirectionalAnimation(@"Resources\spells\firelionUp.png", "Up", 128, 128),
-                LoadDirectionalAnimation(@"Resources\spells\firelionDown.png", "Down", 128, 128)
+                LoadSpellAnimation(@"Resources\spells\firelionLeft.png", "Left", 128, 128, 40),
+                LoadSpellAnimation(@"Resources\spells\firelionRight.png", "Right", 128, 128, 40),
+                LoadSpellAnimation(@"Resources\spells\firelionUp.png", "Up", 128, 128, 40),
+                LoadSpellAnimation(@"Resources\spells\firelionDown.png", "Down", 128, 128, 40)
             };
+            Art.LightningclawSpell = LoadSpellAnimation(@"Resources\spells\lightningclaw.png", "Spell", 128, 128, 40);
 
             Art.StrengthUpgrade = LoadTexture(@"Resources\upgrades\strength.png");
             Art.SpeedUpgrade = LoadTexture(@"Resources\upgrades\speed.png");
@@ -259,6 +279,10 @@ namespace Xemio.PrincessDefense
             Art.Iron = LoadTexture(@"Resources\cups\iron.png");
             Art.RedPepper = LoadTexture(@"Resources\cups\redPepper.png");
             Art.Meat = LoadTexture(@"Resources\cups\meat.png");
+
+            Art.Potion = LoadTexture(@"Resources\items\potion.png");
+            Art.Invincibility = LoadTexture(@"Resources\items\invincibility.png");
+            Art.Thunderstorm = LoadTexture(@"Resources\items\thunder.png");
 
             Art.Map = LoadTexture(@"Resources\map.png");
             Art.Font = Art.Factory.CreateSpriteFont(@"Resources\fonts\kenPixel.sf");
@@ -375,10 +399,15 @@ namespace Xemio.PrincessDefense
         /// Loads a directional animation.
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
-        private static SpriteAnimation LoadDirectionalAnimation(string fileName, string name, int width, int height)
+        /// <param name="name">The name.</param>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        /// <param name="framerate">The framerate.</param>
+        /// <returns></returns>
+        private static SpriteAnimation LoadSpellAnimation(string fileName, string name, int width, int height, int framerate)
         {
             SpriteSheet sheet = new SpriteSheet(fileName, width, height, 0, 16);
-            SpriteAnimation animation = new SpriteAnimation(name, sheet, 40, false);
+            SpriteAnimation animation = new SpriteAnimation(name, sheet, framerate, false);
 
             return animation;
         }

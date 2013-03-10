@@ -6,6 +6,7 @@ using System.IO;
 using Xemio.GameLibrary.Math;
 using Xemio.PrincessDefense.Entities.Environment;
 using Xemio.PrincessDefense.Entities;
+using Xemio.PrincessDefense.Entities.Terrain;
 
 namespace Xemio.PrincessDefense.Levels.Maps.Commands
 {

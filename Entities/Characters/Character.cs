@@ -67,6 +67,7 @@ namespace Xemio.PrincessDefense.Entities.Characters
 
                 ExplosionEmitter explosion = new ExplosionEmitter();
                 explosion.Position = this.Position;
+                explosion.ParticleCount = 6;
 
                 this.Environment.Add(explosion);
             }

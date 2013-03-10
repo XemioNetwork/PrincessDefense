@@ -60,14 +60,23 @@
     </Compile>
     <Compile Include="App\Program.cs" />
     <Compile Include="Art.cs" />
+    <Compile Include="Entities\Components\InventoryComponent.cs" />
     <Compile Include="Entities\Enemies\BatEnemy.cs" />
     <Compile Include="Entities\Enemies\Enemy.cs" />
     <Compile Include="Entities\Enemies\GhostEnemy.cs" />
     <Compile Include="Entities\Enemies\SnakeEnemy.cs" />
+    <Compile Include="Entities\Items\HealthPotion.cs" />
+    <Compile Include="Entities\Items\InvincibilityPotion.cs" />
+    <Compile Include="Entities\Items\Item.cs" />
+    <Compile Include="Entities\Items\Thunderstorm.cs" />
     <Compile Include="Entities\Particles\ExplosionEmitter.cs" />
     <Compile Include="Entities\Particles\Particle.cs" />
     <Compile Include="Entities\Rendering\GhostRenderer.cs" />
+    <Compile Include="Entities\Rendering\ItemRenderer.cs" />
     <Compile Include="Entities\Rendering\ParticleRenderer.cs" />
+    <Compile Include="Entities\Spells\LightningclawSpawner.cs" />
+    <Compile Include="Entities\Spells\LightningclawSpell.cs" />
+    <Compile Include="Entities\Spells\Spell.cs" />
     <Compile Include="Levels\BreadLevel.cs" />
     <Compile Include="Levels\BreadWaveProvider.cs" />
     <Compile Include="Levels\CookingLevel.cs" />
@@ -77,9 +86,9 @@
     <Compile Include="Levels\Maps\MapLoader.cs" />
     <Compile Include="Levels\MeatLevel.cs" />
     <Compile Include="Levels\PepperLevel.cs" />
-    <Compile Include="Levels\Level.cs" />
-    <Compile Include="Levels\LevelContainer.cs" />
-    <Compile Include="Levels\ILevel.cs" />
+    <Compile Include="Levels\Base\Level.cs" />
+    <Compile Include="Levels\Base\LevelContainer.cs" />
+    <Compile Include="Levels\Base\ILevel.cs" />
     <Compile Include="Entities\Components\AnimationComponent.cs" />
     <Compile Include="Entities\Components\Attributes\BowComponent.cs" />
     <Compile Include="Entities\Components\CollidableComponent.cs" />
@@ -108,14 +117,14 @@
     <Compile Include="Entities\Environment\World.cs" />
     <Compile Include="Entities\Characters\Princess.cs" />
     <Compile Include="Entities\Projectile.cs" />
-    <Compile Include="Entities\Rendering\FireLionRenderer.cs" />
+    <Compile Include="Entities\Rendering\SpellRenderer.cs" />
     <Compile Include="Entities\Rendering\ProjectileRenderer.cs" />
     <Compile Include="Entities\Rendering\TreeRenderer.cs" />
     <Compile Include="Entities\Spells\FireLionSpell.cs" />
     <Compile Include="Entities\Team.cs" />
     <Compile Include="Entities\Direction.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
-    <Compile Include="Entities\Tree.cs" />
+    <Compile Include="Entities\Terrain\Tree.cs" />
     <Compile Include="Entities\Upgrades\BowSpeedUpgrade.cs" />
     <Compile Include="Entities\Upgrades\FireLionUpgrade.cs" />
     <Compile Include="Entities\Upgrades\HealthUpgrade.cs" />
@@ -127,7 +136,7 @@
     <Compile Include="Entities\Upgrades\StrengthUpgrade.cs" />
     <Compile Include="Entities\Upgrades\UpgradeManager.cs" />
     <Compile Include="Extensions\SpriteFontExtensions.cs" />
-    <Compile Include="Levels\DirectionIndex.cs" />
+    <Compile Include="Levels\Base\DirectionIndex.cs" />
     <Compile Include="Levels\MushroomLevel.cs" />
     <Compile Include="Levels\MushroomWaveProvider.cs" />
     <Compile Include="Levels\PepperWaveProvider.cs" />
@@ -147,7 +156,7 @@
     <Compile Include="Scenes\Components\MiniMap.cs" />
     <Compile Include="Scenes\PrincessGame.cs" />
     <Compile Include="Entities\Environment\Camera.cs" />
-    <Compile Include="Scenes\Components\SpellButtons.cs" />
+    <Compile Include="Scenes\Components\ItemButtons.cs" />
     <Compile Include="Scenes\Menues\UpgradeMenu.cs" />
     <Compile Include="Scenes\Menues\LevelSelection.cs" />
     <Compile Include="Levels\Waves\IWaveProvider.cs" />
@@ -256,7 +265,10 @@
     <Content Include="Resources\items\potion.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\items\invincibilityPotion.png">
+    <Content Include="Resources\items\invincibility.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\items\thunder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\map.png">
@@ -301,10 +313,16 @@
     <Content Include="Resources\sounds\hit.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\sounds\pickup.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\sounds\playLevel.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\sounds\select.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\sounds\lightningclaw.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\spells\firelionDown.png">
@@ -319,10 +337,130 @@
     <Content Include="Resources\spells\firelionUp.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\spells\lightningclaw.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\crate_1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\terrain\grass.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\terrain\grass_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\grass_3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\leaf_1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\leaf_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\leaf_3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\leaf_4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\monolith.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\mushroom.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\pillar_1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\pillar_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\pillar_3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\shroom.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\statue.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\statue_trophy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_brown_1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_brown_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_brown_3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_brown_4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_brown_5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_brown_6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_brown_7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_brown_8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_dark_1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_dark_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_dark_3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_dark_4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_dark_5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_dark_6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_white_1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_white_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_white_3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_white_4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_white_5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_white_6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stone_white_7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stump.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\stump_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\terrain\tree.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\terrain\tree_2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\ui\buttons.png">

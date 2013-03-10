@@ -10,7 +10,7 @@ using Xemio.PrincessDefense.Levels.Waves;
 using Xemio.PrincessDefense.Scenes;
 using Xemio.PrincessDefense.Scenes.Menues;
 
-namespace Xemio.PrincessDefense.Levels
+namespace Xemio.PrincessDefense.Levels.Base
 {
     public abstract class Level : ILevel
     {

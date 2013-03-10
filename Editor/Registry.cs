@@ -10,6 +10,7 @@ namespace Xemio.PrincessDefense.Editor
     {
         #region Fields
         private static Dictionary<string, string> _commandMappings;
+        private static Dictionary<string, string> _fileMappings;
         #endregion
         
         #region Methods
@@ -20,12 +21,26 @@ namespace Xemio.PrincessDefense.Editor
         /// <returns></returns>
         public static string GetCommand(string fileName)
         {
-            if (!_commandMappings.ContainsKey(fileName))
+            if (_commandMappings.ContainsKey(fileName))
             {
-                return "NONE";
+                return _commandMappings[fileName];
             }
 
-            return _commandMappings[fileName];
+            return string.Empty;
+        }
+        /// <summary>
+        /// Gets the name of the file.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <returns></returns>
+        public static string GetFileName(string command)
+        {
+            if (_fileMappings.ContainsKey(command))
+            {
+                return @"Resources\objects\" + _fileMappings[command];
+            }
+
+            return string.Empty;
         }
         /// <summary>
         /// Loads this instance.
@@ -40,6 +55,7 @@ namespace Xemio.PrincessDefense.Editor
             string[] lines = content.Split('\n');
 
             _commandMappings = new Dictionary<string, string>();
+            _fileMappings = new Dictionary<string, string>();
 
             foreach (string line in lines)
             {
@@ -52,6 +68,7 @@ namespace Xemio.PrincessDefense.Editor
                         string command = segments[2];
 
                         _commandMappings.Add(fileName, command);
+                        _fileMappings.Add(command, fileName);
                         break;
                 }
             }

@@ -9,6 +9,7 @@ using Xemio.GameLibrary;
 using Xemio.GameLibrary.Math;
 using Xemio.PrincessDefense.Entities.Characters;
 using Xemio.PrincessDefense.Levels;
+using Xemio.PrincessDefense.Levels.Base;
 
 namespace Xemio.PrincessDefense.Entities.Environment
 {

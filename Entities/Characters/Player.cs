@@ -40,6 +40,7 @@ namespace Xemio.PrincessDefense.Entities.Characters
             KnockbackComponent knockback = new KnockbackComponent(this);
             knockback.Entries.Add(new Knockback<Enemy>(3));
 
+            this.Components.Add(new InventoryComponent(this, 2));
             this.Components.Add(new InputComponent(this));
             this.Components.Add(new SpeedComponent(this));
             this.Components.Add(knockback);

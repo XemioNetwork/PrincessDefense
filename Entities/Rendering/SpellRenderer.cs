@@ -10,14 +10,14 @@ using Xemio.GameLibrary.Math;
 
 namespace Xemio.PrincessDefense.Entities.Rendering
 {
-    public class FireLionRenderer : EntityRenderer
+    public class SpellRenderer : EntityRenderer
     {
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="FireLionRenderer"/> class.
+        /// Initializes a new instance of the <see cref="SpellRenderer"/> class.
         /// </summary>
-        /// <param name="fireLion">The fire lion.</param>
-        public FireLionRenderer(FireLionSpell fireLion) : base(fireLion)
+        /// <param name="entity">The entity.</param>
+        public SpellRenderer(BaseEntity entity) : base(entity)
         {
         }
         #endregion

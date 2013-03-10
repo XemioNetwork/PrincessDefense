@@ -3,30 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using Xemio.PrincessDefense.Entities.Rendering;
 using Xemio.PrincessDefense.Entities.Characters;
 using Xemio.PrincessDefense.Entities.Components;
-using Xemio.PrincessDefense.Entities.Rendering;
+using Xemio.PrincessDefense.Entities.Particles;
 using Xemio.GameLibrary.Math;
 
 namespace Xemio.PrincessDefense.Entities.Spells
 {
-    public class FireLionSpell : Spell
+    public class LightningclawSpell : Spell
     {
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="FireLionSpell"/> class.
+        /// Initializes a new instance of the <see cref="LightningclawSpell"/> class.
         /// </summary>
         /// <param name="owner">The owner.</param>
-        /// <param name="velocity">The velocity.</param>
-        /// <param name="direction">The direction.</param>
-        public FireLionSpell(Player owner, Vector2 velocity, Direction direction) : base(owner)
+        public LightningclawSpell(Player owner) : base(owner)
         {
             this.Renderer = new SpellRenderer(this);
-            this._velocity = velocity;
 
             AnimationComponent animation = new AnimationComponent(this);
-            animation.Add(Art.FireLionSpell);
-            animation.PlayAnimation(DirectionHelper.GetAnimationName(direction));
+            animation.Add(Art.LightningclawSpell);
+
+            animation.PlayAnimation("Spell");
 
             CollidableComponent collision = new CollidableComponent(this, 40);
             collision.IsStatic = true;
@@ -37,19 +36,12 @@ namespace Xemio.PrincessDefense.Entities.Spells
             this.Components.Add(animation);
             this.Components.Add(collision);
             this.Components.Add(damage);
+
+            Sounds.Play(Sounds.Lightningclaw, this);
         }
         #endregion
 
-        #region Fields
-        private Vector2 _velocity;
-        private bool _hasPlayed;
-        #endregion
-
         #region Properties
-        /// <summary>
-        /// Gets or sets the direction.
-        /// </summary>
-        public Direction Direction { get; set; }
         /// <summary>
         /// Gets the team.
         /// </summary>
@@ -61,7 +53,7 @@ namespace Xemio.PrincessDefense.Entities.Spells
 
         #region Methods
         /// <summary>
-        /// Handles a game tick.
+        /// Ticks the specified elapsed.
         /// </summary>
         /// <param name="elapsed">The elapsed.</param>
         public override void Tick(float elapsed)
@@ -72,16 +64,16 @@ namespace Xemio.PrincessDefense.Entities.Spells
             {
                 this.Destroy();
             }
-
-            this.Position += this._velocity;
-
-            if (!this._hasPlayed)
+            if (animation.Instance != null &&
+                animation.Frame == animation.Instance.Animation.Sheet.Textures.ElementAt(9))
             {
-                this._hasPlayed = true;
-                Sounds.Play(Sounds.FireLion, this);
+                ExplosionEmitter explosion = new ExplosionEmitter();
+                explosion.Position = this.Position + new Vector2(0, 16);
+                explosion.ParticleCount = 3;
+
+                this.Environment.Add(explosion);
             }
 
-            Sounds.Locate(Sounds.FireLion, this);
             base.Tick(elapsed);
         }
         #endregion
